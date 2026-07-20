@@ -57,7 +57,7 @@ su participación activa.
 
 **Puntualidad y Asistencia**: Será necesario ingresar a clases en forma
 puntual y permanecer en la misma sin salir, a menos que haya una
-urgencia. Se requerirá como mínimo un 75% de asistencia). Es importante
+urgencia. Se requerirá como mínimo un 60% de asistencia). Es importante
 que quien tuviera problemas para estar a tiempo o para asistir, se ponga
 en contacto lo antes posible con la coordinadora del curso. Los alumnos
 que lleguen más de 15 minutos tarde serán considerados ausentes de ese
@@ -71,7 +71,7 @@ considera como asistencia.
 **Reunión Zoom recurrente**:
 <https://uai-cl.zoom.us/j/98936792371?jst=1>
 
-**Carpeta de Respaldo de Contenidos**: [Curso-Geoanálisis-2025](https://alumnosuaicl-my.sharepoint.com/:f:/g/personal/denis_berroeta_uai_cl/Eujwj4nL7oFPvZ2zm5W5LKEBbH2sC-Zojs7f7paCLNk3Sg?e=rQJkQq)
+**Carpeta de Respaldo de Contenidos**: [Curso-Geoanálisis-2026](https://alumnosuaicl-my.sharepoint.com/:f:/g/personal/denis_berroeta_uai_cl/Eujwj4nL7oFPvZ2zm5W5LKEBbH2sC-Zojs7f7paCLNk3Sg?e=rQJkQq)
 
 
 ## Contenidos
@@ -80,14 +80,14 @@ Los contenidos de cada clase se detallan a continuación:
 
 | Sesión | Fecha | Inicio | Término | Sesiones | Horas |
 |-----------|-----------|-----------|-----------|--------------------|-----------|
-| S1 | martes, 22 de julio de 2025 | 17:30 | 20:50 | Introducción a R | 3 |
-| S2 | martes, 29 de julio de 2025 | 17:30 | 20:50 | Manipulación de datos | 3 |
-| S3 | martes, 5 de agosto de 2025 | 17:30 | 20:50 | Visualización con R | 3 |
-| S4 | martes, 12 de agosto de 2025 | 17:30 | 20:50 | Manipulación de datos espaciales | 3 |
-| S5 | martes, 19 de agosto de 2025 | 17:30 | 20:50 | Geocoding | 3 |
-| S6 | martes, 26 de agosto de 2025 | 17:30 | 20:50 | Inferencia Espacial: Interpolación y mapas de calor | 3 |
-| S7 | martes, 2 de septiembre de 2025 | 17:30 | 20:50 | Construcción de indicadores territoriales | 3 |
-| S8 | martes, 9 de septiembre de 2025 | 17:30 | 20:50 | Reporte y Proyecto | 3 |
+| S1 | martes, 21 de julio de 2026 | 17:30 | 20:50 | Introducción a R | 3 |
+| S2 | martes, 28 de julio de 2026 | 17:30 | 20:50 | Manipulación de datos | 3 |
+| S3 | martes, 4 de agosto de 2026 | 17:30 | 20:50 | Visualización con R | 3 |
+| S4 | martes, 11 de agosto de 2026 | 17:30 | 20:50 | Manipulación de datos espaciales | 3 |
+| S5 | martes, 19 de agosto de 2026 | 17:30 | 20:50 | Geocoding | 3 |
+| S6 | martes, 25 de agosto de 2026 | 17:30 | 20:50 | Inferencia Espacial: Interpolación y mapas de calor | 3 |
+| S7 | martes, 1 de septiembre de 2026 | 17:30 | 20:50 | Construcción de indicadores territoriales | 3 |
+| S8 | martes, 8 de septiembre de 2026 | 17:30 | 20:50 | Reporte y Proyecto | 3 |
 
 ## Evaluación
 
@@ -100,12 +100,12 @@ evaluaciones:
 | Tipo(s) de evaluación    | Tareas                                          |
 | Forma de entrega         | En documento escrito (PDF o HTML) y código en R |
 | Cálculo de la nota final | Tarea 1: 40% - Tarea 2: 60%                     |
-| Fecha Evaluación 1       | 22-AGO-2025                                     |
-| Fecha Evaluación 2       | 16-SEP-2025                                     |
+| Fecha Evaluación 1       | 23-AGO-2026                                     |
+| Fecha Evaluación 2       | 16-SEP-2026                                     |
 
 ## Docentes
 
-### Profesor: Denis Berroeta ([denis.berroeta\@uai.cl](mailto:denis.berroeta@uai.cl){.email})
+### {{< var profesor.cargo-curso >}}: {{< var profesor.name >}} ([{{< var profesor.email >}}](mailto:{{< var profesor.email >}}){.email})
 
 Master y PhD (cursando) in Data Scicence, Magister en Inteligencia
 Artificial, Universidad Adolfo Ibáñez. Coordinador de Investigación
@@ -118,7 +118,7 @@ experiencia como profesor en Geoestadísticas; Análisis Criminal,
 Análisis de imágenes satelitales para el monitoreo ambiental y gestión
 de desastres naturales; y Data Science.
 
-### Ayudante Docente: Jorge Aravena ([jorge.aravena\@edu.uai.cl](mailto:jorge.aravena@edu.uai.cl){.email})
+### {{< var ayudante.cargo-curso >}}: {{< var ayudante.name >}} ([{{< var ayudante.email >}}](mailto:{{< var ayudante.email >}}){.email})
 
 Analista Espacial en el Centro de Inteligencia Territorial de la
 Universidad Adolfo Ibáñez. Geógrafo de la Universidad Austral de Chile,
@@ -130,10 +130,9 @@ urbana crítica y los sistemas de información geográfica.
 
 | Cargo | Nombre | Correo |
 |------------------------|------------------|-------------------------------|
-| Director de Programa | Claudio Aracena | [claudio.aracena.c\@edu.uai.cl](mailto:claudio.aracena.c@edu.uai.cl){.email} |
-| Coordinadora Académica | Gabriela Nuñez | [gabriela.nunez.s\@uai.cl](mailto:gabriela.nunez.s@uai.cl){.email} |
-| Docente | Denis Berroeta | [denisberroeta\@uai.cl](mailto:denisberroeta@uai.cl){.email} |
-| Ayudante | Jorge Aravena | [jorge.aravena\@edu.uai.cl](mailto:jorge.aravena@edu.uai.cl){.email} |
+| {{< var director.cargo-curso >}} | {{< var director.name >}} | [{{< var director.email >}}](mailto:{{< var director.email >}}){.email} |
+| {{< var profesor.cargo-curso >}} | {{< var profesor.name >}} | [{{< var profesor.email >}}](mailto:{{< var profesor.email >}}){.email} |
+| {{< var ayudante.cargo-curso >}} | {{< var ayudante.name >}} | [{{< var ayudante.email >}}](mailto:{{< var ayudante.email >}}){.email} |
 
 ## Bibliografía
 

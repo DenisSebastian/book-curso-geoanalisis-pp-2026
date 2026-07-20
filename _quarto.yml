@@ -12,36 +12,36 @@ book:
       email: denis.berroeta@uai.cl
   date: "2025-7-22"
   page-footer: 
-    left: "Copyright 2025, Denis Berroeta" 
+    left: "Copyright 2026, Denis Berroeta" 
   chapters:
     - index.qmd
     - geoanalisis.qmd
     - intro_r.qmd
     - variables.qmd
     - funciones.qmd
-    - tidyverse.qmd
-    - visualizaciones.qmd
-    - datos_vectores.qmd
-    - dataframes.qmd
-    - geocode.qmd
-    - datos_rasters.qmd
-    - inferencia.qmd
-    - intro_inds.qmd
+    # - tidyverse.qmd
+    # - visualizaciones.qmd
+    # - datos_vectores.qmd
+    # - dataframes.qmd
+    # - geocode.qmd
+    # - datos_rasters.qmd
+    # - inferencia.qmd
+    # - intro_inds.qmd
     # - indicadores_territoriales.qmd
-    - construccion_inds.qmd
-    - indicadores.qmd
+    # - construccion_inds.qmd
+    # - indicadores.qmd
     # - proyecto.qmd
-    - part: "Tareas"
-      chapters:
-        - tarea_1.qmd
-        - tarea_2.qmd
+    # - part: "Tareas"
+      # chapters:
+        # - tarea_1.qmd
+        # - tarea_2.qmd
     - references.qmd
   appendices:
     - recursos.qmd
-    - control_r.qmd
-    - crs.qmd
-    - john_snow.qmd
-    - quiebres.qmd
+    # - control_r.qmd
+    # - crs.qmd
+    # - john_snow.qmd
+    # - quiebres.qmd
 
 bibliography: references.bib
 

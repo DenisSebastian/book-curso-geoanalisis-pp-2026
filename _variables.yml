@@ -6,8 +6,19 @@ email:
 profesor:
   name: "[Denis Berroeta](https://cit.uai.cl/denis-berroeta/)"
   cargo: "Coordinador de Investigación, Centro de Inteligencia Territorial - UAI"
+  cargo-curso: "Profesor"
   email: <denis.berroeta@uai.cl>
-
+  
+director:
+  name: "[Claudio Aracena](https://www.uai.cl/profesores/gobierno/claudio-aracena)"
+  cargo-curso: "Director de Programa"
+  email: <claudio.aracena@uai.cl>
+  
+ayudante:
+  name: "[Jorge Aravena](https://cit.uai.cl/jorge-aravena/)"
+  cargo: "Analista Espacial, Centro de Inteligencia Territorial - UAI"
+  cargo-curso: "Ayudante"
+  email: <jorge.aravena.p@uai.cl>
 
 
 engine:

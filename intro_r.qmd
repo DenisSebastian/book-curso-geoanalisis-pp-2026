@@ -168,7 +168,7 @@ Session -> Set Working Directory -> Choose Directory
 Definir Directorio de Trabajo con una función
 
 ```{r eval=FALSE}
-setwd("/Users/denisberroeta/Library/CloudStorage/OneDrive-UniversidadAdolfoIbanez/CIT/DOCENCIA/DIPLOMADOS/DGET_2023/compartir_DGET")
+setwd("/Users/denisberroeta/Documents/Docencia/geoanalisis/geoanalisis-2026/")
 ```
 
 
