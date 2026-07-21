@@ -68,10 +68,10 @@ disponible únicamente por 60 días en el servidor de Zoom y posterior a
 esa fecha se elimina. La visualización posterior de la clase no se
 considera como asistencia.
 
-**Reunión Zoom recurrente**:
-<https://uai-cl.zoom.us/j/98936792371?jst=1>
+<!-- **Reunión Zoom recurrente**: -->
+<!-- <https://uai-cl.zoom.us/j/98936792371?jst=1> -->
 
-**Carpeta de Respaldo de Contenidos**: [Curso-Geoanálisis-2026](https://alumnosuaicl-my.sharepoint.com/:f:/g/personal/denis_berroeta_uai_cl/Eujwj4nL7oFPvZ2zm5W5LKEBbH2sC-Zojs7f7paCLNk3Sg?e=rQJkQq)
+**Carpeta de Respaldo de Contenidos**: [Curso-Geoanálisis-2026](https://alumnosuaicl-my.sharepoint.com/:f:/g/personal/denis_berroeta_uai_cl/IgCPgtTUwXWpSILEcp2R1n_UAfbpIF0gMEEGCuGsxhrSly8?e=y3Yya2)
 
 
 ## Contenidos
