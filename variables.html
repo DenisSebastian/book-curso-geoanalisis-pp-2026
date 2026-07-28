@@ -175,6 +175,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipulación de tablas en r</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Referencias Bibliográficas</span></a>
   </div>
@@ -192,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./recursos.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Instalación de Recursos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./control_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Estructuras en R</span></span></a>
   </div>
 </li>
       </ul>
@@ -299,19 +311,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ru <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">10</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ru</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 7.140621 6.072274 8.216640 6.971360 8.176586 4.256545 3.881558 1.931548
-  [9] 5.788101 9.854727 3.245560 4.412103 9.947763 8.145325 3.614026 1.619460
- [17] 7.951645 6.523704 8.847082 1.812588 9.196000 7.293951 7.236119 5.516519
- [25] 6.499790 3.775258 5.995360 5.370649 3.972183 8.130628 5.651964 9.930570
- [33] 6.655621 1.031678 7.735851 2.616179 3.804837 3.818124 2.899458 6.357387
- [41] 8.557716 6.860604 2.469740 2.908247 1.406221 1.663094 9.494294 3.182355
- [49] 6.819211 5.088218 7.497675 4.242416 8.018319 6.896167 8.874431 4.010868
- [57] 1.024626 2.460216 4.855832 6.739235 3.884108 6.784094 8.971412 4.028067
- [65] 4.729608 5.593933 2.954810 1.559642 3.721362 5.335215 9.056434 8.291456
- [73] 2.643889 2.526558 7.299258 3.262319 4.191954 6.087671 2.221252 5.423112
- [81] 7.248113 6.424796 1.613299 2.726175 8.526807 4.597821 1.339681 2.870343
- [89] 2.561593 3.045607 6.124369 5.277827 6.258937 5.261360 6.631564 8.257015
- [97] 8.974777 6.468055 8.029510 6.883628</code></pre>
+<pre><code>  [1] 1.649335 2.274068 1.360814 2.626440 7.751945 5.835421 8.175333 4.312213
+  [9] 4.130530 3.040882 9.651862 3.283419 1.354024 7.028991 2.160487 1.513757
+ [17] 3.792364 7.869184 8.037718 3.757569 7.586152 3.648791 7.684612 4.087658
+ [25] 8.540623 9.111330 1.394704 5.889062 6.899392 9.625165 2.446693 3.261268
+ [33] 1.223081 3.928080 4.762363 2.095665 8.438697 7.570881 2.951021 1.022561
+ [41] 5.102409 4.374413 1.872850 3.440799 8.361147 4.238204 4.156481 4.122452
+ [49] 9.608534 9.918225 1.374640 1.113499 7.458205 6.413077 6.236648 9.386682
+ [57] 2.607405 3.210849 9.257712 2.280214 8.969320 3.477346 5.242128 4.364683
+ [65] 8.613404 3.116682 5.948215 2.667272 2.409945 5.526936 2.178680 7.363073
+ [73] 9.440339 8.061206 1.079043 2.228726 3.615861 4.258771 2.403710 5.939173
+ [81] 4.552364 9.730699 9.828835 3.782962 7.465101 8.732270 5.822252 4.757084
+ [89] 4.472659 9.526735 4.788433 4.050273 8.476518 5.501101 2.649358 1.615121
+ [97] 5.569410 9.890324 6.484133 1.133133</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -330,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample.int</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 4 3 1 3 6 3 6 6 5 5</code></pre>
+<pre><code> [1] 5 5 3 3 6 4 4 2 3 2</code></pre>
 </div>
 </div>
 </section>
