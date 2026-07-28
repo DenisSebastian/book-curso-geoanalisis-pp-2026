@@ -11,15 +11,15 @@ book:
       affiliation-url: https://cit.uai.cl
       email: denis.berroeta@uai.cl
   date: "2026-7-21"
-  page-footer: 
-    left: "Copyright 2026, Denis Berroeta" 
+  page-footer:
+    left: "Copyright 2026, Denis Berroeta"
   chapters:
     - index.qmd
     - geoanalisis.qmd
     - intro_r.qmd
     - variables.qmd
     - funciones.qmd
-    # - tidyverse.qmd
+    - tidyverse.qmd
     # - visualizaciones.qmd
     # - datos_vectores.qmd
     # - dataframes.qmd
@@ -32,13 +32,13 @@ book:
     # - indicadores.qmd
     # - proyecto.qmd
     # - part: "Tareas"
-      # chapters:
-        # - tarea_1.qmd
-        # - tarea_2.qmd
+    # chapters:
+    # - tarea_1.qmd
+    # - tarea_2.qmd
     - references.qmd
   appendices:
     - recursos.qmd
-    # - control_r.qmd
+    - control_r.qmd
     # - crs.qmd
     # - john_snow.qmd
     # - quiebres.qmd
@@ -56,14 +56,11 @@ format:
     mailto: "denis.berroeta@uai.cl"
     toc-title: "Contenidos"
     toc-depth: 3
-    number-sections: true 
-    number-depth: 3 
-  
+    number-sections: true
+    number-depth: 3
+
 execute:
   warning: false
-  
+
 editor: source
 always_allow_html: true
-
-
-
