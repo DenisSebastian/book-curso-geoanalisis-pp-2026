@@ -13,7 +13,9 @@ Los Datos en R se pueden clasificar por su dimensiones y los tipos de Datos que 
 | 2d          | Matrix        | Data frame   |
 | nd          | Array         |              |
 
-Fuente: [http://adv-r.had.co.nz/Data-structures.html](http://adv-r.had.co.nz/Data-structures.html)
+
+
+Detalles: [http://adv-r.had.co.nz/Data-structures.html](http://adv-r.had.co.nz/Data-structures.html)
 
 
 

@@ -7,6 +7,127 @@ subtitle: "Introducción a la generación de Gráficos en R"
 
 La visualización es clave en el análisis espacial porque permite identificar patrones, anomalías y tendencias de manera intuitiva. En este módulo aprenderás a transformar datos tabulares en gráficos que comuniquen información relevante, usando ejemplos reales del catastro de edificaciones (tabla `tbl_sii`).
 
+El objetivo no es producir un gráfico por cada variable disponible, sino
+escoger una representación que responda con claridad una pregunta de
+política pública. Un gráfico bien elegido permite reconocer brechas,
+priorizar territorios o grupos y comunicar evidencia a personas que no
+necesariamente trabajan con datos. Un gráfico mal elegido puede ocultar
+diferencias importantes o sugerir conclusiones que los datos no permiten
+sostener.
+
+### Antes de graficar: una pregunta, una decisión
+
+Antes de abrir R, formule la pregunta que desea responder y determine qué
+tipo de variable tiene. Esto simplifica la elección del gráfico y ayuda a
+evitar visualizaciones decorativas. Por ejemplo, no es lo mismo preguntar
+“¿qué comuna registra más denuncias?” que “¿cómo han cambiado las denuncias
+en el tiempo?” o “¿existe relación entre pobreza y acceso a áreas verdes?”.
+
+| Si la pregunta busca... | Tipo de información | Gráfico que suele ayudar | Ejemplo en políticas públicas |
+|---|---|---|---|
+| Comparar categorías o territorios | Categoría y cantidad, tasa o porcentaje | Barras | Comparar la tasa de delitos violentos por comuna. |
+| Mostrar un cambio o una evolución | Fecha y medida | Líneas | Observar la evolución mensual de las listas de espera en salud. |
+| Conocer cómo se distribuyen los casos | Una variable numérica | Histograma | Identificar si la superficie de vivienda se concentra en valores bajos o altos. |
+| Comparar distribuciones entre grupos | Una variable numérica y una categoría | Boxplot | Comparar la distribución de tiempos de viaje a un CESFAM entre comunas. |
+| Examinar la relación entre dos medidas | Dos variables numéricas | Dispersión | Explorar si las comunas con mayor pobreza presentan menor cobertura de áreas verdes. |
+| Identificar patrones y desigualdades territoriales | Una medida asociada a una ubicación | Mapa temático | Localizar sectores con alta vulnerabilidad y baja cercanía a equipamiento público. |
+
+Esta tabla es una guía inicial, no una regla rígida. La decisión también
+depende de la audiencia y de la acción que se espera apoyar. Para una
+reunión de gestión, un gráfico de barras ordenado puede facilitar la
+priorización; para diagnosticar una desigualdad, un mapa o un boxplot puede
+aportar una mirada que una tabla no muestra.
+
+::: {.callout-tip}
+## Regla práctica para elegir un gráfico
+
+Empiece por completar la frase: **“Quiero que la audiencia pueda ver
+que…”**. Si la frase termina en “una comuna supera a otra”, pruebe barras;
+si termina en “el problema crece o disminuye”, pruebe una línea; si termina
+en “los casos están muy dispersos o tienen valores inusuales”, pruebe un
+histograma o un boxplot. Si la ubicación cambia la interpretación, incorpore
+un mapa y revise el capítulo de datos espaciales.
+:::
+
+### Cómo leer y comunicar un gráfico con responsabilidad
+
+En políticas públicas, los gráficos suelen informar decisiones que afectan
+recursos, territorios y personas. Por ello, antes de compartirlos, revise:
+
+- **Unidad de comparación:** para comparar comunas de distinto tamaño,
+  normalmente una tasa, proporción o indicador por habitante es más
+  informativo que el total de casos.
+- **Periodo y fuente:** indique qué fecha cubren los datos y de dónde
+  provienen; un aumento puede reflejar más registro y no necesariamente más
+  ocurrencia del fenómeno.
+- **Escala de los ejes:** no recorte el eje vertical de un gráfico de barras
+  si ello exagera diferencias pequeñas. Explique las transformaciones o
+  escalas no habituales.
+- **Incertidumbre y contexto:** una diferencia visual no demuestra por sí
+  sola una causa. Complementar con contexto territorial y otras fuentes de
+  evidencia evita conclusiones apresuradas.
+- **Legibilidad:** use un título que comunique el hallazgo, ejes con unidades,
+  una paleta con contraste y etiquetas legibles. Evite el exceso de colores,
+  efectos 3D y leyendas innecesarias.
+
+### Cuándo utilizar los gráficos de este capítulo
+
+Los ejemplos siguientes trabajan con información de manzanas y edificaciones
+del SII. Aunque la base no corresponde a un programa público específico,
+permite practicar preguntas habituales: ¿dónde se concentra la ciudad?,
+¿cómo se distribuye una característica de las viviendas?, ¿hay diferencias
+entre comunas? La misma lógica se puede aplicar a registros de salud,
+educación, seguridad, vivienda o medio ambiente.
+
+**Barras.** Úselas para comparar una cantidad, tasa o porcentaje entre un
+número acotado de categorías. Ordenarlas de mayor a menor hace más visible la
+comparación. Son apropiadas, por ejemplo, para mostrar la cobertura de salas
+cuna por comuna o el porcentaje de hogares sin acceso adecuado a transporte.
+Si hay muchas categorías, muestre las más relevantes o agrupe el resto: una
+lista larga de barras dificulta la lectura.
+
+**Histogramas.** Úselos cuando necesite comprender la distribución de una
+variable numérica: qué valores son frecuentes, si existen concentraciones o
+colas largas y si hay valores extremos. En gestión habitacional podrían
+mostrar la distribución del tamaño de las viviendas; en salud, la de los
+tiempos de espera. El número de intervalos (`bins`) modifica el aspecto del
+gráfico, por lo que conviene probar alternativas sin cambiar la escala ni
+ocultar valores relevantes.
+
+**Boxplots.** Úselos para comparar la distribución de una medida entre dos o
+más grupos. Muestran el valor central, la dispersión y posibles valores
+atípicos, lo que los hace útiles para contrastar, por ejemplo, el tiempo de
+respuesta de ambulancias entre servicios de salud. No reemplazan la revisión
+de los datos: un valor atípico puede ser un error de registro, pero también
+puede revelar una situación territorial que merece atención.
+
+**Líneas y dispersión.** Aunque no se programan en esta sección, son dos
+recursos frecuentes. Un gráfico de líneas es adecuado cuando el orden temporal
+es central —por ejemplo, la evolución trimestral de la deserción escolar—; no
+conviene usarlo para categorías sin orden. Un gráfico de dispersión permite
+explorar si dos indicadores varían conjuntamente, como desempleo y solicitudes
+de subsidio. Describe una asociación, no prueba que una variable cause la otra.
+
+**Mapas temáticos.** Úselos cuando la ubicación y la vecindad entre territorios
+son parte de la pregunta. Un mapa de tasas de delitos puede revelar
+concentraciones que un ranking comunal no muestra. Para comparar territorios,
+revise cuidadosamente que el indicador esté estandarizado y que la simbología
+no haga parecer equivalentes áreas con poblaciones muy distintas. Los mapas se
+abordarán con mayor profundidad en los capítulos de datos espaciales.
+
+::: {.callout-note collapse="false"}
+## Ejemplo de razonamiento aplicado
+
+Suponga que un municipio quiere fortalecer el acceso a cuidados. Para decidir
+dónde profundizar el diagnóstico, puede usar: (1) **barras** para comparar la
+cobertura de cupos por comuna; (2) un **histograma** para conocer cómo se
+distribuyen los tiempos de viaje de los hogares; (3) un **boxplot** para
+comparar esos tiempos entre grupos de ingresos; y (4) un **mapa** para ubicar
+los sectores que combinan baja cobertura y mayor necesidad. Cada gráfico
+responde una pregunta distinta; juntos ofrecen evidencia más útil que una sola
+visualización.
+:::
+
 ## Visualización básica de tablas
 
 ### Explorando la tabla de datos
@@ -99,7 +220,7 @@ plot_baseR <- plot(
 
 ```
 
-\*\*Gráfico de barras con barplot base de R\^\^
+**Gráfico de barras con barplot base de R**
 
 ```{r}
 # Nombres de comunas ordenados por cantidad

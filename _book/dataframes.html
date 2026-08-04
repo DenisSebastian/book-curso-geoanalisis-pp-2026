@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Dataframes y Delitos en R – Curso de Geoanálisis</title>
+<title>6&nbsp; Dataframes y Delitos en R – Curso de Geoanálisis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./geocode.html" rel="next">
-<link href="./datos_vectores.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./visualizaciones.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dataframes.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dataframes y Delitos en R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dataframes.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dataframes y Delitos en R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -211,75 +211,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datos_vectores.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Datos Espaciales: Vectores</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./dataframes.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dataframes y Delitos en R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dataframes y Delitos en R</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./geocode.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Geocoding</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./datos_rasters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Datos Espaciales: Raster</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./inferencia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inferencia Espacial</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./intro_inds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introducción a Indicadores Territoriales</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./construccion_inds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Indicador de Delincuencia</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./indicadores.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inds. Socioeconómicos</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Tareas</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tarea_1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tarea 1: Programación en R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tarea_2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tarea 2: Proyecto Final</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -288,13 +223,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./recursos.html" class="sidebar-item-text sidebar-link">
@@ -305,24 +240,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./control_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Estructuras en R</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./crs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">CRS en R</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./john_snow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Mapa de Cólera</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./quiebres.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Mapas y Quiebres</span></span></a>
   </div>
 </li>
       </ul>
@@ -337,21 +254,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contenidos</h2>
    
   <ul>
-  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">7.1</span> Introducción</a></li>
-  <li><a href="#librerías" id="toc-librerías" class="nav-link" data-scroll-target="#librerías"><span class="header-section-number">7.2</span> Librerías</a></li>
-  <li><a href="#lectura-de-una-tabla" id="toc-lectura-de-una-tabla" class="nav-link" data-scroll-target="#lectura-de-una-tabla"><span class="header-section-number">7.3</span> Lectura de una tabla</a></li>
-  <li><a href="#agregar-categoría" id="toc-agregar-categoría" class="nav-link" data-scroll-target="#agregar-categoría"><span class="header-section-number">7.4</span> Agregar Categoría</a></li>
-  <li><a href="#filtros" id="toc-filtros" class="nav-link" data-scroll-target="#filtros"><span class="header-section-number">7.5</span> Filtros</a></li>
-  <li><a href="#generar-resúmenes-similar-a-tablas-dinámicas" id="toc-generar-resúmenes-similar-a-tablas-dinámicas" class="nav-link" data-scroll-target="#generar-resúmenes-similar-a-tablas-dinámicas"><span class="header-section-number">7.6</span> Generar Resúmenes (similar a tablas dinámicas)</a></li>
-  <li><a href="#visualización-gráfica" id="toc-visualización-gráfica" class="nav-link" data-scroll-target="#visualización-gráfica"><span class="header-section-number">7.7</span> Visualización gráfica</a></li>
-  <li><a href="#visualización-dinámica" id="toc-visualización-dinámica" class="nav-link" data-scroll-target="#visualización-dinámica"><span class="header-section-number">7.8</span> Visualización dinámica</a></li>
-  <li><a href="#actividad" id="toc-actividad" class="nav-link" data-scroll-target="#actividad"><span class="header-section-number">7.9</span> Actividad</a></li>
-  <li><a href="#qué-aprendimos-hoy" id="toc-qué-aprendimos-hoy" class="nav-link" data-scroll-target="#qué-aprendimos-hoy"><span class="header-section-number">7.10</span> Qué aprendimos hoy?</a></li>
-  <li><a href="#visualización-espacial" id="toc-visualización-espacial" class="nav-link" data-scroll-target="#visualización-espacial"><span class="header-section-number">7.11</span> Visualización Espacial</a>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">6.1</span> Introducción</a></li>
+  <li><a href="#librerías" id="toc-librerías" class="nav-link" data-scroll-target="#librerías"><span class="header-section-number">6.2</span> Librerías</a></li>
+  <li><a href="#lectura-de-una-tabla" id="toc-lectura-de-una-tabla" class="nav-link" data-scroll-target="#lectura-de-una-tabla"><span class="header-section-number">6.3</span> Lectura de una tabla</a></li>
+  <li><a href="#agregar-categoría" id="toc-agregar-categoría" class="nav-link" data-scroll-target="#agregar-categoría"><span class="header-section-number">6.4</span> Agregar Categoría</a></li>
+  <li><a href="#filtros" id="toc-filtros" class="nav-link" data-scroll-target="#filtros"><span class="header-section-number">6.5</span> Filtros</a></li>
+  <li><a href="#generar-resúmenes-similar-a-tablas-dinámicas" id="toc-generar-resúmenes-similar-a-tablas-dinámicas" class="nav-link" data-scroll-target="#generar-resúmenes-similar-a-tablas-dinámicas"><span class="header-section-number">6.6</span> Generar Resúmenes (similar a tablas dinámicas)</a></li>
+  <li><a href="#visualización-gráfica" id="toc-visualización-gráfica" class="nav-link" data-scroll-target="#visualización-gráfica"><span class="header-section-number">6.7</span> Visualización gráfica</a></li>
+  <li><a href="#visualización-dinámica" id="toc-visualización-dinámica" class="nav-link" data-scroll-target="#visualización-dinámica"><span class="header-section-number">6.8</span> Visualización dinámica</a></li>
+  <li><a href="#actividad" id="toc-actividad" class="nav-link" data-scroll-target="#actividad"><span class="header-section-number">6.9</span> Actividad</a></li>
+  <li><a href="#qué-aprendimos-hoy" id="toc-qué-aprendimos-hoy" class="nav-link" data-scroll-target="#qué-aprendimos-hoy"><span class="header-section-number">6.10</span> Qué aprendimos hoy?</a></li>
+  <li><a href="#visualización-espacial" id="toc-visualización-espacial" class="nav-link" data-scroll-target="#visualización-espacial"><span class="header-section-number">6.11</span> Visualización Espacial</a>
   <ul class="collapse">
-  <li><a href="#generar-mapa" id="toc-generar-mapa" class="nav-link" data-scroll-target="#generar-mapa"><span class="header-section-number">7.11.1</span> Generar Mapa</a></li>
+  <li><a href="#generar-mapa" id="toc-generar-mapa" class="nav-link" data-scroll-target="#generar-mapa"><span class="header-section-number">6.11.1</span> Generar Mapa</a></li>
   </ul></li>
-  <li><a href="#guardar-resultados" id="toc-guardar-resultados" class="nav-link" data-scroll-target="#guardar-resultados"><span class="header-section-number">7.12</span> Guardar Resultados</a></li>
+  <li><a href="#guardar-resultados" id="toc-guardar-resultados" class="nav-link" data-scroll-target="#guardar-resultados"><span class="header-section-number">6.12</span> Guardar Resultados</a></li>
   </ul>
 </nav>
     </div>
@@ -360,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-dataframes" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dataframes y Delitos en R</span></span></h1>
+<h1 class="title"><span id="sec-dataframes" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dataframes y Delitos en R</span></span></h1>
 <p class="subtitle lead">Flujo de Trabajo de Indicadores de Delincuencia</p>
 </div>
 
@@ -392,8 +309,8 @@ Objetivo de la sesión
 <p>Aplicar un flujo completo de manipulación de datos con <code>dplyr</code> para construir un indicador territorial de delitos violentos por comuna, incluyendo filtros, categorización, resúmenes estadísticos y visualizaciones gráficas.</p>
 </div>
 </div>
-<section id="introducción" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">7.1</span> Introducción</h2>
+<section id="introducción" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">6.1</span> Introducción</h2>
 <p>En esta sesión se realizará un flujo de trabajo de construcción de un indicador territorial de delitos a nivel comuna utilizando R. Que contempla desde la lectura de la base de información (excel de delitos), agregar información de categorías, hacer filtros, resúmenes estadísticos (tablas dinámicas) y finalmente visualizaciones gráficas.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -416,8 +333,8 @@ Acceso a Datos de Casos Policiales Sala CEAD
 </div>
 </div>
 </section>
-<section id="librerías" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="librerías"><span class="header-section-number">7.2</span> Librerías</h2>
+<section id="librerías" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="librerías"><span class="header-section-number">6.2</span> Librerías</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># manipular tablas de datos</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="co">#manipular objetos espaciales</span></span>
@@ -426,8 +343,8 @@ Acceso a Datos de Casos Policiales Sala CEAD
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># library(plotly) # gráficos dinámicos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="lectura-de-una-tabla" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="lectura-de-una-tabla"><span class="header-section-number">7.3</span> Lectura de una tabla</h2>
+<section id="lectura-de-una-tabla" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="lectura-de-una-tabla"><span class="header-section-number">6.3</span> Lectura de una tabla</h2>
 <p>Se leerá el archivo excel que se vio la semana pasada de delitos comunales.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>delitos_tbl <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">"data/excel/delitos_comunales.xlsx"</span>)</span>
@@ -462,8 +379,8 @@ Acceso a Datos de Casos Policiales Sala CEAD
 </div>
 </div>
 </section>
-<section id="agregar-categoría" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="agregar-categoría"><span class="header-section-number">7.4</span> Agregar Categoría</h2>
+<section id="agregar-categoría" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="agregar-categoría"><span class="header-section-number">6.4</span> Agregar Categoría</h2>
 <p><strong>Categorizar los Delitos</strong>:</p>
 <p>Primeros veremos los tipos de delitos que existen, contenidos en la columna <code>Subgrupo</code>:</p>
 <div class="cell">
@@ -522,8 +439,8 @@ Acceso a Datos de Casos Policiales Sala CEAD
 </div>
 </div>
 </section>
-<section id="filtros" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="filtros"><span class="header-section-number">7.5</span> Filtros</h2>
+<section id="filtros" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="filtros"><span class="header-section-number">6.5</span> Filtros</h2>
 <p><strong>Filtrar por Tipo de Participante</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>delitos_filtered <span class="ot">&lt;-</span> delitos_tbl <span class="sc">%&gt;%</span> </span>
@@ -540,8 +457,8 @@ Acceso a Datos de Casos Policiales Sala CEAD
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(grupo <span class="sc">==</span> <span class="st">"Violento"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="generar-resúmenes-similar-a-tablas-dinámicas" class="level2 page-columns page-full" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="generar-resúmenes-similar-a-tablas-dinámicas"><span class="header-section-number">7.6</span> Generar Resúmenes (similar a tablas dinámicas)</h2>
+<section id="generar-resúmenes-similar-a-tablas-dinámicas" class="level2 page-columns page-full" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="generar-resúmenes-similar-a-tablas-dinámicas"><span class="header-section-number">6.6</span> Generar Resúmenes (similar a tablas dinámicas)</h2>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/t_dinamica_excel.png" class="img-fluid figure-img"></p>
@@ -600,8 +517,8 @@ Acceso a Datos de Casos Policiales Sala CEAD
 </div>
 </div>
 </section>
-<section id="visualización-gráfica" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="visualización-gráfica"><span class="header-section-number">7.7</span> Visualización gráfica</h2>
+<section id="visualización-gráfica" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="visualización-gráfica"><span class="header-section-number">6.7</span> Visualización gráfica</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -628,8 +545,8 @@ Acceso a Datos de Casos Policiales Sala CEAD
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">plot =</span> g_barra, <span class="at">filename =</span> <span class="st">"images/del_violentos_R09.png"</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="visualización-dinámica" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="visualización-dinámica"><span class="header-section-number">7.8</span> Visualización dinámica</h2>
+<section id="visualización-dinámica" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="visualización-dinámica"><span class="header-section-number">6.8</span> Visualización dinámica</h2>
 <p>Generar gráfico dinámico con <code>plotly</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura de la Librería</span></span>
@@ -643,8 +560,8 @@ Acceso a Datos de Casos Policiales Sala CEAD
 </div>
 </div>
 </section>
-<section id="actividad" class="level2" data-number="7.9">
-<h2 data-number="7.9" class="anchored" data-anchor-id="actividad"><span class="header-section-number">7.9</span> Actividad</h2>
+<section id="actividad" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="actividad"><span class="header-section-number">6.9</span> Actividad</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -664,8 +581,8 @@ Actividad: Análisis comparado
 </div>
 </div>
 </section>
-<section id="qué-aprendimos-hoy" class="level2" data-number="7.10">
-<h2 data-number="7.10" class="anchored" data-anchor-id="qué-aprendimos-hoy"><span class="header-section-number">7.10</span> Qué aprendimos hoy?</h2>
+<section id="qué-aprendimos-hoy" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="qué-aprendimos-hoy"><span class="header-section-number">6.10</span> Qué aprendimos hoy?</h2>
 <ul class="task-list">
 <li><label><input type="checkbox" checked="">Leer y explorar una tabla de delitos comunales</label></li>
 <li><label><input type="checkbox" checked="">Categorizar delitos en grupos de interés</label></li>
@@ -674,8 +591,8 @@ Actividad: Análisis comparado
 <li><label><input type="checkbox" checked="">Crear gráficos (básicos)</label></li>
 </ul>
 </section>
-<section id="visualización-espacial" class="level2" data-number="7.11">
-<h2 data-number="7.11" class="anchored" data-anchor-id="visualización-espacial"><span class="header-section-number">7.11</span> Visualización Espacial</h2>
+<section id="visualización-espacial" class="level2" data-number="6.11">
+<h2 data-number="6.11" class="anchored" data-anchor-id="visualización-espacial"><span class="header-section-number">6.11</span> Visualización Espacial</h2>
 <p>Primero se debe unir la tabla resumen delitos con Shapefile de comunas del INE.</p>
 <p><strong>Leer Shapefile de comunas</strong></p>
 <div class="cell">
@@ -750,8 +667,8 @@ Projected CRS: WGS 84 / UTM zone 19S
 6 MULTIPOLYGON (((195536.1 58...</code></pre>
 </div>
 </div>
-<section id="generar-mapa" class="level3" data-number="7.11.1">
-<h3 data-number="7.11.1" class="anchored" data-anchor-id="generar-mapa"><span class="header-section-number">7.11.1</span> Generar Mapa</h3>
+<section id="generar-mapa" class="level3" data-number="6.11.1">
+<h3 data-number="6.11.1" class="anchored" data-anchor-id="generar-mapa"><span class="header-section-number">6.11.1</span> Generar Mapa</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>del_r09_m <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -788,8 +705,8 @@ Projected CRS: WGS 84 / UTM zone 19S
 </div>
 </section>
 </section>
-<section id="guardar-resultados" class="level2" data-number="7.12">
-<h2 data-number="7.12" class="anchored" data-anchor-id="guardar-resultados"><span class="header-section-number">7.12</span> Guardar Resultados</h2>
+<section id="guardar-resultados" class="level2" data-number="6.12">
+<h2 data-number="6.12" class="anchored" data-anchor-id="guardar-resultados"><span class="header-section-number">6.12</span> Guardar Resultados</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Excel</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(tabla_resumen, <span class="at">file =</span> <span class="st">"data/excel/R09_del_violentos.xlsx"</span>)</span>
@@ -1206,13 +1123,13 @@ Projected CRS: WGS 84 / UTM zone 19S
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./datos_vectores.html" class="pagination-link" aria-label="Datos Espaciales: Vectores">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Datos Espaciales: Vectores</span></span>
+      <a href="./visualizaciones.html" class="pagination-link" aria-label="Visualizaciones en R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualizaciones en R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./geocode.html" class="pagination-link" aria-label="Geocoding">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Geocoding</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="Referencias Bibliográficas">
+        <span class="nav-page-text">Referencias Bibliográficas</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1220,7 +1137,7 @@ Projected CRS: WGS 84 / UTM zone 19S
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2025, Denis Berroeta</p>
+<p>Copyright 2026, Denis Berroeta</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

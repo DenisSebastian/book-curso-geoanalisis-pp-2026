@@ -20,7 +20,7 @@ book:
     - variables.qmd
     - funciones.qmd
     - tidyverse.qmd
-    # - visualizaciones.qmd
+    - visualizaciones.qmd
     # - datos_vectores.qmd
     # - dataframes.qmd
     # - geocode.qmd
