@@ -181,6 +181,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./visualizaciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualizaciones en R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Referencias Bibliográficas</span></a>
   </div>
@@ -285,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>Fuente: <a href="http://adv-r.had.co.nz/Data-structures.html">http://adv-r.had.co.nz/Data-structures.html</a></p>
+<p>Detalles: <a href="http://adv-r.had.co.nz/Data-structures.html">http://adv-r.had.co.nz/Data-structures.html</a></p>
 <p>R nos permite definir variables que pueden ser luego usadas en las distintas operaciones. El lenguaje no solo permite definir escalares (variable de un numero), si no también variables que sean un conjunto de numero o caracteres ordenados.</p>
 <section id="variables-numéricas" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="variables-numéricas"><span class="header-section-number">2.1.1</span> Variables Numéricas</h3>
@@ -311,19 +317,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ru <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">10</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ru</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 1.649335 2.274068 1.360814 2.626440 7.751945 5.835421 8.175333 4.312213
-  [9] 4.130530 3.040882 9.651862 3.283419 1.354024 7.028991 2.160487 1.513757
- [17] 3.792364 7.869184 8.037718 3.757569 7.586152 3.648791 7.684612 4.087658
- [25] 8.540623 9.111330 1.394704 5.889062 6.899392 9.625165 2.446693 3.261268
- [33] 1.223081 3.928080 4.762363 2.095665 8.438697 7.570881 2.951021 1.022561
- [41] 5.102409 4.374413 1.872850 3.440799 8.361147 4.238204 4.156481 4.122452
- [49] 9.608534 9.918225 1.374640 1.113499 7.458205 6.413077 6.236648 9.386682
- [57] 2.607405 3.210849 9.257712 2.280214 8.969320 3.477346 5.242128 4.364683
- [65] 8.613404 3.116682 5.948215 2.667272 2.409945 5.526936 2.178680 7.363073
- [73] 9.440339 8.061206 1.079043 2.228726 3.615861 4.258771 2.403710 5.939173
- [81] 4.552364 9.730699 9.828835 3.782962 7.465101 8.732270 5.822252 4.757084
- [89] 4.472659 9.526735 4.788433 4.050273 8.476518 5.501101 2.649358 1.615121
- [97] 5.569410 9.890324 6.484133 1.133133</code></pre>
+<pre><code>  [1] 2.808898 8.502494 2.255229 6.235242 4.883834 9.718930 4.019435 6.007903
+  [9] 7.885485 4.875640 1.038783 3.660859 4.234939 8.166947 8.338518 1.039543
+ [17] 7.716309 1.647991 9.383970 6.944359 2.804347 8.762356 1.232957 5.626246
+ [25] 7.497121 2.420932 3.489275 4.694128 9.987596 4.339025 5.084699 7.885768
+ [33] 6.493791 9.111201 6.525222 1.566298 1.568587 5.155756 5.901956 9.138000
+ [41] 4.947588 5.304431 1.407169 1.589411 5.738458 6.334307 9.637290 8.408239
+ [49] 9.839311 8.990674 5.165208 8.120693 3.163856 2.859916 2.217307 8.822104
+ [57] 3.737569 6.212890 2.195748 2.082433 9.145485 5.425688 7.490000 9.890905
+ [65] 8.576171 9.684388 7.041167 5.414981 1.982309 3.235618 2.707322 1.559797
+ [73] 8.193744 6.425322 9.549998 3.353717 8.110188 9.778005 3.611096 8.499875
+ [81] 6.283094 7.796512 8.099582 6.574818 1.716093 6.854335 4.470903 9.223062
+ [89] 5.869694 4.760369 9.711998 6.276851 7.086801 3.818828 8.926598 2.525561
+ [97] 7.842845 8.058951 5.413117 4.669944</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -342,7 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample.int</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 5 5 3 3 6 4 4 2 3 2</code></pre>
+<pre><code> [1] 3 4 2 3 4 1 6 3 5 1</code></pre>
 </div>
 </div>
 </section>
