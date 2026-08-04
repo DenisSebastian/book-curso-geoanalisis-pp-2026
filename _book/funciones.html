@@ -267,22 +267,26 @@ window.Quarto = {
     <h2 id="toc-title">Contenidos</h2>
    
   <ul>
-  <li><a href="#operaciones-básicas-en-r" id="toc-operaciones-básicas-en-r" class="nav-link active" data-scroll-target="#operaciones-básicas-en-r"><span class="header-section-number">3.1</span> Operaciones Básicas en R</a>
+  <li><a href="#introducción-funciones-para-un-análisis-reproducible" id="toc-introducción-funciones-para-un-análisis-reproducible" class="nav-link active" data-scroll-target="#introducción-funciones-para-un-análisis-reproducible"><span class="header-section-number">3.1</span> Introducción: funciones para un análisis reproducible</a>
   <ul class="collapse">
-  <li><a href="#operaciones-matemáticas" id="toc-operaciones-matemáticas" class="nav-link" data-scroll-target="#operaciones-matemáticas"><span class="header-section-number">3.1.1</span> Operaciones Matemáticas</a></li>
+  <li><a href="#ruta-de-aprendizaje-del-capítulo" id="toc-ruta-de-aprendizaje-del-capítulo" class="nav-link" data-scroll-target="#ruta-de-aprendizaje-del-capítulo"><span class="header-section-number">3.1.1</span> Ruta de aprendizaje del capítulo</a></li>
   </ul></li>
-  <li><a href="#funciones-estadísticas-básicas" id="toc-funciones-estadísticas-básicas" class="nav-link" data-scroll-target="#funciones-estadísticas-básicas"><span class="header-section-number">3.2</span> Funciones estadísticas básicas</a></li>
-  <li><a href="#funciones-de-propósito-general" id="toc-funciones-de-propósito-general" class="nav-link" data-scroll-target="#funciones-de-propósito-general"><span class="header-section-number">3.3</span> Funciones de propósito general</a>
+  <li><a href="#operaciones-básicas-en-r" id="toc-operaciones-básicas-en-r" class="nav-link" data-scroll-target="#operaciones-básicas-en-r"><span class="header-section-number">3.2</span> Operaciones Básicas en R</a>
   <ul class="collapse">
-  <li><a href="#funciones-de-repetición-y-secuencia" id="toc-funciones-de-repetición-y-secuencia" class="nav-link" data-scroll-target="#funciones-de-repetición-y-secuencia"><span class="header-section-number">3.3.1</span> Funciones de Repetición y Secuencia</a></li>
-  <li><a href="#funciones-sobre-texto" id="toc-funciones-sobre-texto" class="nav-link" data-scroll-target="#funciones-sobre-texto"><span class="header-section-number">3.3.2</span> Funciones sobre texto</a></li>
-  <li><a href="#funciones-de-condiconales" id="toc-funciones-de-condiconales" class="nav-link" data-scroll-target="#funciones-de-condiconales"><span class="header-section-number">3.3.3</span> Funciones de Condiconales</a></li>
+  <li><a href="#operaciones-matemáticas" id="toc-operaciones-matemáticas" class="nav-link" data-scroll-target="#operaciones-matemáticas"><span class="header-section-number">3.2.1</span> Operaciones Matemáticas</a></li>
   </ul></li>
-  <li><a href="#sec-func_propias" id="toc-sec-func_propias" class="nav-link" data-scroll-target="#sec-func_propias"><span class="header-section-number">3.4</span> Crear Funciones Propias</a>
+  <li><a href="#funciones-estadísticas-básicas" id="toc-funciones-estadísticas-básicas" class="nav-link" data-scroll-target="#funciones-estadísticas-básicas"><span class="header-section-number">3.3</span> Funciones estadísticas básicas</a></li>
+  <li><a href="#funciones-de-propósito-general" id="toc-funciones-de-propósito-general" class="nav-link" data-scroll-target="#funciones-de-propósito-general"><span class="header-section-number">3.4</span> Funciones de propósito general</a>
   <ul class="collapse">
-  <li><a href="#ejercicios-con-funciones" id="toc-ejercicios-con-funciones" class="nav-link" data-scroll-target="#ejercicios-con-funciones"><span class="header-section-number">3.4.1</span> Ejercicios con Funciones</a></li>
+  <li><a href="#funciones-de-repetición-y-secuencia" id="toc-funciones-de-repetición-y-secuencia" class="nav-link" data-scroll-target="#funciones-de-repetición-y-secuencia"><span class="header-section-number">3.4.1</span> Funciones de Repetición y Secuencia</a></li>
+  <li><a href="#funciones-sobre-texto" id="toc-funciones-sobre-texto" class="nav-link" data-scroll-target="#funciones-sobre-texto"><span class="header-section-number">3.4.2</span> Funciones sobre texto</a></li>
+  <li><a href="#funciones-de-condiconales" id="toc-funciones-de-condiconales" class="nav-link" data-scroll-target="#funciones-de-condiconales"><span class="header-section-number">3.4.3</span> Funciones de Condiconales</a></li>
   </ul></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">3.5</span> Referencias:</a></li>
+  <li><a href="#sec-func_propias" id="toc-sec-func_propias" class="nav-link" data-scroll-target="#sec-func_propias"><span class="header-section-number">3.5</span> Crear Funciones Propias</a>
+  <ul class="collapse">
+  <li><a href="#ejercicios-con-funciones" id="toc-ejercicios-con-funciones" class="nav-link" data-scroll-target="#ejercicios-con-funciones"><span class="header-section-number">3.5.1</span> Ejercicios con Funciones</a></li>
+  </ul></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">3.6</span> Referencias:</a></li>
   </ul>
 </nav>
     </div>
@@ -327,10 +331,39 @@ Objetivos
 </ul>
 </div>
 </div>
-<section id="operaciones-básicas-en-r" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="operaciones-básicas-en-r"><span class="header-section-number">3.1</span> Operaciones Básicas en R</h2>
-<section id="operaciones-matemáticas" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="operaciones-matemáticas"><span class="header-section-number">3.1.1</span> Operaciones Matemáticas</h3>
+<section id="introducción-funciones-para-un-análisis-reproducible" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="introducción-funciones-para-un-análisis-reproducible"><span class="header-section-number">3.1</span> Introducción: funciones para un análisis reproducible</h2>
+<p>En este curso, programar no es un fin en sí mismo: es una forma de convertir preguntas sobre el territorio en procedimientos claros, revisables y reutilizables. Una función es una instrucción que recibe uno o más datos, realiza una tarea y devuelve un resultado. R ya incluye muchas funciones —por ejemplo, <code>mean()</code> para calcular un promedio o <code>max()</code> para encontrar el valor más alto— y también permite crear funciones propias cuando una tarea se repite.</p>
+<p>Esta idea es especialmente útil en políticas públicas. Suponga que necesita calcular una tasa de delitos, clasificar el nivel de vulnerabilidad de cada comuna o verificar que un indicador no tenga valores faltantes. Puede hacer cada cálculo manualmente una vez; sin embargo, una función permite aplicar la misma regla a todas las comunas, periodos o bases de datos. Así se reducen errores, se hace explícito cómo se construyó un resultado y se facilita que otra persona revise o actualice el análisis.</p>
+<p>Una manera simple de pensar una función es como una receta:</p>
+<ul>
+<li><strong>Entrada:</strong> los datos que necesita, por ejemplo, casos policiales y población comunal.</li>
+<li><strong>Regla:</strong> el cálculo o criterio que se aplicará, por ejemplo, dividir los casos por la población y multiplicar por 100.000.</li>
+<li><strong>Salida:</strong> el resultado que se usará para analizar o comunicar, por ejemplo, una tasa comparable entre comunas.</li>
+</ul>
+<p>No es necesario memorizar todas las funciones de R. Lo importante al comienzo es reconocer qué problema se quiere resolver, identificar qué información debe entrar y comprobar que el resultado tenga sentido. En este capítulo se practican operaciones, resúmenes y condiciones que luego se utilizarán para manipular tablas, construir indicadores territoriales y generar visualizaciones.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Conexión con las políticas públicas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Las funciones ayudan a que una decisión basada en datos sea más trazable. Si un municipio prioriza comunas según una tasa, la función permite conservar la regla de cálculo junto con el análisis. Al recibir datos de un nuevo mes o año, se puede ejecutar nuevamente el mismo procedimiento en vez de reconstruir el indicador desde cero. Reproducir no garantiza por sí solo una buena decisión: también es necesario revisar la calidad de los datos, el periodo, la población de referencia y el contexto territorial.</p>
+</div>
+</div>
+<section id="ruta-de-aprendizaje-del-capítulo" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="ruta-de-aprendizaje-del-capítulo"><span class="header-section-number">3.1.1</span> Ruta de aprendizaje del capítulo</h3>
+<p>El capítulo avanza desde operaciones sencillas hacia funciones propias. Primero se revisan cálculos y resúmenes de vectores; después, funciones para repetir, secuenciar y clasificar información; finalmente, se crean funciones que encapsulan una tarea y permiten reutilizarla. Cada paso prepara habilidades que se ocuparán en las sesiones de manipulación de datos, visualización y análisis espacial.</p>
+</section>
+</section>
+<section id="operaciones-básicas-en-r" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="operaciones-básicas-en-r"><span class="header-section-number">3.2</span> Operaciones Básicas en R</h2>
+<section id="operaciones-matemáticas" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="operaciones-matemáticas"><span class="header-section-number">3.2.1</span> Operaciones Matemáticas</h3>
 <p>En R, es posible realizar operaciones matemáticas básicas utilizando los operadores aritméticos estándar. Estos operadores incluyen:</p>
 <ul>
 <li>Suma (+): se utiliza para sumar dos valores.</li>
@@ -382,8 +415,8 @@ Objetivos
 <p>Es importante tener en cuenta que R sigue las reglas de precedencia de las operaciones matemáticas. Esto significa que las operaciones dentro de los paréntesis se evalúan primero, seguidas de la exponenciación, la multiplicación y la división, y finalmente la suma y la resta. Si se requiere un orden específico de operaciones, se deben utilizar paréntesis para indicarlo.</p>
 </section>
 </section>
-<section id="funciones-estadísticas-básicas" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="funciones-estadísticas-básicas"><span class="header-section-number">3.2</span> Funciones estadísticas básicas</h2>
+<section id="funciones-estadísticas-básicas" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="funciones-estadísticas-básicas"><span class="header-section-number">3.3</span> Funciones estadísticas básicas</h2>
 <p>Estas funciones permiten resumir información numérica. Se aplican a vectores, columnas o listas de valores. Ejemplo</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">22</span>,<span class="dv">2</span>,<span class="dv">1</span>) <span class="co"># Vector númerico</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -433,10 +466,10 @@ Actividad: Explorando un vector
 </div>
 </div>
 </section>
-<section id="funciones-de-propósito-general" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="funciones-de-propósito-general"><span class="header-section-number">3.3</span> Funciones de propósito general</h2>
-<section id="funciones-de-repetición-y-secuencia" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="funciones-de-repetición-y-secuencia"><span class="header-section-number">3.3.1</span> Funciones de Repetición y Secuencia</h3>
+<section id="funciones-de-propósito-general" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="funciones-de-propósito-general"><span class="header-section-number">3.4</span> Funciones de propósito general</h2>
+<section id="funciones-de-repetición-y-secuencia" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="funciones-de-repetición-y-secuencia"><span class="header-section-number">3.4.1</span> Funciones de Repetición y Secuencia</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -456,8 +489,8 @@ Actividad: Explorando un vector
 </div>
 </div>
 </section>
-<section id="funciones-sobre-texto" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="funciones-sobre-texto"><span class="header-section-number">3.3.2</span> Funciones sobre texto</h3>
+<section id="funciones-sobre-texto" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="funciones-sobre-texto"><span class="header-section-number">3.4.2</span> Funciones sobre texto</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"Hola"</span>, <span class="st">"amigo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -481,8 +514,8 @@ Actividad: Explorando un vector
 </div>
 </div>
 </section>
-<section id="funciones-de-condiconales" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="funciones-de-condiconales"><span class="header-section-number">3.3.3</span> Funciones de Condiconales</h3>
+<section id="funciones-de-condiconales" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="funciones-de-condiconales"><span class="header-section-number">3.4.3</span> Funciones de Condiconales</h3>
 <p>La función <code>ifelse()</code> permite <strong>evaluar una condición lógica y devolver un resultado distinto según se cumpla o no</strong>. Es una herramienta muy útil para tomar decisiones dentro de un vector.</p>
 <p>Su estructura general es:</p>
 <div class="cell">
@@ -523,8 +556,8 @@ Actividad: Clasificación con ifelse()
 </div>
 </section>
 </section>
-<section id="sec-func_propias" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="sec-func_propias"><span class="header-section-number">3.4</span> Crear Funciones Propias</h2>
+<section id="sec-func_propias" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-func_propias"><span class="header-section-number">3.5</span> Crear Funciones Propias</h2>
 <p>En R, es posible crear funciones propias para realizar tareas específicas y reutilizarlas en diferentes partes de un programa.</p>
 <p><strong>¿Por qué crear funciones?</strong></p>
 <p>Crear funciones propias te permite automatizar tareas, evitar repetir código y estructurar tu análisis de manera más clara y reutilizable.</p>
@@ -604,8 +637,8 @@ Actividad: Clasificación con ifelse()
 </div>
 </div>
 <p>Es importante tener en cuenta que los nombres de las funciones en R deben cumplir las mismas reglas que los nombres de las variables. Además, es <em>recomendable</em> incluir comentarios explicativos dentro del cuerpo de la función para facilitar su comprensión y uso posterior.</p>
-<section id="ejercicios-con-funciones" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="ejercicios-con-funciones"><span class="header-section-number">3.4.1</span> Ejercicios con Funciones</h3>
+<section id="ejercicios-con-funciones" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="ejercicios-con-funciones"><span class="header-section-number">3.5.1</span> Ejercicios con Funciones</h3>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -661,7 +694,7 @@ Actividad: Crear tu función de Hipotenusa
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -670,7 +703,7 @@ Ayuda: Estructura de la función
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>hipotenusa <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b){</span>
@@ -684,8 +717,8 @@ Ayuda: Estructura de la función
 </div>
 </section>
 </section>
-<section id="referencias" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="referencias"><span class="header-section-number">3.5</span> Referencias:</h2>
+<section id="referencias" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="referencias"><span class="header-section-number">3.6</span> Referencias:</h2>
 <ul>
 <li><p><a href="https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-control.html">https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-control.html</a></p></li>
 <li><p><a href="https://rstudio-pubs-static.s3.amazonaws.com/623888_497a5388a98545c48e9b5b6bec4056f6.html">Loops y funciones en R</a></p></li>

@@ -2,18 +2,71 @@
 subtitle: "Manipulación de Tablas utilizando dplyr"
 ---
 
-# Manipulación de tablas en r
+# Manipulación de tablas en R
 
 ::: {.callout-note}
-## objetivo de esta sección
-conocer el conjunto de paquetes tidyverse y su utilidad en la manipulación de tablas de datos en r.
+## Objetivo de esta sección
 
-
-“imagina que estás frente a una base de datos de miles de manzanas con información territorial. ¿cómo la exploras, limpias y visualizas con claridad? tidyverse es tu mejor aliado.”
+Conocer el conjunto de paquetes `tidyverse` y utilizar `dplyr` para explorar,
+seleccionar, filtrar, resumir y transformar tablas de datos. Estas operaciones
+permiten preparar información territorial para construir indicadores y apoyar
+decisiones de política pública.
 :::
 
+## Introducción: de los registros a la evidencia territorial
 
-## introducción a tidyverse
+En el trabajo con políticas públicas, los datos rara vez llegan listos para
+responder una pregunta. Una base puede contener miles de registros de manzanas,
+personas, establecimientos o eventos, junto con columnas que no son necesarias
+para el análisis. Antes de elaborar un mapa, un gráfico o un indicador, es
+necesario organizar esa información y definir con transparencia qué se incluye,
+qué se excluye y cómo se calcula cada resultado.
+
+Por ejemplo, una institución podría contar con registros de atenciones de salud
+para todo un año. Para responder “¿en qué comunas se concentra la demanda?” no
+basta con abrir la planilla: habría que seleccionar las variables pertinentes,
+filtrar el periodo de interés, agrupar los registros por comuna y construir un
+resumen o una tasa comparable. En este capítulo se practica esa misma lógica
+con una base de manzanas del Servicio de Impuestos Internos (SII).
+
+El `tidyverse` ofrece un lenguaje consistente para realizar estas tareas en R.
+Trabajar con instrucciones escritas en un script tiene una ventaja importante:
+el procedimiento queda documentado y puede repetirse cuando se reciben datos
+nuevos, se corrige una fuente o se necesita revisar una decisión. La
+reproducibilidad no reemplaza el juicio profesional; sí permite que las reglas
+de análisis sean visibles, discutibles y menos propensas a errores manuales.
+
+::: {.callout-tip}
+## Una pregunta guía el flujo de trabajo
+
+Antes de manipular una tabla, formule una pregunta concreta. Por ejemplo:
+“¿qué comunas tienen mayor proporción de superficie destinada a comercio?” o
+“¿qué manzanas combinan vivienda y comercio?”. La pregunta define la unidad de
+análisis, las variables necesarias y el tipo de indicador. También ayuda a
+evitar comparar totales entre territorios de tamaños muy distintos cuando una
+tasa o proporción sería más apropiada.
+:::
+
+### Ruta de análisis que se practicará
+
+Las funciones de `dplyr` se pueden entender como una secuencia de decisiones
+sobre una tabla:
+
+- `select()` define las columnas que se conservarán para el análisis.
+- `filter()` mantiene los registros que cumplen una condición explícita.
+- `group_by()` establece la unidad para resumir, por ejemplo, comuna o región.
+- `summarise()` calcula medidas agregadas para cada grupo.
+- `mutate()` crea indicadores o categorías nuevas a partir de las variables
+  disponibles.
+
+Estas operaciones se pueden encadenar con el operador *pipe* (`%>%`), que se
+lee de arriba hacia abajo: tomar una tabla, aplicar un paso y usar el resultado
+en el paso siguiente. Más que memorizar comandos, procure explicar con sus
+propias palabras qué decisión representa cada línea y revisar el resultado
+después de cada transformación.
+
+
+## Introducción a tidyverse
 
 [Tidyverse](https://www.tidyverse.org) es una colección de paquetes diseñados para Ciencia de Datos.
 
@@ -406,4 +459,3 @@ mutate(tipo_uso_predominante = case_when(
 - [Tidyverse](https://www.tidyverse.org)
 
 - [Paletas de colores](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)
-

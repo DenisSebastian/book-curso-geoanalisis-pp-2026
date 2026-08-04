@@ -11,6 +11,60 @@
 - Crear funciones propias.
 :::
 
+## Introducción: funciones para un análisis reproducible
+
+En este curso, programar no es un fin en sí mismo: es una forma de convertir
+preguntas sobre el territorio en procedimientos claros, revisables y
+reutilizables. Una función es una instrucción que recibe uno o más datos,
+realiza una tarea y devuelve un resultado. R ya incluye muchas funciones —por
+ejemplo, `mean()` para calcular un promedio o `max()` para encontrar el valor
+más alto— y también permite crear funciones propias cuando una tarea se repite.
+
+Esta idea es especialmente útil en políticas públicas. Suponga que necesita
+calcular una tasa de delitos, clasificar el nivel de vulnerabilidad de cada
+comuna o verificar que un indicador no tenga valores faltantes. Puede hacer
+cada cálculo manualmente una vez; sin embargo, una función permite aplicar la
+misma regla a todas las comunas, periodos o bases de datos. Así se reducen
+errores, se hace explícito cómo se construyó un resultado y se facilita que
+otra persona revise o actualice el análisis.
+
+Una manera simple de pensar una función es como una receta:
+
+- **Entrada:** los datos que necesita, por ejemplo, casos policiales y
+  población comunal.
+- **Regla:** el cálculo o criterio que se aplicará, por ejemplo, dividir los
+  casos por la población y multiplicar por 100.000.
+- **Salida:** el resultado que se usará para analizar o comunicar, por ejemplo,
+  una tasa comparable entre comunas.
+
+No es necesario memorizar todas las funciones de R. Lo importante al comienzo
+es reconocer qué problema se quiere resolver, identificar qué información debe
+entrar y comprobar que el resultado tenga sentido. En este capítulo se
+practican operaciones, resúmenes y condiciones que luego se utilizarán para
+manipular tablas, construir indicadores territoriales y generar
+visualizaciones.
+
+::: {.callout-tip}
+## Conexión con las políticas públicas
+
+Las funciones ayudan a que una decisión basada en datos sea más trazable. Si
+un municipio prioriza comunas según una tasa, la función permite conservar la
+regla de cálculo junto con el análisis. Al recibir datos de un nuevo mes o
+año, se puede ejecutar nuevamente el mismo procedimiento en vez de reconstruir
+el indicador desde cero. Reproducir no garantiza por sí solo una buena
+decisión: también es necesario revisar la calidad de los datos, el periodo, la
+población de referencia y el contexto territorial.
+:::
+
+### Ruta de aprendizaje del capítulo
+
+El capítulo avanza desde operaciones sencillas hacia funciones propias. Primero
+se revisan cálculos y resúmenes de vectores; después, funciones para repetir,
+secuenciar y clasificar información; finalmente, se crean funciones que
+encapsulan una tarea y permiten reutilizarla. Cada paso prepara habilidades que
+se ocuparán en las sesiones de manipulación de datos, visualización y análisis
+espacial.
+
 
 ## Operaciones Básicas en R
 
@@ -444,5 +498,4 @@ r1 <-  hipotenusa(a = 5,  b = 5)
 <!-- ``` -->
 
 <!-- Es importante tener en cuenta que los operadores lógicos se pueden utilizar en combinación para crear expresiones lógicas más complejas. Además, los operadores lógicos también se pueden utilizar en las estructuras de control condicionales, como if/else y switch, para tomar decisiones basadas en condiciones lógicas. -->
-
 
