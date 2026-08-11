@@ -45,6 +45,7 @@ Coordenadas proyectadas (métricas):
 
 library(sf) # manipulación de datos vectoriales
 library(mapview) # visualización de mapas dinámicos
+library(dplyr)
 library(ggplot2) # gráficos
 library(RColorBrewer) #paleta de colores
 ```
@@ -64,22 +65,22 @@ st_crs(LC_mz_32719)
 
 
 
-### Reproyectar Raster
+<!-- ### Reproyectar Raster -->
 
-```{r}
-library(raster)
+<!-- ```{r} -->
+<!-- library(raster) -->
 
-las_condes_raster <- brick("data/raster/OLI_LC.tif")
-names(las_condes_raster) <- c("aerosol", "blue", "green", "red" , "nir", "swir1", "swir2", "tirs1")
+<!-- las_condes_raster <- brick("data/raster/OLI_LC.tif") -->
+<!-- names(las_condes_raster) <- c("aerosol", "blue", "green", "red" , "nir", "swir1", "swir2", "tirs1") -->
 
-las_condes_raster
-```
+<!-- las_condes_raster -->
+<!-- ``` -->
 
 
-```{r}
-crs_latlon <- "+proj=longlat +datum=WGS84 +no_defs"# geográficas o elipsoidales
-crs_utm <- "+proj=utm +zone=19 +south +datum=WGS84 +units=m +no_defs" # UTM o cartográficas
-las_condes_raster2 <- projectRaster(from= las_condes_raster,                                             crs = crs_latlon)
-las_condes_raster2
-```
+<!-- ```{r} -->
+<!-- crs_latlon <- "+proj=longlat +datum=WGS84 +no_defs"# geográficas o elipsoidales -->
+<!-- crs_utm <- "+proj=utm +zone=19 +south +datum=WGS84 +units=m +no_defs" # UTM o cartográficas -->
+<!-- las_condes_raster2 <- projectRaster(from= las_condes_raster,                                             crs = crs_latlon) -->
+<!-- las_condes_raster2 -->
+<!-- ``` -->
 

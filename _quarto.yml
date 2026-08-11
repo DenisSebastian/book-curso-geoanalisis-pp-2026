@@ -21,8 +21,8 @@ book:
     - funciones.qmd
     - tidyverse.qmd
     - visualizaciones.qmd
-    # - datos_vectores.qmd
-    # - dataframes.qmd
+    - datos_vectores.qmd
+    - dataframes.qmd
     # - geocode.qmd
     # - datos_rasters.qmd
     # - inferencia.qmd
@@ -39,7 +39,7 @@ book:
   appendices:
     - recursos.qmd
     - control_r.qmd
-    # - crs.qmd
+    - crs.qmd
     # - john_snow.qmd
     # - quiebres.qmd
 
