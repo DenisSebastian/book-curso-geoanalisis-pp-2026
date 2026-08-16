@@ -26,7 +26,20 @@ suppressPackageStartupMessages(library(stringdist))
 
 ## Introducción
 
-La geocodificación es el proceso de convertir direcciones físicas (por ejemplo, "Presidente Errázuriz 3485, Las Condes") en coordenadas geográficas (latitud y longitud), que se pueden utilizar para posicionar elementos o eventos en el espacio de un mapa o para análisis espaciales. Este proceso es fundamental en diversos proyectos de análisis espacial, ya que permite transformar datos textuales en información espacial. 
+En el capítulo anterior trabajamos con información que ya estaba asociada a una comuna . Para representarla espacialmente bastaba con unir nuestra tabla de indicadores con una capa que contenía las geometrías comunales y en el mejor de los casos ya venía con las coordenadas por defecto.
+
+Sin embargo, muchos registros administrativos no contienen coordenadas ni identificadores territoriales. En cambio, contienen información como:
+
+>_"Presidente Errázuriz 3485, Las Condes"_
+
+Sabemos qué dirección fue registrada, pero todavía no sabemos exactamente dónde se encuentra en el espacio.
+
+Aquí aparece un nuevo problema:
+
+>¿Cómo podemos transformar una dirección escrita como texto en una ubicación que pueda ser utilizada en un análisis espacial?
+
+
+La respuesta es la [geocodificación]{.verde}.
 
 
 ![](images/geocoding.png){fig-align="center" width="500"}
@@ -35,6 +48,26 @@ La geocodificación es el proceso de convertir direcciones físicas (por ejemplo
 En contextos hispanos, la amplia variabilidad en los formatos de escritura de direcciones —abreviaciones, uso de diacríticos, numeraciones, referencias a kilómetros o parcelas, y complementos adicionales— exige un pipeline estructurado. Este debe integrar [normalización determinística, diccionarios de abreviaciones y métodos de similitud]{.verde}, antes de consultar motores de geocodificación externos.
 
 El proceso de geocodificación debe ser [flexible y adaptable]{.verde} a los diferentes tipos y estructuras de direcciones. Por ello, resulta fundamental contar con un flujo de trabajo que permita transformar las direcciones en etapas sucesivas, mejorando gradualmente la calidad de los resultados. Esta organización facilita la trazabilidad, el control de calidad y la incorporación de ajustes o transformaciones adicionales cuando sea necesario. A continuación, se presenta una visión resumida del pipeline básico que trabajaremos en esta clase.
+
+::: {.callout-important}
+
+## Geocodificar no es solamente obtener coordenadas
+
+Un motor puede devolver una latitud y longitud y, aun así, entregar una ubicación incorrecta.
+
+Por ejemplo, una dirección declarada en Temuco podría coincidir con una calle del mismo nombre localizada en Santiago.
+
+Por ello, nuestro objetivo no será simplemente:
+
+`Dirección → Coordenadas`
+
+sino:
+
+`Dirección → Preparación → Coordenadas → Validación → Ubicación confiable`
+
+La calidad de un proceso de geocodificación depende tanto de la capacidad de encontrar coordenadas como de nuestra capacidad para verificar que esas coordenadas son coherentes con la información original.
+:::
+
 
 **Visión del Pipeline Básico**
 
@@ -83,17 +116,19 @@ Para realizar el proceso de geocodificación de direcciones es necesario contar 
 
 Los motores de geocodificación utilizan bases de datos geográficas y algoritmos de correspondencia para ubicar puntos específicos en un mapa a partir de descripciones textuales. Dependiendo del motor, pueden ofrecer características adicionales, como filtrado por región, cálculos de rutas, o integración con sistemas de tráfico en tiempo real. La siguiente tabla compara varios motores de geocodificación en cuanto a características, cobertura, precisión y si son gratuitos o de pago.
 
-| Motor | Tipo | Cobertura | Precisión | Límite Gratuito | Características Adicionales |
-|------------|------------|------------|------------|------------|------------|
-| Google Geocoding API | De pago | Mundial | Alta | 40,000 diarias | Geocodificación y "reverse geocoding", alta calidad. |
-| OpenStreetMap Nominatim | Gratuito | Mundial | Buena | Límite bajo | Basado en OpenStreetMap, infraestructura propia recomendada. |
-| HERE Geocoder API | De pago | Mundial | Alta | 250,000 mensuales | Filtrado avanzado, datos de tráfico en tiempo real. |
-| Mapbox Geocoding API | De pago | Mundial | Alta | 100,000 mensuales | Integración con Mapbox, geocodificación en tiempo real. |
-| Bing Maps Geocoding API | De pago | Mundial | Alta | 125,000 mensuales | Información adicional sobre tipo de localización. |
-| Geocode.xyz | Gratuito | Mundial | Moderada | 1,000 diarias | Servicio gratuito con opciones de pago. |
-| TomTom Geocoding API | De pago | Mundial | Alta | 2,500 diarias | Uso en navegación y tráfico en tiempo real. |
+| Motor | Modelo | Cobertura | Consideraciones principales |
+|---|---|---|---|
+| **Nominatim / OpenStreetMap** | Abierto / gratuito | Global | Basado en OpenStreetMap. Requiere respetar políticas de uso y límites de consultas. Para procesos masivos puede ser conveniente utilizar una instancia propia. |
+| **Google Geocoding API** | Comercial | Global | Alta cobertura y precisión. Requiere API y un plan de facturación vigente. |
+| **HERE Geocoding API** | Comercial | Global | Permite geocodificación y búsqueda estructurada. Requiere API y está sujeto a cuotas de uso. |
+| **Mapbox Geocoding API** | Comercial | Global | Integración con el ecosistema Mapbox y soporte para búsquedas geográficas. Requiere API y está sujeto a cuotas. |
+| **TomTom Geocoding API** | Comercial | Global | Orientado también a aplicaciones de navegación y movilidad. Requiere API y está sujeto a cuotas de uso. |
 
-Un motor geográfico de geocodificación es el sistema que convierte una dirección normalizada en coordenadas (latitud, longitud) usando una base de datos de referencia (calles, portales, topónimos, límites administrativos). 
+
+> Las cuotas, precios y condiciones de uso cambian con el tiempo. Siempre deben revisarse en la documentación oficial del proveedor antes de implementar un proceso masivo.
+
+Para este curso no necesitas que memoricen límites de APIs; necesitas que comprendan que un geocoder es un servicio con una base de referencia, reglas de búsqueda y restricciones operacionales.
+
 
 **Variables clave al momento de geocodificar**
 
@@ -111,13 +146,66 @@ En la práctica se utilizarán motores libres basados en OpenStreetMap (OSM), pr
 
 
 
-### Validación
+### Validación Espacial
 
-Confirma consistencia espacial (**Point-in-Polygon** contra la comuna/municipio esperado) y jerárquica (comuna–provincia–región).
+Obtener coordenadas no garantiza que el resultado sea correcto. Después de cada intento de geocodificación debemos comprobar si la ubicación obtenida es consistente con la información territorial declarada originalmente.
+
+En este ejercicio utilizaremos una validación Point-in-Polygon:
+
+1. el motor devuelve una coordenada;
+2. transformamos esa coordenada en un punto espacial;
+3. intersectamos el punto con los polígonos comunales;
+4. identificamos en qué comuna cayó;
+5. comparamos esa comuna con la declarada en el registro original.
+
+Por ejemplo:
+
+Dirección declarada: Temuco
+Punto geocodificado: Santiago
+
+El motor logró encontrar una coordenada, pero el resultado no supera nuestra validación espacial.
+
+Por esta razón distinguiremos entre:
+
+* geocodificado: el motor devolvió coordenadas;
+* validado: además, las coordenadas son territorialmente consistentes;
+* rezagado: requiere un nuevo tratamiento o revisión.
+
+Esta distinción será fundamental para medir la calidad del pipeline.
+
+
 
 ### Registros de Avances
 
-Mide el desempeño: **match rate**, porcentaje de acierto, cobertura por comuna, y contribución de cada etapa.
+>¿Cómo sabremos si el proceso está funcionando?
+
+El proceso de geocodificación no se evaluará únicamente observando algunos puntos en un mapa. Utilizaremos métricas que permitan cuantificar su desempeño.
+
+**Total inicial**
+
+Número de registros que intentaremos geocodificar.
+
+**Aporte de una etapa**
+
+Porcentaje de la base original que logró ser correctamente validado durante esa etapa.
+
+$$Aporte_k =
+\frac{\text{registros validados en etapa } k}
+{\text{registros originales}}
+\times 100$$
+
+**Cobertura acumulada**
+
+Porcentaje de registros originales que han sido correctamente resueltos después de todas las etapas ejecutadas hasta ese momento.
+
+$$Cobertura =
+\frac{\sum \text{registros validados}}
+{\text{registros originales}}
+\times100$$
+
+La comparación de estas métricas permitirá saber cuánto valor aporta cada transformación adicional al pipeline.
+
+
 
 ## Etapas
 
@@ -1386,3 +1474,40 @@ st_write(resultados_sf, dsn = "resultados/geocododed_v1.shp")
 
 ```
 
+## ¿Qué aprendimos?
+
+Durante esta sesión desarrollamos un flujo reproducible para transformar direcciones administrativas en información espacial.
+
+El proceso completo puede resumirse como:
+
+```{text}
+Dirección cruda
+↓
+Preparar y normalizar
+↓
+Geocodificar
+↓
+Validar espacialmente
+↓
+Reintentar los casos no resueltos
+↓
+Registrar cobertura y calidad
+↓
+Consolidar resultados
+```
+
+
+
+La principal idea de esta sesión es que:
+
+Geocodificar no consiste solamente en encontrar coordenadas, sino en construir ubicaciones suficientemente confiables para ser utilizadas en análisis posteriores.
+
+También aprendimos que diferentes problemas de calidad requieren diferentes estrategias. Las transformaciones simples permiten resolver una parte importante de los registros, mientras que los casos restantes pueden requerir reglas adicionales, diccionarios o técnicas de similitud.
+
+::: {.callout-tip}
+
+Para reflexionar
+
+Si un sistema logra asignar coordenadas al 95 % de las direcciones, pero solamente el 70 % pasa la validación territorial, ¿diríamos que el geocoding tuvo un 95 % o un 70 % de éxito?
+
+La respuesta depende de qué entendamos por un resultado útil. En análisis territorial, encontrar una coordenada no es suficiente: necesitamos confiar en su ubicación.

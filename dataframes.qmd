@@ -8,7 +8,9 @@ subtitle: "Flujo de Trabajo de Indicadores de Delincuencia"
 
 ::: {.callout-note}
 ## Objetivo de la sesión
-Aplicar un flujo completo de manipulación de datos con `dplyr` para construir un indicador territorial de delitos violentos por comuna, incluyendo filtros, categorización, resúmenes estadísticos y visualizaciones gráficas.
+Transformar registros administrativos de delitos en un indicador territorial comparable entre comunas, aplicando un flujo reproducible en R que incluye selección, categorización, filtrado, agregación, normalización por población y visualización gráfica y espacial.
+
+Al finalizar esta sesión podremos distinguir entre registros, conteos e indicadores, y comprender por qué la forma en que procesamos los datos condiciona la interpretación territorial que hacemos de ellos.
 :::
 
 
@@ -19,25 +21,32 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introducción
 
-En esta sesión se realizará un flujo de trabajo de construcción de un indicador territorial de delitos a nivel comuna utilizando R. Que contempla desde la lectura de la base de información (excel de delitos), agregar información de categorías, hacer filtros, resúmenes estadísticos (tablas dinámicas) y finalmente visualizaciones gráficas.
+En muchas instituciones públicas los datos se originan como registros administrativos: denuncias, prestaciones, establecimientos, accidentes, permisos o beneficiarios. Estos registros contienen información valiosa, pero no constituyen automáticamente indicadores útiles para apoyar decisiones.
 
-:::{.callout-note collapse="true"}
-## Acceso a Datos de Casos Policiales Sala CEAD
-La base fuen obtenida de la Sala **CEAD** (Centro de Estudios de Análisis del Delito) dependiente del la Subsecretaría de Prevención del Delito. Corresponde a datos a **nivel comunal** que da cuenta de los casos policiales conocidos por las policías para distintos grupos delictuales a partir de las detenciones flagrantes y las denuncias formales realizadas por la ciudadanía en Carabineros de Chile o la Policía de Investigaciones de Chile.
+En esta sesión trabajaremos con datos comunales de casos policiales y recorreremos un flujo completo para transformar registros en información territorial:
 
-![Filtros realizados en la página de sala CEAD](images/filtros_cead.png)
-Los grupos delictuales propuestos para el análisis incorporan el concepto de daño social y penal el cual busca ponderar los delitos no solo por su frecuencia, sino también, por el impacto y gravedad de sus consecuencias. 
-
-Consideración: A esta base de casos policiales se le agregó información administrativa de cada comuna.
+>`Datos → selección → categorización → filtros → resumen → normalización → indicador → visualización`
 
 
-Acceso a estadísticas policiales: [link](https://cead.spd.gov.cl/estadisticas-delictuales/)\
-**CEAD**: Centro de Estudios de Análisis del Delito
+Utilizaremos R para reproducir cada una de estas operaciones y construiremos como ejemplo una tasa de casos policiales asociados a delitos violentos por cada 10.000 habitantes.
+
+El propósito no es únicamente aprender funciones de R, sino comprender qué transformación representa cada operación y qué pregunta nos permite responder.
+
+
+
+
+
+::: {.callout-tip}
+
+## Antes de comenzar
+
+Supongamos que una comuna registra 1.000 delitos durante un año y otra registra 300.
+
+¿Podemos concluir inmediatamente que la primera comuna presenta un mayor problema de seguridad?
+
+¿Qué otra información necesitaríamos para poder compararlas correctamente?
+
 :::
-
-
-
-
 
 ## Librerías
 
@@ -50,10 +59,33 @@ library(ggplot2) # graficos estáticos
 ```
 
 
-## Lectura de una tabla
+## Lectura de una tabla de Delitos
+
+**¿Qué representan estos datos?**
+
+La base utilizada proviene de la Sala CEAD de la Subsecretaría de Prevención del Delito y contiene información agregada a nivel comunal sobre casos policiales conocidos por las policías.
+
+Estos registros se generan principalmente a partir de denuncias realizadas por la ciudadanía y detenciones efectuadas por las policías. Por esta razón, deben interpretarse como una aproximación administrativa al fenómeno delictual y no como una medición exhaustiva de todos los delitos ocurridos en un territorio.
+
+_Esta distinción es importante_: durante la sesión construiremos un indicador de casos policiales registrados por población, cuyo propósito será facilitar la comparación territorial entre comunas.
+
+:::{.callout-note collapse="true"}
+## Acceso a Datos de Casos Policiales Sala CEAD
+La base fuen obtenida de la Sala **CEAD** (Centro de Estudios de Análisis del Delito) dependiente del la Subsecretaría de Prevención del Delito. Corresponde a datos a **nivel comunal** que da cuenta de los casos policiales conocidos por las policías para distintos grupos delictuales a partir de las detenciones flagrantes y las denuncias formales realizadas por la ciudadanía en Carabineros de Chile o la Policía de Investigaciones de Chile.
+
+![Filtros realizados en la página de sala CEAD](images/filtros_cead.png)
+Los grupos delictuales propuestos para el análisis incorporan el concepto de daño social y penal el cual busca ponderar los delitos no solo por su frecuencia, sino también, por el impacto y gravedad de sus consecuencias. 
+
+Consideración: A esta base de casos policiales se le agregó información administrativa de cada comuna.
 
 
-Se leerá el archivo excel que se vio la semana pasada de delitos comunales.
+Acceso a estadísticas policiales: [link](https://cead.minsegpublica.gob.cl/estadisticas-delictuales/)\
+**CEAD**: Centro de Estudios de Análisis del Delito
+:::
+
+
+A continuación se leerá el archivo excel con de delitos comunales (Junio 2024).
+
 ```{r}
 
 delitos_tbl <- read.xlsx("data/excel/delitos_comunales.xlsx")
@@ -151,7 +183,18 @@ delitos_filtered <- delitos_filtered %>%
 ## Generar Resúmenes (similar a tablas dinámicas)
 
 ![Se buscarà replicar desde R las operaciones correspondientes a esta tabla dinámica](images/t_dinamica_excel.png)
+**De registros a información comunal**
 
+Después de aplicar los filtros todavía tenemos múltiples registros asociados a cada comuna. Para construir un indicador necesitamos cambiar la unidad de análisis.
+
+Hasta ahora nuestra unidad son los registros de delitos. A partir de este momento queremos que cada fila represente una comuna.
+
+Para lograrlo utilizaremos dos operaciones:
+
+* group_by() define la unidad territorial sobre la cual queremos resumir la información.
+* summarise() reduce múltiples registros a una observación por grupo mediante funciones como suma, promedio, mínimo o máximo.
+
+En nuestro caso:
 ```{r}
 
 tabla_resumen <- delitos_filtered %>% 
@@ -162,8 +205,29 @@ tabla_resumen <- delitos_filtered %>%
 tabla_resumen
 ```
 
+El resultado será una tabla donde cada fila representa una comuna y contiene el número total de casos seleccionados y su población.
 
-**Ponderar por población**
+## Del conteo al indicador
+
+El número total de casos permite responder:
+
+>¿Cuántos casos fueron registrados en una comuna?
+
+Sin embargo, comparar únicamente valores absolutos puede ser engañoso cuando las comunas tienen poblaciones muy diferentes.
+
+Por ejemplo, 500 casos en una comuna de 50.000 habitantes no representan la misma situación relativa que 500 casos en una comuna de 500.000 habitantes.
+
+Para hacer comparables los territorios construiremos una tasa:
+
+$$
+Tasa = \frac{\text{casos registrados}}{\text{población}} \times 10.000
+$$
+
+La multiplicación por 10.000 facilita la interpretación del resultado:
+
+Número de casos registrados por cada 10.000 habitantes.
+
+En R:
 
 ```{r}
 tabla_resumen <- tabla_resumen %>%
@@ -171,12 +235,17 @@ tabla_resumen <- tabla_resumen %>%
     del_10000_hab = round((total_delitos / pob) * 10000, 2)
   )
 
-
-tabla_resumen %>%
-  arrange(desc(del_10000_hab)) %>%
-  head(10)
 ```
 
+::: {.callout-important}
+
+## Una precaución de interpretación
+
+Una tasa permite comparar territorios de distinto tamaño, pero no explica por sí sola por qué existen diferencias entre comunas ni implica causalidad.
+
+El indicador debe entenderse como una herramienta descriptiva que ayuda a detectar diferencias territoriales que posteriormente pueden requerir análisis adicionales.
+
+:::
 
 
 ## Visualización gráfica
@@ -221,32 +290,22 @@ ggplotly(g_barra)
 
 
 
-## Actividad
-
-::: {.callout-note}
-## Actividad: Análisis comparado
-
-1. Cambia la región analizada a `REGIÓN METROPOLITANA DE SANTIAGO`.
-2. Cambia los delitos seleccionados por delitos contra la propiedad.
-3. Calcula la tasa por 10.000 habitantes y genera un gráfico de barras.
-4. ¿Qué comunas destacan por mayor concentración de estos delitos?
-:::
 
 
-## Qué aprendimos hoy?
-
-- [x] Leer y explorar una tabla de delitos comunales
-- [x] Categorizar delitos en grupos de interés
-- [x] Aplicar filtros por víctima, región y grupo delictual
-- [x] Calcular tasas por población
-- [x] Crear gráficos (básicos)
 
 
 
 
 ## Visualización Espacial
 
-Primero se debe unir la tabla resumen delitos con Shapefile de comunas del INE.
+Hasta este punto, `tabla_resumen` contiene un indicador para cada comuna, pero sigue siendo una tabla sin geometría. Para representar estos valores en un mapa necesitamos asociar cada registro con el polígono correspondiente de la comuna.
+
+Para ello utilizaremos una variable común o llave de unión entre ambas bases:
+
+* la tabla de indicadores contiene el valor calculado para cada comuna;
+* el shapefile contiene la geometría que representa espacialmente cada comuna;
+* `left_join()` permite asociar ambos elementos mediante una variable común.
+
 
 **Leer Shapefile de comunas**
 
@@ -258,9 +317,27 @@ comunas_r09 <- st_read("data/shape/Comunas_Chile.shp") %>%
 head(comunas_r09)
 ```
 
-**Unir shafile con tabla resumen**
+**Unir shapefile de comunas de región con tabla resumen**
 
-Se utilizará la función `left_join`
+Trabajaremos entonces con dos fuentes:
+
+*Tabla de indicadores*
+
+>`NOM_COMUNA | total_delitos | pob | del_10000_hab`
+
+*Capa espacial de comunas*
+
+>`NOM_COMUNA | geometry`
+
+
+Verificar que exista la columna 
+```{r}
+names(delitos_tbl)
+names(comunas_r09)
+# intersect(names(delitos_tbl), names(comunas_r09))
+```
+
+Ambas contienen una variable común que permite relacionarlas. Esta operación se denomina unión por atributos o attribute join.
 
 ```{r}
 
@@ -270,8 +347,9 @@ comunas_r09 <- comunas_r09 %>%
 head(comunas_r09)
 ```
 
+>Siempre que sea posible, es recomendable realizar estas uniones utilizando un identificador territorial único, como un código de comuna, en lugar del nombre. Los nombres pueden presentar diferencias de escritura, acentos o abreviaciones que dificulten una correspondencia correcta entre las bases.
 
-
+Después de la unión, cada geometría comunal contiene también el indicador calculado y puede representarse mediante un mapa.
 
 ### Generar Mapa
 
@@ -321,4 +399,26 @@ saveRDS(object = comunas_r09,file = "data/rds/R09_del_violentos.rds")
 
 ```
 
+
+## Actividad
+
+::: {.callout-note}
+## Actividad: Análisis comparado
+
+1. Cambia la región analizada a `REGIÓN METROPOLITANA DE SANTIAGO`.
+2. Cambia los delitos seleccionados por delitos contra la propiedad.
+3. Calcula la tasa por 10.000 habitantes y genera un gráfico de barras.
+4. ¿Qué comunas destacan por mayor concentración de estos delitos?
+:::
+
+
+
+## Qué aprendimos hoy?
+
+- [x] Leer y explorar una tabla de delitos comunales
+- [x] Categorizar delitos en grupos de interés
+- [x] Aplicar filtros por víctima, región y grupo delictual
+- [x] Calcular tasas por población
+- [x] Crear gráficos explicativos
+- [x] Crear Mapa 
 

@@ -23,7 +23,7 @@ book:
     - visualizaciones.qmd
     - datos_vectores.qmd
     - dataframes.qmd
-    # - geocode.qmd
+    - geocode.qmd
     # - datos_rasters.qmd
     # - inferencia.qmd
     # - intro_inds.qmd
