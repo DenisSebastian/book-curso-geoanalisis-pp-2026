@@ -886,5 +886,38 @@
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Geocoding</span>"
     ]
+  },
+  {
+    "objectID": "tarea_1.html",
+    "href": "tarea_1.html",
+    "title": "Tarea 1: Programación en R",
+    "section": "",
+    "text": "Antecedentes",
+    "crumbs": [
+      "Tareas",
+      "Tarea 1: Programación en R"
+    ]
+  },
+  {
+    "objectID": "tarea_1.html#antecedentes",
+    "href": "tarea_1.html#antecedentes",
+    "title": "Tarea 1: Programación en R",
+    "section": "",
+    "text": "Fecha de entrega: 30 de Agosto 2026\nFormato: Informe (pdf o html) + Código (.R)\nIntegrantes: 1 o 2 Integrantes\nPonderación de tarea sobre Nota Final: 40%",
+    "crumbs": [
+      "Tareas",
+      "Tarea 1: Programación en R"
+    ]
+  },
+  {
+    "objectID": "tarea_1.html#instrucciones",
+    "href": "tarea_1.html#instrucciones",
+    "title": "Tarea 1: Programación en R",
+    "section": "Instrucciones",
+    "text": "Instrucciones\n\nParte 1: Manipulación de Tablas\nEn esta primera parte trabajaremos con la base de datos del Servicio de Impuestos Internos (SII) a nivel nacional. El conjunto de datos representa la cantidad de metros cuadrados construidos por manzana en Chile, clasificados por uso (comercio, oficinas, vivienda).\nInsumo:\n\n# Cargar librerías necesarias\nlibrary(dplyr)    # Manipulación de tablas\nlibrary(sf)       # Manipulación de datos espaciales\nlibrary(ggplot2)  # Gráficos de alto nivel\n\n# Leer datos del SII\ntbl_sii &lt;- readRDS(\"data/sii/mz_constru_SII.rds\") %&gt;% \n  st_drop_geometry()  # Usaremos solo la tabla, sin geometría\n\nInstrucciones de la tarea:\n\nImportante: Sigue los pasos en orden y asegúrate de que tu código sea reproducible. Usa nombres de variables claros.\n\n\nFunción para calcular proporciones (1 punto)\n\nCrea una función propia en R que reciba como argumentos:\n\nEl valor de una categoría (por ejemplo, m² de comercio).\nEl valor total de m² construidos.\n\nLa función debe devolver la proporción (en decimal o porcentaje) de la categoría respecto al total.\n(Referencia: Crear Funciones Propias).\n\nAplicación de la función (1 punto)\n\nUtiliza la función creada en el paso anterior para calcular, para cada manzana, las proporciones de:\n\nm² de Comercio\nm² de Oficinas\nm² de Vivienda\n\nGuarda estos nuevos valores como columnas adicionales en tbl_sii. (Referencia: Mutate).\n\nAnálisis por región (1 punto)\n\nSelecciona una región de Chile (a tu elección).\nCalcula, para cada comuna de esa región, el promedio de las proporciones de m² de Comercio, Oficinas y Vivienda obtenidas en el paso anterior.\nPresenta los resultados en una tabla resumen.\nGenera un gráfico de barras que compare estos promedios por comuna de una categoría solamente (por ejemplo Oficinas).\n(Referencias: Resúmenes Estadísticos, Gráficos de Barra con ggplot2).\n\n\n\n\nParte 2: Manipulación de Vectores Espaciales\nEn esta segunda parte trabajaremos con los polígonos de zonas censales del INE, que servirán para realizar operaciones espaciales.\nInsumo:\n\n# Cargar Librerías\nlibrary(dplyr) # Manipulación de tablas\nlibrary(sf) # Manipulación de datos espaciales\nlibrary(ggplot2) # Generar gráficas de alto nivel\n\n\n# zonas censales INE, seleccionará columnas de interés\nzonas_censales &lt;-  readRDS(\"data/censo/zonas_urb_consolidadas.rds\") %&gt;% \n  select(REGION, NOM_REGION, COMUNA, NOM_COMUNA, COD_INE_16, ESC_JH, PERS)\n\nSiga los pasos en orden. Usa nombres de variables claros y agrega comentarios a tu código para explicar cada operación.\n\nFiltrar comunas seleccionadas (1 punto)\n\nElige dos o más comunas contiguas dentro de una misma región.\nFiltra la base de zonas censales utilizando la columna NOM_COMUNA para quedarte únicamente con esas comunas seleccionadas. Filtros y selección de columnas\nGuarda el resultado en un nuevo objeto.\n\nCálculo de área y densidad de población (1 punto)\n\nCalcula una nueva variable AREA_HA que represente el área de cada polígono en hectáreas (st_area(.) / 10000). Referencias Generación columnas.\nCalcula la densidad de población (PERS / AREA_HA).\nGenera dos mapas con ggplot2:\n\nPoblación absoluta (PERS por zona censal).\nDensidad de población (personas por hectárea).\n\nUsa escalas de color adecuadas y leyendas claras para cada mapa.\n\nPromedio comunal de escolaridad y análisis espacial (1 punto)\n\nCalcula, a nivel comunal, el promedio de escolaridad del jefe/a de hogar (ESC_JH) usando group_by() y summarise() (Referencia: Resumen Estadísticos Espaciales).\nUne esta tabla resumen a la base espacial filtrada en el punto 1 mediante left_join() (Referencia: Joining).\nCalcula una nueva variable que represente la diferencia entre:\n\nLa escolaridad de cada zona censal (ESC_JH), y El promedio comunal calculado previamente.\n\nGenera un mapa temático mostrando esta diferencia y analiza si existe algún patrón espacial visible.",
+    "crumbs": [
+      "Tareas",
+      "Tarea 1: Programación en R"
+    ]
   }
 ]

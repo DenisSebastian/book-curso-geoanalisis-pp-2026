@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./references.html" rel="next">
-<link href="./dataframes.html" rel="prev">
+<link href="./geocode.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tarea_1.html">Tarea 1: Programación en R</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tarea_1.html">Tareas</a></li><li class="breadcrumb-item"><a href="./tarea_1.html">Tarea 1: Programación en R</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -176,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tidyverse.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipulación de tablas en r</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipulación de tablas en R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -187,16 +187,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dataframes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dataframes y Delitos en R</span></span></a>
+  <a href="./datos_vectores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Datos Espaciales: Vectores</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dataframes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dataframes y Delitos en R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geocode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Geocoding</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Tareas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tarea_1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Tarea 1: Programación en R</span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -205,13 +228,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./recursos.html" class="sidebar-item-text sidebar-link">
@@ -222,6 +245,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./control_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Estructuras en R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./crs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">CRS en R</span></span></a>
   </div>
 </li>
       </ul>
@@ -248,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tarea_1.html">Tareas</a></li><li class="breadcrumb-item"><a href="./tarea_1.html">Tarea 1: Programación en R</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Tarea 1: Programación en R</h1>
 <p class="subtitle lead">Datos Vectoriales</p>
@@ -271,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="antecedentes" class="level2">
 <h2 class="anchored" data-anchor-id="antecedentes">Antecedentes</h2>
 <ul>
-<li>Fecha de entrega: <strong>22 de Agosto 2025</strong></li>
+<li>Fecha de entrega: <strong>30 de Agosto 2026</strong></li>
 <li>Formato: Informe (pdf o html) + Código (.R)</li>
 <li>Integrantes: 1 o 2 Integrantes</li>
 <li>Ponderación de tarea sobre Nota Final: 40%</li>
@@ -348,12 +377,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Filtrar comunas seleccionadas (1 punto)</p>
 <ul>
 <li>Elige dos o más comunas contiguas dentro de una misma región.</li>
-<li>Filtra la base de zonas censales utilizando la columna <code>NOM_COMUNA</code> para quedarte únicamente con esas comunas seleccionadas. <span class="quarto-unresolved-ref">?sec-filtros_esp</span></li>
+<li>Filtra la base de zonas censales utilizando la columna <code>NOM_COMUNA</code> para quedarte únicamente con esas comunas seleccionadas. <a href="datos_vectores.html#sec-filtros_esp" class="quarto-xref"><span>Filtros y selección de columnas</span></a></li>
 <li>Guarda el resultado en un nuevo objeto.</li>
 </ul></li>
 <li><p>Cálculo de área y densidad de población (1 punto)</p>
 <ul>
-<li>Calcula una nueva variable <code>AREA_HA</code> que represente el área de cada polígono en hectáreas (<code>st_area(.)</code> / 10000). Referencias <span class="quarto-unresolved-ref">?sec-mutate_esp</span>.</li>
+<li>Calcula una nueva variable <code>AREA_HA</code> que represente el área de cada polígono en hectáreas (<code>st_area(.)</code> / 10000). Referencias <a href="datos_vectores.html#sec-mutate_esp" class="quarto-xref"><span>Generación columnas</span></a>.</li>
 <li>Calcula la densidad de población (PERS / <code>AREA_HA</code>).</li>
 <li>Genera dos mapas con ggplot2:
 <ul>
@@ -364,8 +393,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><p>Promedio comunal de escolaridad y análisis espacial (1 punto)</p>
 <ul>
-<li>Calcula, a nivel comunal, el promedio de escolaridad del jefe/a de hogar (<code>ESC_JH</code>) usando <code>group_by()</code> y <code>summarise()</code> (Referencia: <span class="quarto-unresolved-ref">?sec-groupby_esp</span>).</li>
-<li>Une esta tabla resumen a la base espacial filtrada en el punto 1 mediante <code>left_join()</code> (Referencia: <span class="quarto-unresolved-ref">?sec-joins</span>).</li>
+<li>Calcula, a nivel comunal, el promedio de escolaridad del jefe/a de hogar (<code>ESC_JH</code>) usando <code>group_by()</code> y <code>summarise()</code> (Referencia: <a href="datos_vectores.html#sec-groupby_esp" class="quarto-xref"><span>Resumen Estadísticos Espaciales</span></a>).</li>
+<li>Une esta tabla resumen a la base espacial filtrada en el punto 1 mediante <code>left_join()</code> (Referencia: <a href="datos_vectores.html#sec-joins" class="quarto-xref"><span>Joining</span></a>).</li>
 <li>Calcula una nueva variable que represente la diferencia entre:
 <ul>
 <li>La escolaridad de cada zona censal (<code>ESC_JH</code>), y El promedio comunal calculado previamente.</li>
@@ -780,8 +809,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./dataframes.html" class="pagination-link" aria-label="Dataframes y Delitos en R">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dataframes y Delitos en R</span></span>
+      <a href="./geocode.html" class="pagination-link" aria-label="Geocoding">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Geocoding</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
