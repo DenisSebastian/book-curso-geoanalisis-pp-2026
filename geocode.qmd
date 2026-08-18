@@ -717,6 +717,12 @@ eliminar_sn <- function(texto) {
 
 Con las funciones listas, se aplican a los campos de la dirección (`CALLE`, `NUM`, `COMUNA`, `REGION`). Luego se crea una columna `CONSULTA`, que concatena todo en un formato estándar. Esto es esencial porque motores como Nominatim requieren una cadena única, ordenada y jerárquica (número + calle + comuna + región + país).
 
+::: {.callout-note}
+## Recomendación para nombres territoriales de Chile
+
+Antes de construir la cadena de consulta, conviene revisar y estandarizar los nombres de las divisiones administrativas. El paquete de R {{< var library.territorial >}} incorpora una tabla de referencia con los nombres y códigos únicos territoriales de las comunas, provincias y regiones de Chile. Permite validar comunas y regiones con `validar_comunas()` y `validar_regiones()`, corregir nombres comunales con errores ortográficos mediante `limpiar_comunas()` y completar la jerarquía territorial —incluida la provincia— con `contextualizar()`. Aplicar estas verificaciones antes de formar `CONSULTA` ayuda a reducir ambigüedades y mejora la consistencia territorial de la geocodificación.
+:::
+
 ```{r}
 
 base_e1 <- base %>% 
