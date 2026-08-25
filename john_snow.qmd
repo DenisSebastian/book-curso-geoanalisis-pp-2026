@@ -12,7 +12,7 @@ suppressPackageStartupMessages(library(raster))
 suppressPackageStartupMessages(library(mapview))
 ```
 
-# Mapa de Cólera
+# Mapa de Cólera {#sec-john-snow}
 
 ![John Snow (1813-1858), considerado como el padre de la epidemiología moderna [@Cerda_L_2007]](images/john_snow.jpg){fig-aling="center" width="250"}
 

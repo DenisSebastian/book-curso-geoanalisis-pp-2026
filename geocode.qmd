@@ -1486,7 +1486,7 @@ Durante esta sesión desarrollamos un flujo reproducible para transformar direcc
 
 El proceso completo puede resumirse como:
 
-```{text}
+```text
 Dirección cruda
 ↓
 Preparar y normalizar
@@ -1517,3 +1517,20 @@ Para reflexionar
 Si un sistema logra asignar coordenadas al 95 % de las direcciones, pero solamente el 70 % pasa la validación territorial, ¿diríamos que el geocoding tuvo un 95 % o un 70 % de éxito?
 
 La respuesta depende de qué entendamos por un resultado útil. En análisis territorial, encontrar una coordenada no es suficiente: necesitamos confiar en su ubicación.
+:::
+
+## Del punto a la superficie
+
+El resultado de este capítulo es una colección de ubicaciones puntuales cuya calidad ha sido evaluada. Con ellas ya podemos responder **dónde** ocurre cada registro y representarlo como un objeto vectorial. Sin embargo, no todos los fenómenos territoriales se comprenden como objetos aislados: la temperatura, la contaminación, la elevación o la intensidad de ciertos eventos varían a lo largo de todo el espacio.
+
+Ese cambio de pregunta requiere otra forma de representar el territorio. En el [capítulo siguiente](datos_rasters.qmd) pasaremos de puntos y polígonos a una grilla de celdas. El modelo ráster nos permitirá describir coberturas continuas y, más adelante, servirá como soporte para estimar superficies a partir de observaciones puntuales.
+
+```text
+Direcciones
+    ↓ geocodificación y validación
+Puntos confiables
+    ↓ representación del territorio en celdas
+Datos ráster
+    ↓ estimación de valores o intensidades
+Superficies espaciales
+```

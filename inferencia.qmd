@@ -1,5 +1,5 @@
 ---
-title: " Inferencia Espacial"
+title: "Inferencia espacial"
 subtitle: "KDE y IDW"
 editor_options: 
   chunk_output_type: console
@@ -14,13 +14,41 @@ suppressPackageStartupMessages(library(raster))
 suppressPackageStartupMessages(library(mapview))
 ```
 
+## Introducción: de representar a estimar
+
+Los dos capítulos anteriores resolvieron problemas complementarios. Primero, la geocodificación convirtió direcciones en puntos confiables y nos permitió saber **dónde** ocurrió cada registro. Luego, el modelo ráster organizó el territorio como una grilla de celdas capaz de representar fenómenos que varían en el espacio.
+
+Ahora combinaremos ambas ideas. Partiremos de observaciones puntuales y construiremos una superficie ráster que describa lo que ocurre entre ellas. El propósito ya no será solamente localizar o representar datos existentes, sino **estimar un patrón espacial** allí donde no tenemos una observación directa.
+
+En este capítulo utilizaremos el término *inferencia espacial* en un sentido operativo: producir y examinar estimaciones a partir de la posición y la proximidad de las observaciones. Estudiaremos dos métodos que responden preguntas diferentes:
+
+- **KDE** estima dónde se concentra la intensidad de un conjunto de eventos. Cada punto indica que algo ocurrió, pero no necesita contener una magnitud medida.
+- **IDW** estima el valor de una variable en lugares no observados. Cada punto sí contiene una medición, como la concentración de PM2.5 registrada por una estación.
+
+Ninguno de los dos métodos demuestra causalidad ni elimina la incertidumbre. Sus resultados dependen de decisiones como el ancho de banda, la potencia, el número de vecinos y la resolución de la grilla. Por ello, antes de ejecutar el código aprenderemos qué pregunta responde cada técnica y cómo interpretar la superficie resultante.
+
+::: {.callout-tip}
+## Continuidad del recorrido
+
+```text
+Geocodificación          Datos ráster             Inferencia espacial
+direcciones → puntos  →  territorio en celdas  →  superficies estimadas
+```
+:::
+
+::: {.callout-note}
+## Un antecedente para comprender el problema
+
+El apéndice @sec-john-snow presenta el mapa del brote de cólera de 1854 y su réplica con herramientas actuales. El caso permite observar, antes de calcular, cómo la distribución de eventos puntuales y su proximidad a una fuente pueden sostener una pregunta territorial. Puedes leer primero su contexto histórico y volver a la réplica después de estudiar KDE.
+:::
 
 
 ## Objetivos del Módulo
 
-- Conocer los fundamentos teóricos de la inferencia espacial  
-- Aprender a construir indicadores con **Kernel Density Estimation (KDE)** e **Intertpolación de Inverso a la Distancia Ponderada (IDW) **
-- Explorar su aplicación espacial en delitos y fenómenos territoriales  
+- Comprender qué problemas espaciales resuelven KDE e IDW y distinguir sus resultados.
+- Construir superficies e indicadores con **Kernel Density Estimation (KDE)** e **Interpolación Inversa a la Distancia Ponderada (IDW)**.
+- Reconocer cómo los parámetros de cada método modifican la interpretación de la superficie.
+- Aplicar ambas técnicas a eventos delictivos y mediciones ambientales.
 
 ---
 
@@ -78,7 +106,7 @@ De esta forma se consigue que cada observación contribuya justo en la posición
 
 **2. Todas las campanas se suman para formar una sola curva.**
 
-Por último, si se suman las contribuciones individuales y se dividen por el total de curvas (observaciones), se consigue una curva final que describe la distribución de las observaciones.sy
+Por último, si se suman las contribuciones individuales y se dividen por el total de curvas (observaciones), se obtiene una curva final que describe la distribución de las observaciones.
 
 ![Suma de las Distribuciones](images/sum_distr_kde.png)
 
@@ -102,48 +130,20 @@ Ejemplo visual:
 
 ---
 
-### Fórmula general
-
-Dado un conjunto de datos $x={x_1,x_2,...,x_n}$:
-
-$$
-\hat{f}(x)=\frac{1}{nh}\sum_{i=1}^{n}K\left(\frac{x-x_i}{h}\right)
-$$
-
-Donde:
-- $n$ = número de datos  
-- $h$ = ancho de banda  
-- $K$ = tipo de kernel (normal, Epanechnikov, etc.)  
-
----
-
-### Aplicación espacial
-
-Para aplicar los KDE a casos espaciales, se tiene que entender que las variables aleatorias antes señaladas, ahora van a corresponder a eventos o condiciones físicas que ocurren en el espacio, por ende bajo un sistema de coordenadas, por lo cual el eje de coordenadas $x$ e $y$, entonces los que se pretente estimar una distribución multivariante.
-
-
-![De puentos espaciales a Mapa de Densidad.](images/Density- map_point-map.png)
-
-Se usa, por ejemplo, en **análisis criminal** para identificar zonas con mayor concentración de eventos.  
-
-![Mapa KDE Delitos](images/lc_delitos_dom.png){width=60%}
-
----
-
 ### Tipos de kernel
 
 Los más comunes:  
 
 - **Gaussian**: asigna los pesos siguiendo la distribución normal con una desviación estándar equivalente al ancho de banda.
 
-- **Epanechnikov**: las observaciones que están a una distancia entre 0 y h tienen un peso entre  $\frac{3}{4}$ y 0 con disminución cuadrática. Toda observación fuera de este rango tiene pero 0.
+- **Epanechnikov**: las observaciones que están a una distancia entre 0 y $h$ tienen un peso entre $\frac{3}{4}$ y 0 con disminución cuadrática. Toda observación fuera de este rango tiene peso 0.
 
 - **Tophat**: Asigna el mismo peso a todas las observaciones que estén dentro del ancho de banda.
 
 - **Exponential**: el peso decae de forma exponencial.
 
 
-- **Linear**: el peso decae de forma lineal dentro del ancho de banda. Más allá de este el pero es 0.
+- **Linear**: el peso decae de forma lineal dentro del ancho de banda. Más allá de este, el peso es 0.
 
 - **Cosine**: el peso dentro del ancho de banda es proporcional al coseno.
 
@@ -161,6 +161,149 @@ En la práctica, el kernel elegido influye menos que el ancho de banda.
 - En análisis espacial, crea **mapas de densidad** para fenómenos como delitos, incendios o accidentes.  
 
 ---
+
+::: {.callout-important}
+## Antes de estimar: formular la pregunta
+
+Para que un mapa KDE sea interpretable debemos definir primero la unidad de observación, el área de estudio y el significado de la superficie. En el caso siguiente, cada punto representa un evento violento y cada celda expresará una **intensidad relativa de eventos**. No debe interpretarse automáticamente como una probabilidad individual de victimización ni como evidencia de las causas del delito.
+
+También debemos justificar el ancho de banda y la resolución: ambos parámetros modifican el patrón que veremos. Con esa pregunta analítica definida, recién tiene sentido pasar al código.
+:::
+
+
+
+### De la fórmula general a la fórmula espacial
+
+La expresión habitual de KDE en una dimensión es:
+
+$$
+\hat{f}(x)=\frac{1}{nh}\sum_{i=1}^{n}K\left(\frac{x-x_i}{h}\right)
+$$
+
+En ella, $x_i$ es cada valor observado y $x$ es el punto de la misma escala donde se calcula la densidad. La diferencia $x-x_i$ indica su separación. Esta notación permite comprender el origen del método, pero para un mapa necesitamos representar ubicaciones mediante pares de coordenadas.
+
+### Ecuación espacial de KDE
+
+Para un kernel isotrópico —con la misma influencia en todas las direcciones— la ecuación espacial puede escribirse como:
+
+$$
+\hat{f}(\mathbf{s})=
+\frac{1}{nh^2}
+\sum_{i=1}^{n}
+K\left(\frac{\lVert \mathbf{s}-\mathbf{s}_i \rVert}{h}\right)
+$$
+
+Esta ecuación responde la pregunta:
+
+> **¿Cuál es la densidad estimada en la celda ubicada en $\mathbf{s}$, considerando su distancia a todos los eventos observados?**
+
+#### Lectura de la ecuación de adentro hacia afuera
+
+**1. Ubicar la celda y cada evento**
+
+- $\mathbf{s}=(s_x,s_y)$ es el centro de la celda donde queremos estimar la densidad.
+- $\mathbf{s}_i=(x_i,y_i)$ es la ubicación del evento $i$.
+- $n$ es el número total de eventos.
+
+En un KDE de delitos, estas coordenadas indican **dónde ocurrió cada evento**; no son valores de delincuencia ni atributos ambientales.
+
+**2. Calcular la distancia espacial**
+
+El término $\lVert\mathbf{s}-\mathbf{s}_i\rVert$ representa la distancia entre la celda y el evento $i$.
+
+Por ejemplo, para una celda en $\mathbf{s}=(100,200)$ metros y un evento en $\mathbf{s}_i=(130,240)$ metros:
+
+$$
+\lVert\mathbf{s}-\mathbf{s}_i\rVert
+=\sqrt{(100-130)^2+(200-240)^2}
+=50\text{ metros}
+$$
+
+Llamaremos $d_i$ a esta distancia:
+
+$$
+d_i=\lVert\mathbf{s}-\mathbf{s}_i\rVert
+$$
+
+**3. Comparar la distancia con el ancho de banda**
+
+La distancia se divide por el ancho de banda $h$:
+
+$$
+u_i=\frac{d_i}{h}
+$$
+
+$u_i$ expresa la distancia de forma relativa. Si $d_i=50$ metros y $h=100$ metros, entonces $u_i=0{,}5$: el evento está a medio ancho de banda de la celda. Si $d_i=500$ metros, entonces $u_i=5$ y su influencia será mucho menor.
+
+**4. Convertir la distancia relativa en un peso**
+
+La función kernel transforma $u_i$ en un peso:
+
+$$
+w_i=K(u_i)=K\left(\frac{d_i}{h}\right)
+$$
+
+Un evento cercano recibe un peso alto; uno lejano recibe un peso bajo o igual a cero, según el kernel. La función $K$ define la forma en que disminuye esa influencia con la distancia.
+
+**5. Sumar el aporte de todos los eventos**
+
+El símbolo de sumatoria reúne los pesos calculados para los $n$ eventos:
+
+$$
+W(\mathbf{s})=\sum_{i=1}^{n}w_i
+$$
+
+Si varios eventos están cerca de la celda, sus pesos se superponen y $W(\mathbf{s})$ aumenta. Si hay pocos eventos cercanos, la suma será menor.
+
+**6. Normalizar la suma**
+
+Finalmente se aplica el factor $\frac{1}{nh^2}$:
+
+$$
+\hat{f}(\mathbf{s})=\frac{W(\mathbf{s})}{nh^2}
+$$
+
+- La división por $n$ promedia los aportes y permite comparar la forma de la distribución entre conjuntos con distinto número de observaciones.
+- La división por $h^2$ conserva la escala de la densidad al cambiar el ancho de banda. Se utiliza $h^2$ porque el kernel se extiende sobre un área de dos dimensiones.
+
+El resultado $\hat{f}(\mathbf{s})$ es el valor de densidad asignado a esa celda. Al repetir el cálculo para todas las celdas se obtiene la superficie ráster de densidad.
+
+```text
+Coordenadas de la celda y del evento
+                  ↓
+          distancia espacial dᵢ
+                  ↓ dividir por h
+          distancia relativa uᵢ
+                  ↓ aplicar K
+                peso wᵢ
+                  ↓ sumar eventos
+               W(s)
+                  ↓ dividir por nh²
+        densidad de la celda f̂(s)
+```
+
+::: {.callout-tip}
+## Analogía espacial: focos de luz sobre un mapa
+
+Cada evento funciona como un foco instalado sobre el mapa. El ancho de banda $h$ determina hasta dónde se extiende su luz y el kernel $K$ determina cómo disminuye con la distancia. En cada celda sumamos la luz recibida desde todos los focos y normalizamos esa suma. Las celdas donde se superponen varios haces presentan una densidad mayor.
+:::
+
+---
+
+### De la ecuación al mapa
+
+Al repetir el cálculo de $\hat{f}(\mathbf{s})$ en el centro de cada celda, los valores resultantes forman una superficie continua que resume la concentración espacial de los eventos.
+
+
+![De puntos espaciales a un mapa de densidad.](images/Density- map_point-map.png)
+
+Se usa, por ejemplo, en **análisis criminal** para identificar zonas con mayor concentración de eventos.  
+
+![Mapa KDE Delitos](images/lc_delitos_dom.png){width=60%}
+
+---
+
+
 
 ### Caso Práctico: Kernel Density Estimation en delitos Violentos {#sec-kdeVio}
 
@@ -413,27 +556,139 @@ En este ejemplo:
 ---
 
 
-### Fórmula general
+### Ecuación espacial de IDW
 
-La estimación para un punto $x_0$ se calcula así:
+Para estimar una variable en una ubicación sin medición $\mathbf{s}_0$, IDW utiliza:
 
 $$
-\hat{z}(x_0) = \frac{\sum_{i=1}^n w_i z(x_i)}{\sum_{i=1}^n w_i}
-\qquad \text{donde } w_i = \frac{1}{d(x_0,x_i)^p}
+\hat{z}(\mathbf{s}_0)
+=
+\frac{
+\sum_{i=1}^{n} w_i(\mathbf{s}_0)\,z(\mathbf{s}_i)
+}{
+\sum_{i=1}^{n} w_i(\mathbf{s}_0)
+}
+\qquad
+\text{donde}
+\qquad
+w_i(\mathbf{s}_0)=\frac{1}{d_i^p}
 $$
 
-- $z(x_i)$ = valor en el punto $i$  
-- $d(x_0,x_i)$ = distancia entre $x_0$ y $x_i$  
-- $p$ = parámetro que controla la influencia de la distancia  
+Esta ecuación responde la pregunta:
 
----
+> **¿Qué valor podemos estimar en $\mathbf{s}_0$ a partir de las mediciones cercanas, dando mayor importancia a las más próximas?**
 
-### Parámetro de potencia  
+#### Lectura de la ecuación de adentro hacia afuera
 
-- **$p$ alto →** solo puntos muy cercanos influyen.  
-- **$p$ bajo →** puntos lejanos también tienen peso.  
+**1. Identificar la ubicación objetivo y las estaciones**
 
-Un valor típico es $p = 2$.  
+- $\mathbf{s}_0=(x_0,y_0)$ es la ubicación donde queremos estimar la variable, normalmente el centro de una celda del ráster.
+- $\mathbf{s}_i=(x_i,y_i)$ es la ubicación de la estación $i$.
+- $z(\mathbf{s}_i)$ es el valor medido en esa estación, por ejemplo, una concentración de PM2.5.
+- $n$ es el número de estaciones utilizadas. Puede incluir todas las estaciones o solo las vecinas seleccionadas mediante un parámetro como `nmax`.
+
+A diferencia de KDE, IDW no utiliza solamente la posición de los puntos: necesita que cada punto contenga una **magnitud medida**.
+
+**2. Calcular la distancia espacial**
+
+Para cada estación se calcula su distancia hasta la ubicación objetivo:
+
+$$
+d_i=\lVert\mathbf{s}_0-\mathbf{s}_i\rVert
+=\sqrt{(x_0-x_i)^2+(y_0-y_i)^2}
+$$
+
+Esta distancia debe calcularse en un sistema de coordenadas proyectado adecuado, por ejemplo UTM, para trabajar con unidades interpretables como metros.
+
+**3. Convertir la distancia en un peso**
+
+El peso de cada estación es el inverso de su distancia elevada a una potencia $p$:
+
+$$
+w_i=\frac{1}{d_i^p}
+$$
+
+- Una distancia pequeña produce un peso grande.
+- Una distancia grande produce un peso pequeño.
+- Un $p$ alto concentra la influencia en las estaciones más cercanas.
+- Un $p$ bajo permite que las estaciones lejanas conserven mayor influencia.
+
+El valor $p=2$ se utiliza con frecuencia como punto de partida, pero debe evaluarse según el fenómeno y la distribución de las estaciones.
+
+**4. Ponderar cada medición**
+
+Cada valor medido se multiplica por su peso:
+
+$$
+c_i=w_i\,z(\mathbf{s}_i)
+$$
+
+El término $c_i$ es el aporte ponderado de la estación $i$. Una estación cercana tendrá mayor capacidad para acercar la estimación hacia su valor.
+
+**5. Sumar y normalizar los aportes**
+
+El numerador suma todas las mediciones ponderadas:
+
+$$
+\sum_{i=1}^{n}w_i\,z(\mathbf{s}_i)
+$$
+
+El denominador suma los pesos:
+
+$$
+\sum_{i=1}^{n}w_i
+$$
+
+Dividir ambas sumas convierte el resultado en un **promedio ponderado**. Por ello, si todos los pesos son positivos, la estimación queda entre el menor y el mayor valor de las estaciones utilizadas y mantiene las mismas unidades de la variable original.
+
+**6. Asignar el resultado y construir la superficie**
+
+$\hat{z}(\mathbf{s}_0)$ es el valor estimado para la celda. Al repetir el cálculo en todas las celdas de la grilla se obtiene una superficie ráster interpolada.
+
+::: {.callout-warning}
+## ¿Qué ocurre si la distancia es cero?
+
+Si $\mathbf{s}_0$ coincide exactamente con una estación, entonces $d_i=0$ y la expresión $1/d_i^p$ no puede calcularse. En ese caso se asigna directamente a la ubicación el valor observado en la estación. Las funciones de interpolación suelen resolver internamente esta situación.
+:::
+
+### Caso espacial paso a paso
+
+Queremos estimar PM2.5 en una celda ubicada en $\mathbf{s}_0=(0,0)$ km. Disponemos de tres estaciones y utilizaremos $p=2$:
+
+| Estación | Ubicación | PM2.5, $z(\mathbf{s}_i)$ ($\mu$g/m³) | Distancia $d_i$ | Peso $w_i=1/d_i^2$ | Aporte $w_i z(\mathbf{s}_i)$ |
+|---|---:|---:|---:|---:|---:|
+| A | $(1,0)$ km | 30 | 1 km | 1 | 30 |
+| B | $(0,2)$ km | 20 | 2 km | $0{,}25$ | 5 |
+| C | $(4,0)$ km | 10 | 4 km | $0{,}0625$ | $0{,}625$ |
+| **Suma** |  |  |  | **$1{,}3125$** | **$35{,}625$** |
+
+Sustituimos las sumas en la ecuación:
+
+$$
+\hat{z}(\mathbf{s}_0)
+=\frac{35{,}625}{1{,}3125}
+=27{,}14
+$$
+
+La estimación es **27,14 $\mu$g/m³ de PM2.5**. El promedio simple de las tres estaciones sería 20, pero IDW entrega un valor más cercano a 30 porque la estación A es la más próxima y recibe el mayor peso.
+
+```text
+Coordenadas de la celda y las estaciones
+                     ↓
+              distancias dᵢ
+                     ↓ aplicar 1/dᵢᵖ
+                 pesos wᵢ
+                     ↓ multiplicar por z(sᵢ)
+         aportes ponderados wᵢz(sᵢ)
+                     ↓ sumar y dividir
+            valor estimado ẑ(s₀)
+```
+
+::: {.callout-tip}
+## Analogía espacial: voces con distinto volumen
+
+Imagina que cada estación propone su valor para una celda sin medición. Las estaciones cercanas hablan más fuerte y las lejanas, más bajo. La potencia $p$ controla qué tan rápido disminuye ese volumen con la distancia. IDW combina todas las voces mediante un promedio ponderado; por eso la estación más cercana influye más, pero no necesariamente decide por sí sola.
+:::
 
 ---
 
@@ -445,6 +700,13 @@ Un valor típico es $p = 2$.
 - Funciona bien cuando los puntos están bien distribuidos.  
 - No predice valores fuera del rango original.  
 
+::: {.callout-important}
+## Antes de interpolar: distinguir mediciones de eventos
+
+En KDE, la presencia de cada evento contribuye a una superficie de intensidad. En IDW la lógica cambia: cada punto contiene una **magnitud medida**, y la superficie estima esa misma variable entre los puntos de muestreo. Por eso no basta con conocer la ubicación de las estaciones; también debemos revisar la cobertura espacial, los valores atípicos, las unidades y la distancia entre observaciones.
+
+En el caso siguiente estimaremos PM2.5 entre estaciones de monitoreo. El resultado será una aproximación condicionada por la distribución de esas estaciones y por los parámetros elegidos, no una medición directa en cada celda.
+:::
 
 
 
@@ -703,6 +965,12 @@ st_write(mz_comuna,
          delete_layer = TRUE)
 ```
 
+## Cierre: dos preguntas, una misma estructura espacial
+
+KDE e IDW producen superficies ráster a partir de puntos, pero no son intercambiables. KDE resume la intensidad espacial de eventos; IDW estima una variable medida en sitios de muestreo. En ambos casos, la superficie depende de la calidad y distribución de los puntos, de los parámetros elegidos y de la resolución de la grilla.
+
+Con esta distinción se completa el recorrido iniciado en la geocodificación: primero construimos ubicaciones confiables, luego aprendimos a representar el territorio en celdas y, finalmente, usamos esas celdas para estimar patrones o valores entre observaciones. El apéndice @sec-john-snow permite volver sobre este recorrido mediante un caso histórico en el que puntos, distancias y concentración espacial se integran para construir evidencia.
+
 
 ## Referencias
 
@@ -780,4 +1048,3 @@ st_write(mz_comuna,
 <!--   labs(title = "Residuales LOO (observado - predicho)") + -->
 <!--   theme_bw() -->
 <!-- ``` -->
-

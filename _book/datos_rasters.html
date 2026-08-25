@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9&nbsp; Datos Espaciales: Raster – Curso de Geoanálisis</title>
+<title>9&nbsp; Datos espaciales: ráster – Curso de Geoanálisis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./datos_rasters.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Datos Espaciales: Raster</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./datos_rasters.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Datos espaciales: ráster</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -176,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tidyverse.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipulación de tablas en r</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipulación de tablas en R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -206,31 +206,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./datos_rasters.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Datos Espaciales: Raster</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Datos espaciales: ráster</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./inferencia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inferencia Espacial</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./intro_inds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introducción a Indicadores Territoriales</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./construccion_inds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Indicador de Delincuencia</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./indicadores.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inds. Socioeconómicos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inferencia espacial</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -246,12 +228,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./tarea_1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tarea 1: Programación en R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tarea_2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tarea 2: Proyecto Final</span></a>
   </div>
 </li>
       </ul>
@@ -295,12 +271,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Mapa de Cólera</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./quiebres.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Mapas y Quiebres</span></span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -313,22 +283,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contenidos</h2>
    
   <ul>
-  <li><a href="#objetivos-del-módulo" id="toc-objetivos-del-módulo" class="nav-link active" data-scroll-target="#objetivos-del-módulo"><span class="header-section-number">9.1</span> Objetivos del Módulo</a></li>
-  <li><a href="#definición-de-raster" id="toc-definición-de-raster" class="nav-link" data-scroll-target="#definición-de-raster"><span class="header-section-number">9.2</span> Definición de Raster</a></li>
-  <li><a href="#características-de-un-raster" id="toc-características-de-un-raster" class="nav-link" data-scroll-target="#características-de-un-raster"><span class="header-section-number">9.3</span> Características de un Raster</a></li>
-  <li><a href="#imágenes-satelitales-ejemplo-landsat-8" id="toc-imágenes-satelitales-ejemplo-landsat-8" class="nav-link" data-scroll-target="#imágenes-satelitales-ejemplo-landsat-8"><span class="header-section-number">9.4</span> Imágenes Satelitales (ejemplo: Landsat 8)</a></li>
-  <li><a href="#ejemplo-práctico" id="toc-ejemplo-práctico" class="nav-link" data-scroll-target="#ejemplo-práctico"><span class="header-section-number">9.5</span> Ejemplo Práctico</a>
+  <li><a href="#introducción-del-punto-a-la-superficie" id="toc-introducción-del-punto-a-la-superficie" class="nav-link active" data-scroll-target="#introducción-del-punto-a-la-superficie"><span class="header-section-number">9.1</span> Introducción: del punto a la superficie</a></li>
+  <li><a href="#objetivos-del-módulo" id="toc-objetivos-del-módulo" class="nav-link" data-scroll-target="#objetivos-del-módulo"><span class="header-section-number">9.2</span> Objetivos del Módulo</a></li>
+  <li><a href="#definición-de-ráster" id="toc-definición-de-ráster" class="nav-link" data-scroll-target="#definición-de-ráster"><span class="header-section-number">9.3</span> Definición de ráster</a></li>
+  <li><a href="#características-de-un-ráster" id="toc-características-de-un-ráster" class="nav-link" data-scroll-target="#características-de-un-ráster"><span class="header-section-number">9.4</span> Características de un ráster</a></li>
+  <li><a href="#imágenes-satelitales-ejemplo-landsat-8" id="toc-imágenes-satelitales-ejemplo-landsat-8" class="nav-link" data-scroll-target="#imágenes-satelitales-ejemplo-landsat-8"><span class="header-section-number">9.5</span> Imágenes Satelitales (ejemplo: Landsat 8)</a></li>
+  <li><a href="#antes-de-la-práctica-cómo-leer-un-ráster" id="toc-antes-de-la-práctica-cómo-leer-un-ráster" class="nav-link" data-scroll-target="#antes-de-la-práctica-cómo-leer-un-ráster"><span class="header-section-number">9.6</span> Antes de la práctica: cómo leer un ráster</a></li>
+  <li><a href="#del-concepto-a-la-práctica" id="toc-del-concepto-a-la-práctica" class="nav-link" data-scroll-target="#del-concepto-a-la-práctica"><span class="header-section-number">9.7</span> Del concepto a la práctica</a>
   <ul class="collapse">
-  <li><a href="#librerías" id="toc-librerías" class="nav-link" data-scroll-target="#librerías"><span class="header-section-number">9.5.1</span> Librerías</a></li>
-  <li><a href="#lectura-de-imagen-raster." id="toc-lectura-de-imagen-raster." class="nav-link" data-scroll-target="#lectura-de-imagen-raster."><span class="header-section-number">9.5.2</span> lectura de imagen Raster.</a></li>
-  <li><a href="#visualización-raster" id="toc-visualización-raster" class="nav-link" data-scroll-target="#visualización-raster"><span class="header-section-number">9.5.3</span> Visualización Raster</a></li>
+  <li><a href="#librerías" id="toc-librerías" class="nav-link" data-scroll-target="#librerías"><span class="header-section-number">9.7.1</span> Librerías</a></li>
+  <li><a href="#lectura-de-una-imagen-ráster" id="toc-lectura-de-una-imagen-ráster" class="nav-link" data-scroll-target="#lectura-de-una-imagen-ráster"><span class="header-section-number">9.7.2</span> Lectura de una imagen ráster</a></li>
+  <li><a href="#visualización-del-ráster" id="toc-visualización-del-ráster" class="nav-link" data-scroll-target="#visualización-del-ráster"><span class="header-section-number">9.7.3</span> Visualización del ráster</a></li>
   </ul></li>
-  <li><a href="#anexo-compatibilidad-con-librería-raster" id="toc-anexo-compatibilidad-con-librería-raster" class="nav-link" data-scroll-target="#anexo-compatibilidad-con-librería-raster"><span class="header-section-number">9.6</span> Anexo: Compatibilidad con librería <code>raster</code></a>
+  <li><a href="#anexo-compatibilidad-con-librería-raster" id="toc-anexo-compatibilidad-con-librería-raster" class="nav-link" data-scroll-target="#anexo-compatibilidad-con-librería-raster"><span class="header-section-number">9.8</span> Anexo: Compatibilidad con librería <code>raster</code></a>
   <ul class="collapse">
-  <li><a href="#lectura-e-inspección" id="toc-lectura-e-inspección" class="nav-link" data-scroll-target="#lectura-e-inspección"><span class="header-section-number">9.6.1</span> Lectura e inspección</a></li>
-  <li><a href="#visualización-de-rgb" id="toc-visualización-de-rgb" class="nav-link" data-scroll-target="#visualización-de-rgb"><span class="header-section-number">9.6.2</span> Visualización de RGB</a></li>
+  <li><a href="#lectura-e-inspección" id="toc-lectura-e-inspección" class="nav-link" data-scroll-target="#lectura-e-inspección"><span class="header-section-number">9.8.1</span> Lectura e inspección</a></li>
+  <li><a href="#visualización-de-rgb" id="toc-visualización-de-rgb" class="nav-link" data-scroll-target="#visualización-de-rgb"><span class="header-section-number">9.8.2</span> Visualización de RGB</a></li>
   </ul></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">9.7</span> Referencias:</a></li>
+  <li><a href="#cierre-la-grilla-como-soporte-del-análisis" id="toc-cierre-la-grilla-como-soporte-del-análisis" class="nav-link" data-scroll-target="#cierre-la-grilla-como-soporte-del-análisis"><span class="header-section-number">9.9</span> Cierre: la grilla como soporte del análisis</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">9.10</span> Referencias</a></li>
   </ul>
 </nav>
     </div>
@@ -337,8 +310,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Datos Espaciales: Raster</span></h1>
-<p class="subtitle lead">Manipulación de Raster</p>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Datos espaciales: ráster</span></h1>
+<p class="subtitle lead">Manipulación de datos ráster</p>
 </div>
 
 
@@ -355,20 +328,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="objetivos-del-módulo" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="objetivos-del-módulo"><span class="header-section-number">9.1</span> Objetivos del Módulo</h2>
+<section id="introducción-del-punto-a-la-superficie" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="introducción-del-punto-a-la-superficie"><span class="header-section-number">9.1</span> Introducción: del punto a la superficie</h2>
+<p>En el capítulo anterior transformamos direcciones escritas como texto en coordenadas y validamos su localización. El resultado fue un conjunto de puntos: una representación adecuada para responder <strong>dónde se encuentra cada registro</strong>. Sin embargo, muchos fenómenos geográficos no se presentan como objetos aislados. La elevación, la temperatura, la contaminación atmosférica, la humedad del suelo y la reflectancia de una imagen satelital varían a lo largo del territorio.</p>
+<p>Para representar esa continuidad necesitamos cambiar la unidad de observación. En lugar de describir entidades mediante puntos, líneas o polígonos, dividimos el espacio en una grilla y asignamos un valor a cada celda. Esa es la lógica del <strong>modelo ráster</strong>.</p>
+<p>Este capítulo cumple, por tanto, una función de enlace. Partimos de las ubicaciones puntuales construidas mediante geocodificación, aprendemos a interpretar el territorio como una matriz de valores y preparamos la estructura que utilizaremos en el capítulo siguiente para generar superficies mediante KDE e IDW.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ruta de lectura
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>Direcciones → puntos validados → celdas ráster → superficies estimadas</code></pre>
+<p>En este capítulo nos concentraremos en las <strong>celdas ráster</strong>: qué representan, cómo se localizan y cómo se interpretan sus valores. La estimación de superficies será el paso siguiente.</p>
+</div>
+</div>
+</section>
+<section id="objetivos-del-módulo" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="objetivos-del-módulo"><span class="header-section-number">9.2</span> Objetivos del Módulo</h2>
 <ul>
-<li>Identificar la estructura, propiedades y metadatos de un Raster (resolución, extensión, sistema de referencia).</li>
-<li>Cargar, visualizar e interpretar bandas satelitales (ej.: Landsat 8) y sus combinaciones color.</li>
-<li>Ejecutar un flujo mínimo en R para leer y visualizar imágenes Raster (color natural y falso color).</li>
+<li>Identificar la estructura, propiedades y metadatos de un ráster (resolución, extensión, sistema de referencia).</li>
+<li>Cargar, visualizar e interpretar bandas satelitales (ej.: Landsat 8) y sus combinaciones de color.</li>
+<li>Ejecutar un flujo mínimo en R para leer y visualizar imágenes ráster (color natural y falso color).</li>
 </ul>
 </section>
-<section id="definición-de-raster" class="level2 page-columns page-full" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="definición-de-raster"><span class="header-section-number">9.2</span> Definición de Raster</h2>
+<section id="definición-de-ráster" class="level2 page-columns page-full" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="definición-de-ráster"><span class="header-section-number">9.3</span> Definición de ráster</h2>
 <dl>
-<dt>Raster</dt>
+<dt>Ráster</dt>
 <dd>
-<p>Representación del espacio mediante una matriz de celdas (filas × columnas). Cada celda almacena un valor que describe el fenómeno (p.&nbsp;ej., reflectancia en una banda espectral). Un conjunto de capas apiladas (bandas) forma un raster multicapas..</p>
+<p>Representación del espacio mediante una matriz de celdas (filas × columnas). Cada celda almacena un valor que describe el fenómeno (p.&nbsp;ej., reflectancia en una banda espectral). Un conjunto de capas apiladas (bandas) forma un ráster multicapa.</p>
 </dd>
 </dl>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
@@ -378,8 +371,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </section>
-<section id="características-de-un-raster" class="level2 page-columns page-full" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="características-de-un-raster"><span class="header-section-number">9.3</span> Características de un Raster</h2>
+<section id="características-de-un-ráster" class="level2 page-columns page-full" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="características-de-un-ráster"><span class="header-section-number">9.4</span> Características de un ráster</h2>
 <ul>
 <li>Resolución espacial: tamaño de celda en unidades del mapa (p.&nbsp;ej., 30 m).</li>
 </ul>
@@ -404,9 +397,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Valores NoData: celdas sin información válida.</li>
 </ul>
 </section>
-<section id="imágenes-satelitales-ejemplo-landsat-8" class="level2 page-columns page-full" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="imágenes-satelitales-ejemplo-landsat-8"><span class="header-section-number">9.4</span> Imágenes Satelitales (ejemplo: Landsat 8)</h2>
-<p>Para ejemplificar el uso y ver características de Raster vamos a utilizar una imágenes satelital del <a href="https://eos.com/es/find-satellite/landsat-8/">Satelite Landsat 8</a>.</p>
+<section id="imágenes-satelitales-ejemplo-landsat-8" class="level2 page-columns page-full" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="imágenes-satelitales-ejemplo-landsat-8"><span class="header-section-number">9.5</span> Imágenes Satelitales (ejemplo: Landsat 8)</h2>
+<p>Para reconocer estas propiedades utilizaremos una imagen del <a href="https://eos.com/es/find-satellite/landsat-8/">satélite Landsat 8</a>.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/Sentinel-2Poster.jpg" class="img-fluid figure-img"></p>
@@ -422,24 +415,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Para este ejemplo de visualización necesitamos conocer las bandas satelitales que componen nuestra imagen satelital.</p>
 </section>
-<section id="ejemplo-práctico" class="level2 page-columns page-full" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="ejemplo-práctico"><span class="header-section-number">9.5</span> Ejemplo Práctico</h2>
-<section id="librerías" class="level3" data-number="9.5.1">
-<h3 data-number="9.5.1" class="anchored" data-anchor-id="librerías"><span class="header-section-number">9.5.1</span> Librerías</h3>
+<section id="antes-de-la-práctica-cómo-leer-un-ráster" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="antes-de-la-práctica-cómo-leer-un-ráster"><span class="header-section-number">9.6</span> Antes de la práctica: cómo leer un ráster</h2>
+<p>Abrir un archivo ráster y producir una imagen no garantiza que sepamos interpretarlo. Antes de trabajar con el código conviene responder cuatro preguntas:</p>
+<ol type="1">
+<li><strong>¿Qué representa cada celda?</strong> Puede ser una medición, una categoría, una reflectancia o un valor estimado.</li>
+<li><strong>¿Qué tamaño de territorio resume?</strong> La resolución determina el nivel de detalle y los patrones que podremos distinguir.</li>
+<li><strong>¿Dónde está ubicado?</strong> La extensión y el sistema de referencia permiten relacionar la grilla con otras capas espaciales.</li>
+<li><strong>¿Cómo se obtuvo el valor?</strong> Debemos distinguir entre datos observados por un sensor y superficies derivadas mediante un procedimiento analítico.</li>
+</ol>
+<p>En el ejemplo siguiente leeremos valores observados por un sensor satelital. En el <a href="./inferencia.html">capítulo de inferencia espacial</a>, en cambio, construiremos nuevos rásteres a partir de observaciones puntuales. La estructura será la misma, pero cambiará el origen y la interpretación de sus valores.</p>
+</section>
+<section id="del-concepto-a-la-práctica" class="level2 page-columns page-full" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="del-concepto-a-la-práctica"><span class="header-section-number">9.7</span> Del concepto a la práctica</h2>
+<section id="librerías" class="level3" data-number="9.7.1">
+<h3 data-number="9.7.1" class="anchored" data-anchor-id="librerías"><span class="header-section-number">9.7.1</span> Librerías</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="lectura-de-imagen-raster." class="level3 page-columns page-full" data-number="9.5.2">
-<h3 data-number="9.5.2" class="anchored" data-anchor-id="lectura-de-imagen-raster."><span class="header-section-number">9.5.2</span> lectura de imagen Raster.</h3>
+<section id="lectura-de-una-imagen-ráster" class="level3 page-columns page-full" data-number="9.7.2">
+<h3 data-number="9.7.2" class="anchored" data-anchor-id="lectura-de-una-imagen-ráster"><span class="header-section-number">9.7.2</span> Lectura de una imagen ráster</h3>
 <p>Para el ejemplo, necesitaremos reconocer qué bandas incluye nuestro archivo y cómo nombrarlas para facilitar su uso:</p>
 <blockquote class="blockquote">
-<p>la nomenclatura exacta varía según la fuente de datos y el preprocesamiento. En este módulo usaremos nombres legibles que mapean a Landsat 8 OLI/TIRS: <code>aerosol</code>, <code>blue</code>, <code>green</code>, <code>red</code>, <code>nir</code>, <code>swir1</code>, <code>swir2</code>, <code>tirs1</code>.</p>
+<p>La nomenclatura exacta varía según la fuente de datos y el preprocesamiento. En este módulo usaremos nombres legibles que corresponden a las bandas de Landsat 8 OLI/TIRS: <code>aerosol</code>, <code>blue</code>, <code>green</code>, <code>red</code>, <code>nir</code>, <code>swir1</code>, <code>swir2</code>, <code>tirs1</code>.</p>
 </blockquote>
 <div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -448,7 +452,7 @@ Tabla de Bandas de Imagen satelital Landsat 8
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure" aria-labelledby="-caption">
@@ -459,52 +463,52 @@ Tabla de Bandas de Imagen satelital Landsat 8
 </div>
 </div>
 </div>
-<div id="-caption" class="margin-figure-caption column-margin callout-1-contents callout-collapse collapse callout-margin-content callout-margin-content-simple">Bandas de Landsat 8</div><p>Para asegurar compatibilidad con material existente, mostramos primero con <code>raster</code> y, luego, la versión recomendada moderna con <code>terra</code>.</p>
+<div id="-caption" class="margin-figure-caption column-margin callout-2-contents callout-collapse collapse callout-margin-content callout-margin-content-simple">Bandas de Landsat 8</div><p>Para asegurar compatibilidad con material existente, mostramos primero con <code>raster</code> y, luego, la versión recomendada moderna con <code>terra</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("terra") # si no lo tienes</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>las_condes_rst <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"data/raster/OLI_LC.tif"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(las_condes_rst) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"aerosol"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"nir"</span>, <span class="st">"swir1"</span>, <span class="st">"swir2"</span>, <span class="st">"tirs1"</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>las_condes_rst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("terra") # si no lo tienes</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>las_condes_rst <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"data/raster/OLI_LC.tif"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(las_condes_rst) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"aerosol"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"nir"</span>, <span class="st">"swir1"</span>, <span class="st">"swir2"</span>, <span class="st">"tirs1"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>las_condes_rst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>class       : SpatRaster 
+<pre><code>class       : SpatRaster
 size        : 449, 562, 8  (nrow, ncol, nlyr)
 resolution  : 30, 30  (x, y)
 extent      : 350505, 367365, 6293905, 6307375  (xmin, xmax, ymin, ymax)
-coord. ref. : WGS 84 / UTM zone 19S (EPSG:32719) 
-source      : OLI_LC.tif 
-names       : aerosol,  blue, green,   red,   nir, swir1, ... 
-min values  :    8465,  7604,  6500,  5924,  5520,  5191, ... 
-max values  :   19119, 20517, 21248, 23237, 29344, 30012, ... </code></pre>
+coord. ref. : WGS 84 / UTM zone 19S (EPSG:32719)
+source      : OLI_LC.tif
+names       : aerosol,  blue, green,   red,   nir, swir1, ...
+min values  :    8465,  7604,  6500,  5924,  5520,  5191, ...
+max values  :   19119, 20517, 21248, 23237, 29344, 30012, ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(las_condes_rst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(las_condes_rst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "PROJCRS[\"WGS 84 / UTM zone 19S\",\n    BASEGEOGCRS[\"WGS 84\",\n        DATUM[\"World Geodetic System 1984\",\n            ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n                LENGTHUNIT[\"metre\",1]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4326]],\n    CONVERSION[\"UTM zone 19S\",\n        METHOD[\"Transverse Mercator\",\n            ID[\"EPSG\",9807]],\n        PARAMETER[\"Latitude of natural origin\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8801]],\n        PARAMETER[\"Longitude of natural origin\",-69,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8802]],\n        PARAMETER[\"Scale factor at natural origin\",0.9996,\n            SCALEUNIT[\"unity\",1],\n            ID[\"EPSG\",8805]],\n        PARAMETER[\"False easting\",500000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8806]],\n        PARAMETER[\"False northing\",10000000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8807]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    USAGE[\n        SCOPE[\"Navigation and medium accuracy spatial referencing.\"],\n        AREA[\"Between 72°W and 66°W, southern hemisphere between 80°S and equator, onshore and offshore. Argentina. Bolivia. Brazil. Chile. Colombia. Peru.\"],\n        BBOX[-80,-72,0,-66]],\n    ID[\"EPSG\",32719]]"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">res</span>(las_condes_rst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">res</span>(las_condes_rst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 30 30</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ext</span>(las_condes_rst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ext</span>(las_condes_rst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SpatExtent : 350504.999999999, 367364.999999999, 6293905, 6307375 (xmin, xmax, ymin, ymax)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nlyr</span>(las_condes_rst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nlyr</span>(las_condes_rst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
 </div>
 </section>
-<section id="visualización-raster" class="level3" data-number="9.5.3">
-<h3 data-number="9.5.3" class="anchored" data-anchor-id="visualización-raster"><span class="header-section-number">9.5.3</span> Visualización Raster</h3>
+<section id="visualización-del-ráster" class="level3" data-number="9.7.3">
+<h3 data-number="9.7.3" class="anchored" data-anchor-id="visualización-del-ráster"><span class="header-section-number">9.7.3</span> Visualización del ráster</h3>
 <p>Color natural (RGB = 4–3–2): rojo, verde y azul aproximan cómo “veríamos” la escena.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Visualización de imagen recortada de Las Condes en Color Natural</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRGB</span>(las_condes_rst, <span class="at">r =</span> <span class="dv">4</span>, <span class="at">g =</span> <span class="dv">3</span>, <span class="at">b =</span> <span class="dv">2</span>, <span class="at">stretch =</span> <span class="st">"lin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Visualización de imagen recortada de Las Condes en Color Natural</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRGB</span>(las_condes_rst, <span class="at">r =</span> <span class="dv">4</span>, <span class="at">g =</span> <span class="dv">3</span>, <span class="at">b =</span> <span class="dv">2</span>, <span class="at">stretch =</span> <span class="st">"lin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -512,10 +516,10 @@ max values  :   19119, 20517, 21248, 23237, 29344, 30012, ... </code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # mapview::viewRGB(raster::brick(las_condes_rst), r = 4, g = 3, b = 2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # mapview::viewRGB(raster::brick(las_condes_rst), r = 4, g = 3, b = 2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -524,18 +528,18 @@ Actividad 1 — Explora combinaciones de bandas
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Ensaya falso color vegetación (NIR–Red–Green → 5–4–3 en Landsat 8 clásico; aquí nir=5, red=4, green=3):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRGB</span>(las_condes_rst, <span class="at">r =</span> <span class="dv">5</span>, <span class="at">g =</span> <span class="dv">4</span>, <span class="at">b =</span> <span class="dv">3</span>, <span class="at">stretch =</span> <span class="st">"lin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRGB</span>(las_condes_rst, <span class="at">r =</span> <span class="dv">5</span>, <span class="at">g =</span> <span class="dv">4</span>, <span class="at">b =</span> <span class="dv">3</span>, <span class="at">stretch =</span> <span class="st">"lin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="images/l8-band-combinations.png" class="img-fluid" alt="Visualización de Bandas"> Referencias: <a href="https://mappinggis.com/2019/05/combinaciones-de-bandas-en-imagenes-de-satelite-landsat-y-sentinel/" class="uri">https://mappinggis.com/2019/05/combinaciones-de-bandas-en-imagenes-de-satelite-landsat-y-sentinel/</a></p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -544,11 +548,11 @@ Actividad 2 — Falso color SWIR (realce de suelos/urbano)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Prueba una combinación que realce zonas urbanas/sequedad (SWIR2–SWIR1–Red → 7–6–4):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRGB</span>(las_condes_rst, <span class="at">r =</span> <span class="dv">7</span>, <span class="at">g =</span> <span class="dv">6</span>, <span class="at">b =</span> <span class="dv">4</span>, <span class="at">stretch =</span> <span class="st">"lin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRGB</span>(las_condes_rst, <span class="at">r =</span> <span class="dv">7</span>, <span class="at">g =</span> <span class="dv">6</span>, <span class="at">b =</span> <span class="dv">4</span>, <span class="at">stretch =</span> <span class="st">"lin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -562,7 +566,7 @@ Actividad 2 — Falso color SWIR (realce de suelos/urbano)
 </div>
 </div>
 <div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -571,56 +575,61 @@ Actividad 3 — Chequeos rápidos de metadatos
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>¿Cuál es la resolución de tu raster?</li>
 <li>¿Qué CRS utiliza? ¿Es geográfico (lat/long) o proyectado (p.&nbsp;ej., UTM)?</li>
 <li>¿Hay NoData? ¿Cómo se representan?</li>
 </ul>
-<p>Usa: <code>res(r)</code>, <code>crs(r)</code>, `is.na(values(r))```.</p>
+<p>Usa: <code>res(r)</code>, <code>crs(r)</code> e <code>is.na(values(r))</code>.</p>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="anexo-compatibilidad-con-librería-raster" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="anexo-compatibilidad-con-librería-raster"><span class="header-section-number">9.6</span> Anexo: Compatibilidad con librería <code>raster</code></h2>
+<section id="anexo-compatibilidad-con-librería-raster" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="anexo-compatibilidad-con-librería-raster"><span class="header-section-number">9.8</span> Anexo: Compatibilidad con librería <code>raster</code></h2>
 <p>Para asegurar compatibilidad con material existente, mostramos también con {<code>raster</code>} aunque la librería recomendada para el futuro es {<code>terra</code>}.</p>
 <blockquote class="blockquote">
 <p><em><code>terra</code> replaces the <code>raster</code> package. The interfaces of <code>terra</code> and <code>raster</code> are similar, but <code>terra</code> is simpler, faster and can do more</em>. Fuente: <a href="https://rspatial.github.io/terra/" class="uri">https://rspatial.github.io/terra/</a></p>
 </blockquote>
-<section id="lectura-e-inspección" class="level3" data-number="9.6.1">
-<h3 data-number="9.6.1" class="anchored" data-anchor-id="lectura-e-inspección"><span class="header-section-number">9.6.1</span> Lectura e inspección</h3>
+<section id="lectura-e-inspección" class="level3" data-number="9.8.1">
+<h3 data-number="9.8.1" class="anchored" data-anchor-id="lectura-e-inspección"><span class="header-section-number">9.8.1</span> Lectura e inspección</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>las_condes_raster <span class="ot">&lt;-</span> <span class="fu">brick</span>(<span class="st">"data/raster/OLI_LC.tif"</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(las_condes_raster) <span class="ot">&lt;-</span> </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"aerosol"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span> , <span class="st">"nir"</span>, <span class="st">"swir1"</span>, <span class="st">"swir2"</span>, <span class="st">"tirs1"</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspección básica</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>las_condes_raster</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(las_condes_raster)<span class="co"># sistema de referencia de coordenadas</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">res</span>(las_condes_raster)   <span class="co"># tamaño de celda</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">extent</span>(las_condes_raster) <span class="co"># extensión de la imagen</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">nlayers</span>(las_condes_raster) <span class="co"># cantidad de capas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>las_condes_raster <span class="ot">&lt;-</span> <span class="fu">brick</span>(<span class="st">"data/raster/OLI_LC.tif"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(las_condes_raster) <span class="ot">&lt;-</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"aerosol"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span> , <span class="st">"nir"</span>, <span class="st">"swir1"</span>, <span class="st">"swir2"</span>, <span class="st">"tirs1"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspección básica</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>las_condes_raster</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(las_condes_raster)<span class="co"># sistema de referencia de coordenadas</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">res</span>(las_condes_raster)   <span class="co"># tamaño de celda</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">extent</span>(las_condes_raster) <span class="co"># extensión de la imagen</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">nlayers</span>(las_condes_raster) <span class="co"># cantidad de capas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="visualización-de-rgb" class="level3" data-number="9.6.2">
-<h3 data-number="9.6.2" class="anchored" data-anchor-id="visualización-de-rgb"><span class="header-section-number">9.6.2</span> Visualización de RGB</h3>
+<section id="visualización-de-rgb" class="level3" data-number="9.8.2">
+<h3 data-number="9.8.2" class="anchored" data-anchor-id="visualización-de-rgb"><span class="header-section-number">9.8.2</span> Visualización de RGB</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización de Las Condes en color natural</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRGB</span>(las_condes_raster, <span class="at">r =</span> <span class="dv">4</span>, <span class="at">g =</span> <span class="dv">3</span>, <span class="at">b =</span> <span class="dv">2</span>, <span class="at">stretch =</span> <span class="st">"lin"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternativa interactiva (si la tienes instalada):</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mapview::viewRGB(las_condes_raster, r = 4, g = 3, b = 2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización de Las Condes en color natural</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRGB</span>(las_condes_raster, <span class="at">r =</span> <span class="dv">4</span>, <span class="at">g =</span> <span class="dv">3</span>, <span class="at">b =</span> <span class="dv">2</span>, <span class="at">stretch =</span> <span class="st">"lin"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternativa interactiva (si la tienes instalada):</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mapview::viewRGB(las_condes_raster, r = 4, g = 3, b = 2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="referencias" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="referencias"><span class="header-section-number">9.7</span> Referencias:</h2>
+<section id="cierre-la-grilla-como-soporte-del-análisis" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="cierre-la-grilla-como-soporte-del-análisis"><span class="header-section-number">9.9</span> Cierre: la grilla como soporte del análisis</h2>
+<p>En este capítulo aprendimos que un ráster no es simplemente una imagen: es un modelo de datos que organiza el territorio en celdas localizadas y comparables. Su resolución, extensión, sistema de referencia y valores <code>NoData</code> condicionan cualquier análisis posterior.</p>
+<p>Hasta aquí trabajamos con una superficie ya observada por un sensor. El paso siguiente consiste en preguntarnos qué ocurre cuando solo disponemos de mediciones o eventos en algunos puntos. En el <a href="./inferencia.html">capítulo siguiente</a>, KDE transformará eventos puntuales en una superficie de intensidad e IDW estimará valores en lugares sin medición. Así, la grilla que acabamos de estudiar se convertirá en el soporte de la inferencia espacial.</p>
+</section>
+<section id="referencias" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="referencias"><span class="header-section-number">9.10</span> Referencias</h2>
 <ul>
-<li><a href="https://rspatial.org/">Spatial Data Science with R and “terra”</a></li>
+<li><a href="https://rspatial.org/">Spatial Data Science with R y “terra”</a></li>
 </ul>
 
 
@@ -1033,8 +1042,8 @@ Actividad 3 — Chequeos rápidos de metadatos
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./inferencia.html" class="pagination-link" aria-label="Inferencia Espacial">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inferencia Espacial</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./inferencia.html" class="pagination-link" aria-label="Inferencia espacial">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inferencia espacial</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1042,7 +1051,7 @@ Actividad 3 — Chequeos rápidos de metadatos
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2025, Denis Berroeta</p>
+<p>Copyright 2026, Denis Berroeta</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

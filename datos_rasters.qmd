@@ -1,27 +1,45 @@
 ---
-title: "Datos Espaciales: Raster"
-subtitle: "Manipulación de Raster"
+title: "Datos espaciales: ráster"
+subtitle: "Manipulación de datos ráster"
 number-sections: true
 number-depth: 3
 editor_options: 
   chunk_output_type: console
 ---
 
+## Introducción: del punto a la superficie
+
+En el capítulo anterior transformamos direcciones escritas como texto en coordenadas y validamos su localización. El resultado fue un conjunto de puntos: una representación adecuada para responder **dónde se encuentra cada registro**. Sin embargo, muchos fenómenos geográficos no se presentan como objetos aislados. La elevación, la temperatura, la contaminación atmosférica, la humedad del suelo y la reflectancia de una imagen satelital varían a lo largo del territorio.
+
+Para representar esa continuidad necesitamos cambiar la unidad de observación. En lugar de describir entidades mediante puntos, líneas o polígonos, dividimos el espacio en una grilla y asignamos un valor a cada celda. Esa es la lógica del **modelo ráster**.
+
+Este capítulo cumple, por tanto, una función de enlace. Partimos de las ubicaciones puntuales construidas mediante geocodificación, aprendemos a interpretar el territorio como una matriz de valores y preparamos la estructura que utilizaremos en el capítulo siguiente para generar superficies mediante KDE e IDW.
+
+::: {.callout-tip}
+## Ruta de lectura
+
+```text
+Direcciones → puntos validados → celdas ráster → superficies estimadas
+```
+
+En este capítulo nos concentraremos en las **celdas ráster**: qué representan, cómo se localizan y cómo se interpretan sus valores. La estimación de superficies será el paso siguiente.
+:::
+
 ## Objetivos del Módulo
 
--   Identificar la estructura, propiedades y metadatos de un Raster (resolución, extensión, sistema de referencia).
--   Cargar, visualizar e interpretar bandas satelitales (ej.: Landsat 8) y sus combinaciones color.
--   Ejecutar un flujo mínimo en R para leer y visualizar imágenes Raster (color natural y falso color).
+-   Identificar la estructura, propiedades y metadatos de un ráster (resolución, extensión, sistema de referencia).
+-   Cargar, visualizar e interpretar bandas satelitales (ej.: Landsat 8) y sus combinaciones de color.
+-   Ejecutar un flujo mínimo en R para leer y visualizar imágenes ráster (color natural y falso color).
 
-## Definición de Raster
+## Definición de ráster
 
-Raster
+Ráster
 
-:   Representación del espacio mediante una matriz de celdas (filas × columnas). Cada celda almacena un valor que describe el fenómeno (p. ej., reflectancia en una banda espectral). Un conjunto de capas apiladas (bandas) forma un raster multicapas..
+:   Representación del espacio mediante una matriz de celdas (filas × columnas). Cada celda almacena un valor que describe el fenómeno (p. ej., reflectancia en una banda espectral). Un conjunto de capas apiladas (bandas) forma un ráster multicapa.
 
 ![Representación Raster](images/raster_concept.png){width="60%"}
 
-## Características de un Raster
+## Características de un ráster
 
 -   Resolución espacial: tamaño de celda en unidades del mapa (p. ej., 30 m).
 
@@ -40,7 +58,7 @@ Raster
 
 ## Imágenes Satelitales (ejemplo: Landsat 8)
 
-Para ejemplificar el uso y ver características de Raster vamos a utilizar una imágenes satelital del [Satelite Landsat 8](https://eos.com/es/find-satellite/landsat-8/).
+Para reconocer estas propiedades utilizaremos una imagen del [satélite Landsat 8](https://eos.com/es/find-satellite/landsat-8/).
 
 ![Imágenes Satelitales](images/Sentinel-2Poster.jpg)
 
@@ -50,9 +68,18 @@ Este tipo de productos suele distribuirse como series de bandas (p. ej., coastal
 
 Para este ejemplo de visualización necesitamos conocer las bandas satelitales que componen nuestra imagen satelital.
 
+## Antes de la práctica: cómo leer un ráster
 
+Abrir un archivo ráster y producir una imagen no garantiza que sepamos interpretarlo. Antes de trabajar con el código conviene responder cuatro preguntas:
 
-## Ejemplo Práctico
+1. **¿Qué representa cada celda?** Puede ser una medición, una categoría, una reflectancia o un valor estimado.
+2. **¿Qué tamaño de territorio resume?** La resolución determina el nivel de detalle y los patrones que podremos distinguir.
+3. **¿Dónde está ubicado?** La extensión y el sistema de referencia permiten relacionar la grilla con otras capas espaciales.
+4. **¿Cómo se obtuvo el valor?** Debemos distinguir entre datos observados por un sensor y superficies derivadas mediante un procedimiento analítico.
+
+En el ejemplo siguiente leeremos valores observados por un sensor satelital. En el [capítulo de inferencia espacial](inferencia.qmd), en cambio, construiremos nuevos rásteres a partir de observaciones puntuales. La estructura será la misma, pero cambiará el origen y la interpretación de sus valores.
+
+## Del concepto a la práctica
 
 ### Librerías
 
@@ -63,12 +90,12 @@ library(mapview)
 ```
 
 
-### lectura de imagen Raster.
+### Lectura de una imagen ráster
 
 
 Para el ejemplo, necesitaremos reconocer qué bandas incluye nuestro archivo y cómo nombrarlas para facilitar su uso:
 
->la nomenclatura exacta varía según la fuente de datos y el preprocesamiento. En este módulo usaremos nombres legibles que mapean a Landsat 8 OLI/TIRS:
+> La nomenclatura exacta varía según la fuente de datos y el preprocesamiento. En este módulo usaremos nombres legibles que corresponden a las bandas de Landsat 8 OLI/TIRS:
 >`aerosol`, `blue`, `green`,  `red`, `nir`, `swir1`, `swir2`, `tirs1`.
 
 :::{.callout-note  appearance="simple" collapse="true"}
@@ -100,7 +127,7 @@ nlyr(las_condes_rst)
 ```
 
 
-### Visualización Raster
+### Visualización del ráster
 
 Color natural (RGB = 4–3–2): rojo, verde y azul aproximan cómo “veríamos” la escena.
 
@@ -148,7 +175,7 @@ plotRGB(las_condes_rst, r = 7, g = 6, b = 4, stretch = "lin")
 - ¿Qué CRS utiliza? ¿Es geográfico (lat/long) o proyectado (p. ej., UTM)?
 - ¿Hay NoData? ¿Cómo se representan?
 
-Usa: `res(r)`, `crs(r)`, `is.na(values(r))```.
+Usa: `res(r)`, `crs(r)` e `is.na(values(r))`.
 :::
 
 
@@ -187,6 +214,12 @@ plotRGB(las_condes_raster, r = 4, g = 3, b = 2, stretch = "lin")
 ```
 
 
-## Referencias:
+## Cierre: la grilla como soporte del análisis
 
-- [Spatial Data Science with R and “terra”](https://rspatial.org/)
+En este capítulo aprendimos que un ráster no es simplemente una imagen: es un modelo de datos que organiza el territorio en celdas localizadas y comparables. Su resolución, extensión, sistema de referencia y valores `NoData` condicionan cualquier análisis posterior.
+
+Hasta aquí trabajamos con una superficie ya observada por un sensor. El paso siguiente consiste en preguntarnos qué ocurre cuando solo disponemos de mediciones o eventos en algunos puntos. En el [capítulo siguiente](inferencia.qmd), KDE transformará eventos puntuales en una superficie de intensidad e IDW estimará valores en lugares sin medición. Así, la grilla que acabamos de estudiar se convertirá en el soporte de la inferencia espacial.
+
+## Referencias
+
+- [Spatial Data Science with R y “terra”](https://rspatial.org/)

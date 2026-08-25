@@ -85,7 +85,6 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./quiebres.html" rel="next">
 <link href="./crs.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -196,7 +195,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tidyverse.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipulación de tablas en r</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipulación de tablas en R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -226,31 +225,13 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./datos_rasters.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Datos Espaciales: Raster</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Datos espaciales: ráster</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./inferencia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inferencia Espacial</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./intro_inds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introducción a Indicadores Territoriales</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./construccion_inds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Indicador de Delincuencia</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./indicadores.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inds. Socioeconómicos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inferencia espacial</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -266,12 +247,6 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="./tarea_1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tarea 1: Programación en R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tarea_2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tarea 2: Proyecto Final</span></a>
   </div>
 </li>
       </ul>
@@ -315,12 +290,6 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Mapa de Cólera</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./quiebres.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Mapas y Quiebres</span></span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -352,7 +321,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./recursos.html">Appendices</a></li><li class="breadcrumb-item"><a href="./john_snow.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Mapa de Cólera</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Appendix D — Mapa de Cólera</h1>
+<h1 class="title"><span id="sec-john-snow" class="quarto-section-identifier">Appendix D — Mapa de Cólera</span></h1>
 <p class="subtitle lead">El Mapa que cambio el Mundo</p>
 </div>
 
@@ -431,7 +400,7 @@ div.csl-indent {
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>snow_deaths <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/SnowGIS_SHP/Cholera_Deaths.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `Cholera_Deaths' from data source 
-  `/Users/denisberroeta/Documents/Docencia/geoanalisis/cgeoa-book/data/SnowGIS_SHP/Cholera_Deaths.shp' 
+  `/Users/denisberroeta/Documents/Docencia/geoanalisis/geoanalisis-2026/cgeoa-2026-book/data/SnowGIS_SHP/Cholera_Deaths.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 250 features and 2 fields
 Geometry type: POINT
@@ -442,7 +411,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>snow_pumps <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/SnowGIS_SHP/Pumps.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `Pumps' from data source 
-  `/Users/denisberroeta/Documents/Docencia/geoanalisis/cgeoa-book/data/SnowGIS_SHP/Pumps.shp' 
+  `/Users/denisberroeta/Documents/Docencia/geoanalisis/geoanalisis-2026/cgeoa-2026-book/data/SnowGIS_SHP/Pumps.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 8 features and 1 field
 Geometry type: POINT
@@ -1003,16 +972,13 @@ Ramsay, Michael A. E. 2006. <span>“John Snow, <span>MD</span>: Anaesthetist to
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./quiebres.html" class="pagination-link" aria-label="Mapas y Quiebres">
-        <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Mapas y Quiebres</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2025, Denis Berroeta</p>
+<p>Copyright 2026, Denis Berroeta</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
