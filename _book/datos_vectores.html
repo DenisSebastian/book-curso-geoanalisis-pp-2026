@@ -205,6 +205,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Geocoding</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datos_rasters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Datos espaciales: ráster</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./inferencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inferencia espacial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./indicadores_territoriales.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Indicadores Territoriales</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -253,6 +271,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./crs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">CRS en R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./john_snow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Mapa de Cólera</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quiebres.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Mapas y Quiebres</span></span></a>
   </div>
 </li>
       </ul>
@@ -1293,7 +1323,7 @@ Figure&nbsp;6.5: Buffer de la comuna de Valparaíso 1000 y 500 metros.
 <p>Una consideración importante, cuando se hacen operaciones espaciales entre dos geometrías es importantes que ambas estén bajo el mismo sistema de referencias de coordenadas, por cual empezaremos con esto a continuación.</p>
 <section id="transformación-de-crs" class="level4">
 <h4 class="anchored" data-anchor-id="transformación-de-crs">Transformación de CRS</h4>
-<p>Los sistemas de coordenadas forman la base de cálculo para describir la posición de un punto a partir de mediciones geodésicas: distancias, proporciones de distancias (sin escala) y ángulos. Las coordenadas nunca pueden medirse, solamente se calculan con referencia un sistema de coordenadas bien definido. Mayores detalles ver la sección en apéndices sobre Sistemas de Referencias de Coordenadas (<a href="crs.html" class="quarto-xref"><span>Appendix C</span></a>).</p>
+<p>Los sistemas de coordenadas forman la base de cálculo para describir la posición de un punto a partir de mediciones geodésicas: distancias, proporciones de distancias (sin escala) y ángulos. Las coordenadas nunca pueden medirse, solamente se calculan con referencia un sistema de coordenadas bien definido. Mayores detalles ver la sección en apéndices sobre Sistemas de Referencias de Coordenadas (<a href="#sec-crs" class="quarto-xref"><span class="quarto-unresolved-ref">sec-crs</span></a>).</p>
 <p>Para el caso de Chile usamos dos sistemas de referencias de coordenadas:</p>
 <dl>
 <dt>Coordenadas elipsoidales (geodésicas):</dt>

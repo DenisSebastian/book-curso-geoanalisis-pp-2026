@@ -203,6 +203,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Geocoding</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datos_rasters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Datos espaciales: ráster</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./inferencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inferencia espacial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./indicadores_territoriales.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Indicadores Territoriales</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -251,6 +269,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./crs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">CRS en R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./john_snow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Mapa de Cólera</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quiebres.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Mapas y Quiebres</span></span></a>
   </div>
 </li>
       </ul>
@@ -358,19 +388,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ru <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">10</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ru</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 1.749609 5.455962 3.084934 4.780937 1.629212 3.550004 1.486331 8.112413
-  [9] 2.364462 7.506231 5.898235 5.001319 2.380657 3.225796 2.413403 1.861233
- [17] 1.288611 2.866030 2.608275 2.352912 6.838423 4.372167 9.076719 1.687968
- [25] 1.624485 6.756847 3.466653 1.255480 6.381349 1.958906 9.460589 3.499083
- [33] 1.116851 1.188380 1.756945 8.712042 3.755423 8.289490 5.918461 6.038338
- [41] 2.826705 6.382414 8.624898 6.178351 7.860414 1.643436 5.494193 7.824635
- [49] 1.461209 1.303401 8.692093 5.862753 8.290629 9.400484 7.350134 9.269709
- [57] 5.854738 2.469570 9.175534 1.415795 6.792330 7.352081 5.922368 9.415684
- [65] 7.538867 1.692968 5.395446 9.400922 2.584393 8.639040 3.590811 5.928645
- [73] 8.241462 2.214160 1.432750 4.451867 9.226118 6.857262 1.080478 4.531964
- [81] 4.008679 6.686440 5.911199 1.089577 1.731604 1.684543 1.109249 6.038065
- [89] 2.934581 3.465138 5.826852 9.929458 5.980667 1.058926 7.087865 8.364506
- [97] 7.709103 9.498929 2.798649 3.718612</code></pre>
+<pre><code>  [1] 4.142270 2.303686 3.736416 8.184725 8.907170 5.268046 8.635921 8.261339
+  [9] 1.172122 4.415818 6.342994 9.658957 3.599362 6.241881 7.312314 2.328252
+ [17] 6.900814 9.944752 2.822823 6.316616 1.361347 6.937253 9.112418 1.485055
+ [25] 8.017395 2.731556 4.153059 9.184880 7.383480 7.659808 5.628653 2.875030
+ [33] 5.767155 5.150290 5.156474 8.200482 2.372336 1.675998 6.930118 6.604101
+ [41] 6.781116 6.398318 2.382576 3.385714 8.020584 8.307290 4.945254 7.364256
+ [49] 7.296333 5.346882 2.983377 4.441504 9.117463 1.273559 6.294258 3.129904
+ [57] 1.553854 1.842106 5.502181 6.029263 5.199890 1.867321 2.456594 3.524991
+ [65] 7.939497 8.206473 3.976227 6.397877 1.178760 3.717866 8.067756 1.608909
+ [73] 8.433082 4.704136 9.851439 1.217236 5.459614 5.081021 4.459931 4.176618
+ [81] 8.823490 6.015311 1.343503 9.835757 2.010370 4.422770 9.435968 6.192773
+ [89] 6.324517 4.527177 3.765816 2.957524 3.536855 7.054589 6.442759 8.321894
+ [97] 5.302097 2.484045 7.329306 2.506269</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -389,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample.int</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 3 1 4 3 4 6 4 5 3 2</code></pre>
+<pre><code> [1] 1 4 4 6 2 3 3 6 4 3</code></pre>
 </div>
 </div>
 </section>

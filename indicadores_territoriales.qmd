@@ -1,7 +1,7 @@
 ---
 title: "Indicadores Territoriales"
-subtitle: "Construcción de Indicadores Socioecnómicos en Chile"
-editor_options: 
+subtitle: "Construcción de indicadores socioeconómicos con el Censo 2024"
+editor_options:
   chunk_output_type: console
 ---
 
@@ -9,635 +9,823 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(sf))
-suppressPackageStartupMessages(library(raster))
-suppressPackageStartupMessages(library(mapview))
-suppressPackageStartupMessages(library(kableExtra))
-suppressPackageStartupMessages(library(ggplot2))
-suppressPackageStartupMessages(require(knitr))
-suppressPackageStartupMessages(library(viridis))
 suppressPackageStartupMessages(library(tidyr))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(knitr))
 ```
 
+## Propósito del capítulo
 
-## Definiciones
+Hasta aquí hemos aprendido a organizar, transformar, representar y analizar datos espaciales. En este capítulo reuniremos esas capacidades para responder una pregunta aplicada: **¿cómo convertir un problema territorial en una medida que pueda compararse entre lugares?**
 
-### ¿Qué es un Indicador?:
+Al finalizar, podrás:
 
-Un indicador es una variable cuantitativa o cualitativa que se utiliza para medir y monitorear el estado, evolución o desempeño de un fenómeno, proceso o sistema específico a lo largo del tiempo. Los indicadores permiten transformar datos complejos en información accesible y comprensible, facilitando la toma de decisiones.
+- distinguir un indicador general de uno territorial;
+- reconocer las decisiones conceptuales y técnicas involucradas en su construcción;
+- comprender por qué fue necesario corregir algunas geometrías censales y cómo se utiliza el ponderador `w`;
+- calcular, normalizar y cartografiar indicadores socioeconómicos con datos agregados del Censo 2024; y
+- diferenciar una medición directa de un proxy y comunicar sus límites de interpretación.
 
-En el ámbito de las políticas públicas, los indicadores juegan un rol clave al ofrecer una representación clara y medible de los problemas sociales, económicos o ambientales. Por ejemplo, un indicador como la tasa de desempleo proporciona una visión comprensible del mercado laboral, permitiendo a los responsables de políticas adaptar sus decisiones y recursos para mitigar el desempleo. Los indicadores permiten evaluar el impacto de las políticas implementadas, ajustarlas cuando sea necesario, y comunicar los resultados de manera efectiva a la ciudadanía.
+## Conceptos fundamentales
 
-### ¿Qué es un Indicador Territorial?:
+### De los datos al indicador
 
-Un indicador territorial es una medida que refleja características o fenómenos específicos de una región o área geográfica, tales como la accesibilidad, la distribución de recursos, el desarrollo socioeconómico o los niveles de seguridad. Estos indicadores están vinculados a un territorio y suelen ser utilizados para evaluar las condiciones y desigualdades entre distintas zonas.
+Un **indicador** es una medida que sintetiza un fenómeno relevante para describir su estado, seguir su evolución o evaluar un resultado. No es un dato aislado: adquiere sentido cuando se vincula con una pregunta, una población de referencia, un periodo y una regla de cálculo.
 
-![](images/back_homev04-1.png){fig-align="center" width="70%"}
+Un **indicador territorial** incorpora, además, una unidad geográfica explícita —por ejemplo, una región, una comuna o una manzana—. Esto permite comparar lugares, reconocer desigualdades espaciales y orientar decisiones públicas. Una tasa de desocupación comunal, la distancia al centro de salud más cercano o la proporción de viviendas con materialidad insuficiente son ejemplos de indicadores territoriales.
 
-Desde la perspectiva de las políticas públicas, los indicadores territoriales son esenciales para diseñar estrategias que respondan a las particularidades de diferentes regiones. Por ejemplo, un indicador territorial de accesibilidad a servicios de salud en zonas rurales permite identificar disparidades frente a áreas urbanas, facilitando la distribución equitativa de recursos. Estos indicadores también permiten a los gobiernos locales y nacionales identificar zonas prioritarias de intervención, optimizando el uso de los recursos y promoviendo un desarrollo territorial más equilibrado.
+![](images/ind_ter.png){fig-align="center" width="400" fig-alt="Un indicador territorial vincula una medida con un área geográfica delimitada."}
 
-## Etapas de Construcción un Indicador
+Un indicador bien definido debe explicitar, al menos:
 
-La construcción de indicadores territoriales es un proceso metodológico que permite transformar datos complejos y dispersos en información útil para la toma de decisiones territoriales. Este proceso no solo involucra cálculos matemáticos o recolección de datos, sino que también requiere un análisis profundo de los problemas específicos del territorio, la definición de objetivos claros, y la contextualización dentro de un marco de referencia adecuado. Los indicadores territoriales permiten evaluar el desarrollo de un área específica, detectar desigualdades, y facilitar la planificación pública orientada a mejorar la calidad de vida y la sostenibilidad territorial.
+- **qué mide** y por qué es relevante;
+- **a quiénes o qué unidades representa**;
+- **dónde y cuándo** es válido;
+- **cómo se calcula**, incluidos numerador, denominador y tratamiento de valores faltantes; y
+- **cómo se interpreta**, especialmente qué significan sus valores bajos y altos.
 
-![](images/pasos.png){fig-align="center"}
-
-Para construir indicadores territoriales efectivos, es fundamental seguir una serie de etapas bien definidas. Cada una de estas etapas responde a diferentes necesidades del proceso, desde la identificación inicial de los problemas hasta el análisis y representación espacial de los resultados. Estas etapas permiten garantizar que los indicadores resulten útiles y precisos para la evaluación de políticas públicas y el desarrollo regional. A lo largo de esta sección, se explicarán las siguientes etapas clave: problema territorial, marco de referencia, definición de objetivos, recolección de datos, cálculo de indicadores, representación espacial, y análisis de resultados, cada una con su respectiva función en la construcción de indicadores territoriales.
-
-### Problema Territorial
-
-En esta etapa, es fundamental describir con claridad el problema específico que afecta al territorio que se desea analizar. Esto puede incluir desafíos relacionados con temas sociales, económicos, ambientales, de seguridad, o de planificación urbana, entre otros. La descripción debe ser detallada, enfocándose en los aspectos que hacen único al problema dentro del contexto territorial.
-
-Es crucial también explicar la relevancia del problema para la comunidad local, resaltando por qué este desafío es significativo y cómo afecta al desarrollo del territorio. Los indicadores territoriales jugarán un papel clave, ya que permiten medir y analizar el problema de manera objetiva, facilitando su comprensión. A largo plazo, estos indicadores proporcionarán la base para la toma de decisiones y la implementación de políticas públicas que contribuyan a resolver la problemática identificada.
-
-Consideraciones Importantes:
-
-1.  **Identificación del problema territorial**: Describir de manera clara y precisa el problema específico (social, económico, ambiental, etc.) que afecta al territorio y su importancia para la comunidad.
-
-2.  **Relevancia para la comunidad**: Explicar por qué el problema es significativo para la población local y cómo influye en su desarrollo y bienestar.
-
-3.  **Uso de indicadores territoriales**: Destacar cómo los indicadores territoriales permiten cuantificar y analizar el problema, proporcionando una base sólida para la toma de decisiones y la formulación de políticas públicas.
-
-### Marco de Referencia
-
-En esta etapa, es crucial establecer las teorías, conceptos y estudios previos que guiarán el análisis y la construcción de los indicadores. El marco teórico proporciona la base conceptual y metodológica necesaria para entender el problema territorial y justificar las decisiones que se tomen a lo largo del proceso de investigación.
-
-Este marco incluye la revisión de la literatura relevante, donde se analizan teorías geográficas, modelos de análisis espacial y estudios previos que hayan abordado problemas similares. Es fundamental contextualizar el problema dentro de estos conceptos para comprender mejor su naturaleza y sus implicancias.
-
-Consideraciones Importantes:
-
-1.  **Contextualización del Problema**: Comprender cómo las teorías y modelos existentes explican el problema territorial en cuestión y cómo los indicadores ayudarán a analizarlo.
-
-2.  **Definición de Indicadores**: A partir de la revisión de la literatura y de las teorías analizadas, se puede definir de manera precisa el tipo de indicador territorial que se pretende construir, asegurando que esté respaldado por enfoques metodológicos sólidos.
-
-3.  **Guía para el Análisis**: El marco de referencia orienta la recolección y análisis de los datos, asegurando que el enfoque adoptado esté alineado con las mejores prácticas del campo, y que los indicadores generados sean fiables y útiles para la toma de decisiones.
-
-### Definición de Objetivos
-
-La definición de objetivos es una etapa clave en la construcción de indicadores territoriales, ya que proporciona una guía clara sobre lo que se espera lograr con el estudio. Estos objetivos deben estar alineados con el problema territorial identificado y deben estructurar el proceso de investigación de manera que todas las actividades contribuyan al propósito final del estudio.
-
-Para asegurar que los objetivos sean claros y alcanzables, se recomienda utilizar el framework SMART (Specific, Measurable, Achievable, Relevant, Time-bound). Este enfoque ayuda a estructurar los objetivos de manera que sean específicos (centrados en aspectos concretos del problema), medibles (con resultados cuantificables), alcanzables (realistas dentro de los recursos disponibles), relevantes (pertinentes para el problema territorial) y limitados en el tiempo (con plazos definidos para su logro). De esta manera, los resultados del estudio serán tangibles y evaluables, facilitando la toma de decisiones informadas y la aplicación de políticas públicas más efectivas.
-
-### Identificación y Recolección de Datos
-
-En esta etapa, se lleva a cabo la identificación y recopilación de los datos necesarios para calcular los indicadores territoriales. Este paso es crucial para garantizar que los datos utilizados sean de alta calidad y estén adecuadamente adaptados al análisis que se desea realizar.
-
-La recolección de datos implica la identificación de fuentes tanto abiertas como cerradas, como bases de datos gubernamentales, estudios previos, sensores remotos o censos. Además, es importante evaluar la calidad de los datos recolectados, considerando diversas características clave: representatividad (que los datos reflejen con precisión la realidad del territorio), pertinencia (que los datos sean relevantes para los indicadores a construir), precisión (exactitud en las mediciones), actualidad (datos recientes), accesibilidad (fácil acceso y disponibilidad de los datos) y consistencia (coherencia en los datos a lo largo del tiempo y entre diferentes fuentes). Estos factores aseguran que los indicadores territoriales sean sólidos y confiables para la toma de decisiones.
-
-
-**Otras fuentes de información nacionales**
-
-#### Censo de Población y Vivienda {.unnumbered}
-
--   **Descripción**: El Censo de Población y Vivienda se realiza cada diez años y ofrece un conteo exhaustivo de la población y sus características demográficas, económicas y de vivienda. Es una fuente crítica de datos para la planificación y desarrollo de políticas a nivel nacional y local.
--   **Enlace**: [Censo](http://www.censo2017.cl/)
-
-#### Encuesta Nacional de Uso del Tiempo (ENUT) {.unnumbered}
-
--   **Descripción**: La Encuesta Nacional de Uso del Tiempo (ENUT) proporciona información detallada sobre cómo las personas distribuyen su tiempo en diversas actividades, incluyendo trabajo remunerado, trabajo no remunerado, educación, ocio y cuidados. Es una herramienta clave para analizar la distribución del trabajo y la desigualdad de género en el uso del tiempo.
--   **Enlace**: [ENUT](https://www.ine.gob.cl/enut)
-
-#### Encuesta de Caracterización Socioeconómica Nacional (CASEN) {.unnumbered}
-
--   **Descripción**: La Encuesta de Caracterización Socioeconómica Nacional (CASEN) es la principal fuente de datos sobre las condiciones socioeconómicas de los hogares en Chile. Proporciona información sobre ingresos, educación, salud, vivienda y otras dimensiones del bienestar, siendo fundamental para el diseño y evaluación de políticas públicas.
--   **Enlace**: [CASEN](https://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen-2022)
-
-#### Encuesta de Presupuestos Familiares (EPF) {.unnumbered}
-
--   **Descripción**: La Encuesta de Presupuestos Familiares (EPF) proporciona información sobre los ingresos y gastos de los hogares chilenos, permitiendo el análisis de la estructura del consumo y las condiciones de vida de la población.
--   **Enlace**: [EPF](https://www.ine.gob.cl/estadisticas/sociales/ingresos-y-gastos/encuesta-de-presupuestos-familiares)
-
-#### Encuesta Nacional de Empleo (ENE) {.unnumbered}
-
--   **Descripción**: La Encuesta Nacional de Empleo (ENE) ofrece datos sobre la situación laboral de la población, incluyendo tasas de empleo, desempleo y subempleo, así como características de la fuerza laboral.
--   **Enlace**: [ENE](https://www.ine.gob.cl/estadisticas/sociales/mercado-laboral/ocupacion-y-desocupacion)
-
-#### Encuesta de Victimización (ENUSC) {.unnumbered}
-
--   **Descripción**: La Encuesta Nacional Urbana de Seguridad Ciudadana (ENUSC) proporciona datos sobre la percepción de seguridad y la prevalencia de delitos en la población urbana de Chile.
--   **Enlace**: [ENUSC](https://www.ine.gob.cl/enusc)
-
-#### Sistema Nacional de Información Municipal (SINIM) {.unnumbered}
-
--   **Descripción**: El Sistema Nacional de Información Municipal (SINIM) ofrece información sobre la gestión y desempeño de los municipios en Chile, incluyendo datos financieros, de infraestructura y servicios.
--   **Enlace**: [SINIM](https://datos.sinim.gov.cl/)
-
-#### Datos.gob {.unnumbered}
-
--   **Descripción**: Datos.gob el repositorio de datos abiertos centralizado del Estado. En este portal encontrarás datos y estadísticas del sector público, para distintos fines, como aplicaciones, visualizaciones, investigación, etc.
--   **Enlace**: [datos.gob.cl](https://datos.gob.cl/)
-
-#### IDE Chile {.unnumbered}
-
--   **Descripción**: La Infraestructura de Datos Geoespaciales de Chile (IDE Chile), dependiente del Ministerio de Bienes Nacionales.
--   **Enlace**: [IDE Chile](https://www.geoportal.cl/catalog)
-
-Estas fuentes de datos proporcionan una base sólida para el análisis de diversas dimensiones del desarrollo en Chile, siendo de gran utilidad para investigadores, planificadores y tomadores de decisiones.
-
-### Cálculo de Indicadores
-
-El cálculo de indicadores territoriales es una etapa clave en el análisis espacial, ya que permite convertir datos brutos en información específica que describe una condición, actividad o resultado dentro de un área geográfica definida. Este proceso es fundamental para comprender cómo las personas y los recursos interactúan dentro de un territorio, proporcionando una representación cuantitativa de fenómenos complejos.
-
-Los indicadores territoriales no solo ofrecen una visión numérica del territorio, sino que también permiten identificar patrones espaciales que podrían no ser evidentes a simple vista. Su valor radica en su capacidad de sintetizar interacciones complejas en métricas claras y comprensibles, facilitando así la toma de decisiones informadas. Estos indicadores ayudan a identificar problemas, evaluar el impacto de políticas públicas y detectar oportunidades de desarrollo a nivel local o regional, siendo herramientas cruciales para la gestión territorial y el análisis de políticas públicas.
-
-### Representación Espacial
-
-La representación espacial consiste en visualizar los resultados del cálculo de los indicadores territoriales mediante mapas, gráficos o modelos. Esto permite comprender de manera clara la distribución y las relaciones de los fenómenos que los indicadores describen en un territorio. Este paso es fundamental, ya que transforma resultados numéricos abstractos en representaciones visuales comprensibles y accesibles para el análisis y la toma de decisiones.
-
-![](images/lc_vulnerabilidad.png){fig-align="center" width="500"}
-
-La representación visual de los resultados de los indicadores facilita la interpretación de datos complejos, mejorando la comunicación de los resultados del análisis. Esta claridad visual es crucial para detectar situaciones problemáticas, como áreas con carencias o desigualdades, y para identificar oportunidades de intervención en el territorio. Así, los mapas y otros recursos visuales se convierten en herramientas esenciales para la planificación y gestión territorial, así como para la implementación de políticas públicas.
-
-
-
-
-
-
-
-### Análisis de Resultados
-
-La etapa de análisis de resultados es fundamental en la construcción de indicadores territoriales, ya que permite evaluar si se han cumplido los objetivos planteados y cómo los resultados obtenidos responden al problema territorial definido al inicio del estudio. Durante esta etapa, se examinan los patrones y tendencias revelados por los indicadores, lo que permite identificar fenómenos territoriales, desigualdades o comportamientos inesperados que requieren atención especial.
-
-Este análisis no solo implica la interpretación de los valores numéricos o visuales, sino que también requiere una comprensión profunda de las dinámicas espaciales que subyacen en los datos. Comparar los resultados obtenidos con la situación inicial del problema permite destacar áreas de alta prioridad y oportunidades de intervención. El análisis de resultados también ayuda a ajustar las hipótesis iniciales o incluso a formular nuevas, más alineadas con la realidad observada.
-
-Finalmente, esta etapa proporciona una base sólida para la toma de decisiones informadas, al ofrecer información clave que permite a los responsables de la planificación y gestión proponer soluciones focalizadas y basadas en evidencia, contribuyendo a una mejor gestión del territorio.
-
-## Construcción de Indicadores Socioconómicos {#sec-indsoc}
-
-El Centro de Inteligencia Territorial de la Universidad Adolfo Ibáñez, bajo proyecto denominado **Matriz de Bienestar Humano Territorial (MBHT)** construyó una serie indicadores territoriales, que buscan comprender las condiciones de los entornos urbanos y rurales, para construir soluciones que impacten positivamente en el bienestar de las personas y su hábitat.
-
-::: {#fig-cit}
-![](images/Logo_CIT_UAI_Negro.png){fig-align="center" width="30%"}![](images/logo-mbht.png){fig-align="center" width="18%"}
-
-Centro de Inteligencia Territorial - UAI
+::: {.callout-important title="La escala también forma parte del indicador"}
+Un patrón observado por región puede cambiar al calcularse por comuna o manzana. Por eso, toda comparación debe usar unidades geográficas y periodos equivalentes. Los resultados describen áreas, no necesariamente a cada persona que vive en ellas; confundir ambos niveles conduce a una **falacia ecológica**.
 :::
 
-El sistema MBHT consiste en 18 indicadores territoriales agrupados en 4 dimensiones, que corresponde a las dimensiones de Accesibilidad, Ambiental, Seguridad y **Socoeconómicas**, siendo esta última a la se replicará.
+### Tipos y usos
+
+Los indicadores pueden organizarse según la dimensión territorial que representan. En este curso trabajaremos principalmente con cuatro familias:
+
+| Dimensión | Pregunta orientadora | Ejemplos |
+|---|---|---|
+| Accesibilidad | ¿Con qué facilidad se llega a servicios y oportunidades? | tiempo de viaje, distancia, cobertura |
+| Socioeconómica | ¿Qué condiciones sociales y materiales caracterizan el área? | escolaridad, empleo, vivienda |
+| Seguridad | ¿Cómo se distribuyen los riesgos y hechos delictuales? | tasas, concentración, exposición |
+| Ambiental | ¿Qué presiones o beneficios ambientales recibe la población? | contaminación, áreas verdes, amenazas |
+
+En la práctica, estas medidas apoyan cuatro tareas: **diagnosticar** brechas actuales, **monitorear** cambios, **comparar** escenarios y **evaluar** políticas o proyectos. El mapa ayuda a comunicar el resultado, pero no reemplaza la definición conceptual ni el análisis.
+
+## Ruta para construir un indicador territorial
+
+![](images/pasos.png){fig-align="center" fig-alt="Siete etapas para construir un indicador territorial: problema, marco de referencia, objetivos, datos, cálculo, representación y análisis."}
+
+La construcción no comienza con una fórmula. Sigue una cadena de decisiones conectadas:
+
+1. **Delimitar el problema.** Precisar el fenómeno, la población afectada, el territorio y el periodo de interés.
+2. **Establecer un marco de referencia.** Revisar conceptos, evidencia y criterios que justifiquen qué aspecto del problema se medirá.
+3. **Formular el objetivo.** Expresar para qué se utilizará el indicador. Un objetivo claro debe ser específico, medible, alcanzable, relevante y acotado en el tiempo.
+4. **Seleccionar los datos.** Verificar pertinencia, cobertura, escala, actualidad, consistencia y posibilidad de acceso. La disponibilidad de una variable no basta para justificar su uso.
+5. **Definir y calcular la medida.** Documentar variables, fórmula, unidad, denominadores, valores faltantes, normalización y dirección del indicador.
+6. **Representar el patrón espacial.** Elegir una clasificación y una simbología coherentes con la distribución de los datos y con el mensaje que se desea comunicar.
+7. **Analizar y validar.** Contrastar el resultado con el problema inicial, revisar valores extremos y sensibilidad a las decisiones metodológicas, e identificar límites de interpretación.
+
+::: {.callout-tip title="Una ficha mínima antes de programar"}
+Antes de escribir código, completa una frase como esta: *Este indicador mide ___, para ___, en ___, durante ___; se calcula mediante ___ y un valor alto significa ___.* Si quedan espacios ambiguos, la medida todavía no está suficientemente definida.
+:::
+
+### Fuentes nacionales frecuentes
+
+La fuente adecuada depende de la pregunta y de la escala. Entre los recursos más utilizados en Chile se encuentran:
+
+| Fuente | Aporte principal |
+|---|---|
+| [Censos de población y vivienda](https://www.ine.gob.cl/estadisticas-por-tema/demografia-y-poblacion/censo-de-poblacion-y-vivienda) | población, hogares y viviendas con alta desagregación territorial |
+| [Encuesta CASEN](https://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen) | ingresos y condiciones socioeconómicas de los hogares |
+| [Encuesta Nacional de Empleo](https://www.ine.gob.cl/estadisticas-por-tema/mercado-laboral/ocupacion-y-desocupacion) | empleo, desempleo y fuerza de trabajo |
+| [Encuesta Nacional Urbana de Seguridad Ciudadana](https://www.ine.gob.cl/estadisticas-por-tema/sociedad-y-condiciones-de-vida/seguridad-ciudadana) | victimización y percepción de inseguridad |
+| [Sistema Nacional de Información Municipal](https://datos.sinim.gov.cl/) | gestión, finanzas y servicios municipales |
+| [Portal de Datos Abiertos](https://datos.gob.cl/) | conjuntos de datos publicados por organismos del Estado |
+| [IDE Chile](https://geoportal.cl/geoportal/catalog) | catálogo de información geoespacial pública |
+
+Al utilizar encuestas, recuerda que la representatividad estadística limita el nivel territorial al que se pueden producir estimaciones confiables.
+
+## Caso aplicado: dimensión socioeconómica 2024 {#sec-indsoc}
+
+La **Matriz de Bienestar Humano Territorial (MBHT)**, desarrollada por el Centro de Inteligencia Territorial de la Universidad Adolfo Ibáñez, organiza indicadores en cuatro dimensiones: accesibilidad, ambiente, seguridad y condiciones socioeconómicas. En este ejercicio construiremos una versión pedagógica de la dimensión socioeconómica con variables agregadas del **Censo de Población y Vivienda 2024**.
 
 ::: {#fig-mbht}
-![](images/dimensiones_bht.png){fig-align="center"}
+![](images/dimensiones_bht.png){fig-align="center" fig-alt="Dimensiones de la Matriz de Bienestar Humano Territorial."}
 
 Dimensiones de la Matriz de Bienestar Humano Territorial
 :::
 
-Las ciudades de Chile presentan altos índices de segregación (@sabatini2002segregacion), que reflejan la separación espacial de distintos grupos sociales (@ruiz2014estudio). La intensidad de este fenómeno hace imperativo el considerar la condición social como una dimensión estructurante en la evaluación de Políticas Públicas.
+Calcularemos cinco indicadores: empleo, materialidad de la vivienda, suficiencia de la vivienda, escolaridad adulta y estructura de los hogares. Todos se orientarán en la misma dirección: **un valor más alto representará una situación relativamente más favorable**.
 
-::: {#fig-soc-mbht}
-![](images/socioeconomico.png){fig-align="center" width="40%"}
+| Indicador | Estado con los tabulados 2024 | Qué representa |
+|---|---|---|
+| `IEM` | medición directa | participación de la población activa en el empleo |
+| `IVI` | medición directa | calidad material de la vivienda |
+| `ISV` | proxy | suficiencia de la vivienda a partir de señales de hacinamiento |
+| `IEA` | proxy | escolaridad promedio de la población de 18 años o más |
+| `IRH` | proxy | señal compuesta de estructura de hogares |
+| `IPJ` | no calculable | requiere un cruce conjunto de edad, estudio y trabajo no disponible |
 
-Indicadores Socioconómicos
+::: {.callout-note title="Qué significa proxy"}
+Un **proxy** es una medida indirecta: utiliza variables observables relacionadas con un concepto que no puede medirse directamente con los datos disponibles. No debe presentarse como equivalente al fenómeno original. Su nombre, fórmula, universo, supuestos y límites deben acompañar siempre el resultado.
 :::
 
-### Insumos Censo 2017
+### Datos y unidad de análisis
 
-Para la construcción de los indicadores territoriales que componen la dimensión seocioeconómica, se utiliza íntegramente información del Censo 2017.
+El insumo nacional contiene geometrías censales corregidas y variables agregadas de personas, hogares y viviendas. En este capítulo trabajaremos con la localidad censal **LA SERENA - COQUIMBO**, perteneciente a la Región de Coquimbo (`COD_REGION == "04"`) y distribuida entre las comunas de Coquimbo y La Serena. En la base, esta unidad se identifica exactamente mediante `LOCALIDAD == "LA SERENA - COQUIMBO"`.
 
-**¿Que es Censo 2017?:**
+```{r load-data, echo=TRUE}
+path_censo_2024 <- "../sesiones/data/censo-2024/censo_2024_nacional.gpkg"
 
-El censo de población y vivienda es la operación estadística más importante que realiza el INE y en la cual participan todos los habitantes del país, ya que este es un insumo esencial para elaborar estimaciones y proyecciones de población tanto para el país, las regiones y las comunas.
+if (!file.exists(path_censo_2024)) {
+  stop("No se encontró el insumo 2024 en: ", path_censo_2024)
+}
 
-El censo permite contar con información esencial para el adecuado diseño de políticas públicas y toma de decisiones privadas y públicas. El último censo de población y vivienda realizado fue en 2017. Sus resultados indican que la población efectivamente censada llegó a un total de 17.574.003 personas.
+data_nac <- st_read(path_censo_2024, quiet = TRUE)
 
-De ellas, 8.601.989 (48,9%) son hombres y 8.972.014 (51,1%), mujeres. El número de viviendas, en tanto, fue 6.499.355, de las cuales 6.486.533 (99,8%) corresponden a viviendas particulares y 12.822 (0,2%) a colectivas.
+reg <- "04"
+comunas_estudio <- c("COQUIMBO", "LA SERENA")
+localidad <- "LA SERENA - COQUIMBO"
 
-Para estos fines, se utilizaremos información censal agregada a nivel de **manzanas** obtenidos del Censo 2017, a continuación se explorará los insumos utilizados.
+data_reg <- data_nac %>%
+  filter(
+    COD_REGION == reg,
+    COMUNA %in% comunas_estudio,
+    LOCALIDAD == localidad
+  )
 
-::: {#fig-logo-censo}
-![](images/censo_2017.png){width="20%" fig-align="center"}
+if (nrow(data_reg) == 0) {
+  stop("No se encontraron geometrías para la localidad: ", localidad)
+}
 
-Censo 2017 - Instituto Nacional de Estadísticas de Chile
+cat("Geometrías de la localidad", localidad, ":", nrow(data_reg), "\n")
+```
+
+```{r region-table, echo=FALSE}
+#| tbl-cap: Geometrías censales de la localidad LA SERENA - COQUIMBO por comuna
+
+data_reg %>%
+  st_drop_geometry() %>%
+  count(COMUNA, name = "n_geometrias", sort = TRUE) %>%
+  kable()
+```
+
+## Corrección geométrica y ponderador `w`
+
+### ¿Por qué fue necesaria la corrección?
+
+En el insumo censal se identificaron casos en los que un mismo ID estaba asociado a más de un polígono. Algunas geometrías multipartes representan una unidad espacial coherente; otras contienen partes físicamente separadas que necesitan tratarse como polígonos independientes para evitar errores de visualización, agregación e interpretación.
+
+::: {#fig-w layout-ncol=2}
+
+![](images/id_separado.png) 
+
+![](images/id_separado_sat.png)
+
+Manzanas que comparten el mismo número de identificación.
 :::
 
-### Insumos del Censo
 
-Para los indicadores que se crearán a continuación se utilizará una base proveniente de la consolidación de las bases del censo, denominadas microdatos de Personas, Viviendas y Hogares provenientes de los resultados de la Encuesta del Censo 2017 del Instituto Nacional de Estadísticas, Chile.
 
-```{r}
-library(sf)
-library(dplyr)
+Cuando una unidad se separa, sus atributos no pueden copiarse íntegramente a cada nueva parte, porque eso duplicaría personas, hogares y viviendas. La corrección geométrica asigna un identificador derivado a cada parte y calcula un peso de redistribución `w`.
 
-# ruta de insumos
-path_insumos <- "data/socioeconomicos/insumos/"
-```
+### ¿Cómo se obtiene `w`?
 
-Lectura de Insumos y selección de región de estudio, en este caso seleccionará la [Región de Coquimbo](https://es.wikipedia.org/wiki/Región_de_Coquimbo) compuesta por las provincias de Elqui, Limarí y Choapa. Sus principales centros urbanos son la Conurbación La Serena-Coquimbo con 506 391 habitantes, seguida de Ovalle con 121.269 habitantes según el Censo chileno de 2017.
+La huella construida se utiliza como evidencia de ocupación. Para cada parte geométrica se calcula el número o el área de las edificaciones contenidas. El peso de la parte $i$ se expresa como:
 
-```{r}
-# selección de región
-reg <-  "R04"
+![](images/distribucion-w.png){fig-align="center" fig-alt="Distribución de edificaciones para crear valore de $w$ pesos de edificaciones por manzana."}
 
-# Lectura de insumo espacial
-path_file <- paste0(path_insumos, reg, "_INSUMO_SOCIOECONOMICO.shp")
-censo <- st_read(path_file, quiet = T)
-```
+<br>
 
-**Visualización de Tabla de Información `head()`**
+$$
+w_i =
+\frac{\text{medida de edificaciones en la parte } i}
+{\sum_j \text{medida de edificaciones de las partes del mismo ID}}
+$$
 
-```{r echo=FALSE}
-#| label: tbl-censo
-#| tbl-cap: Visualización de registros de insumos del Censo 2017 para indicadores socioeconómicos
+La medida principal puede ser el área construida o el conteo de edificaciones, según la configuración del proceso. Si no existe evidencia construida suficiente, se utiliza un método de respaldo basado en el área del terreno o en una distribución uniforme.
 
-censo  %>%
-  head(6) %>% 
-  kbl() %>%
-   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
-                 font_size = 8,full_width = F)
-```
+Para los IDs efectivamente redistribuidos se debe cumplir:
 
-## Indicador de Escolaridad del jefe de hogar (IEJ)
+$$
+\sum_i w_i = 1
+$$
 
-Para la construcción de este indicador se utilizó el promedio de años de estudio de jefes de hogar (EJH), que es una variable censal numérica (“ESCOLARIDAD”, en tabla de personas del censo 2017) que registra el nivel del curso más alto aprobado, medida en años sucesivos desde la enseñanza básica hasta estudios de postgrado.
+De esta forma, una variable absoluta $x$ se asigna a cada parte mediante:
 
-Se calcula el promedio de esta variable para todos los jefes de hogar en cada manzana. Esta variable es representativa del **capital cultural de cada hogar** y está altamente correlacionada con el nivel de ingresos en Chile (@agostini2016segregacion).
+$$
+x_i = x \times w_i
+$$
 
-$$IEJ = ESCOLAR$$
+### ¿A qué variables se aplica?
 
-**Cálculo Indicador de Escolaridad del jefe de hogar (IEJ)**
+El peso se aplica a **conteos absolutos**, como número de personas, hogares o viviendas. No se aplica a promedios ya calculados, como `prom_escolaridad18`. Además:
 
-```{r}
-censo <- censo %>% 
-  mutate( IEJ = ifelse(PERSONAS ==0, NA, ESCOLAR))
-```
+- `w = 1` indica que el registro conserva el valor completo;
+- `0 < w < 1` indica que el atributo se redistribuye proporcionalmente; y
+- `w = 0` es válido para una parte que no recibe atributos después de la redistribución.
 
-Para efectos de visualización se enfocará los resultados en las zonas urbanas de la comuna de La Serena en todos los indicadores que se presentarán.
+Cuando un indicador es una razón y el mismo `w` se aplica al numerador y al denominador, el peso se cancela algebraicamente:
 
-```{r}
-la_serena_urb <- censo %>% 
-  filter(COD_COM == 4101 & MANZ_EN == "URBANO")
-```
+$$
+\frac{a \times w}{b \times w} = \frac{a}{b}, \qquad w > 0
+$$
 
-**Visualizar la Variable de `IEJ` comuna de La Serena `URBANO`**:
+Esto significa que `w` preserva la consistencia de los **conteos**, pero no crea por sí solo variación interna en las proporciones de las partes derivadas de una misma unidad.
 
-```{r}
-#| label: fig-iej-urbano
-#| fig-cap: Indicador de Escolaridad del jefe de hogar (IEJ) - Urbano
+::: {.callout-important title="Dos pesos diferentes"}
+En este capítulo aparecen dos símbolos que no deben confundirse: `w` es el **peso geométrico de redistribución** incluido en la base; `w_hac = 2` es una **ponderación conceptual de criticidad** usada únicamente en el proxy de suficiencia de la vivienda.
+:::
 
+### Validación y aplicación
 
-ggplot() +
-  geom_sf(data = la_serena_urb, aes(fill = IEJ), color =NA, 
-          alpha=0.8,  size= 0.1)+
-  scale_fill_distiller(palette= "YlGnBu", direction = 1)+
-  ggtitle("Indicador de Escolaridad del jefe de hogar (IEJ) - Urbano" ) +
-  theme_bw() +
-  theme(panel.grid.major = element_line(colour = "gray80"), 
-        panel.grid.minor = element_line(colour = "gray80"))
-```
+Definimos tres funciones breves para evitar divisiones por cero, acotar proporciones y normalizar los indicadores.
 
-```{r}
-# mapview::mapview(censo %>% filter(COD_COM == 4101 & MANZ_EN == "URBANO"),
-                 # zcol = "IEJ", layer.name = "IEJ")
-```
+```{r helpers}
+proporcion_segura <- function(numerador, denominador) {
+  if_else(
+    !is.na(denominador) & denominador > 0,
+    numerador / denominador,
+    NA_real_
+  )
+}
 
-**Visualizar la Variable de `IEJ` comuna de La Serena `RURAL`**:
+acotar_01 <- function(x) {
+  pmin(pmax(x, 0), 1)
+}
 
-```{r echo=TRUE}
-#| label: fig-iej-rural
-#| fig-cap: Indicador de Escolaridad del jefe de hogar (IEJ) - Rural
-
-la_serena_rural <- censo %>% filter(COD_COM == 4101 & MANZ_EN == "RURAL")
-
-ggplot() +
-  geom_sf(data = la_serena_rural, aes(fill = IEJ), color =NA, 
-          alpha=0.8,  size= 0.1)+
-  scale_fill_distiller(palette= "YlGnBu", direction = 1)+
-  ggtitle("Indicador de Escolaridad del jefe de hogar (IEJ) - Rural" ) +
-  theme_bw() +
-  theme(panel.grid.major = element_line(colour = "gray80"), 
-        panel.grid.minor = element_line(colour = "gray80"))
-# mapview::mapview(censo %>% filter(COD_COM == 4101 & MANZ_EN == "RURAL"),
-                 # zcol = "IEJ", layer.name = "IEJ")
-```
-
-## Indicador de Empleo (IEM)
-
-Para este indicador se usó la proporción de población activa sin empleo que es la fracción de las personas que no tienen empleo y están buscando uno, respecto al total de personas en condiciones y con deseo de trabajar en cada manzana.
-
-Esta variable es similar al cálculo de desempleo, pero calculada a escala de manzanas y en un tiempo específico, por lo que representa las brechas potenciales que existen para acceder al empleo en barrios específicos (MDS, 2019).
-
-$$IEM = 1- \left(\frac{P17\_4}{P17\_ACT} \right) $$
-
-**Cálculo Indicador de Empleo (IEM)**
-
-**P17_4**: Trabajo la semana pasada, *opción 4*: "Se encontraba buscando empleo"\
-**P17_ACT**: Total de Actividades Remuneradas (no es pregunta del Censo)
-
-```{r}
-
-# P17: Trabajo la semana pasada
-# opción `4`: "Se encontraba buscando empleo"
-# P17_ACT: Total de Actividades Remuneradas
-
-censo <- censo %>% mutate( CESA_DENS = P17_4 / P17_ACT)
-
-# Invertir el valor de indicador 1
-censo <- censo %>% mutate( IEM = 1 - CESA_DENS )
-```
-
-De aquí continuación se realizarán cartografías solo a zonas urbanas a efecto de limitar la extensión del presente documento, pero el cálculo urbano se puede efectuar perfectamente aplicando un filtro como se ejemplifico en el indicador anterior. Ahora, se procede a filtrar por zonas urbanas
-
-```{r}
-la_serena_urb <- censo %>% filter(COD_COM == 4101 & MANZ_EN == "URBANO")
-```
-
-**Visualizar la Variable de `IEM` comuna de La Serena `URBANO`**:
-
-```{r}
-#| label: fig-iem-urbano
-#| fig-cap: Indicador de Empleo (IEM) - Urbano
-
-
-ggplot() +
-  geom_sf(data = la_serena_urb, aes(fill = IEM), color =NA, 
-          alpha=0.8,  size= 0.1)+
-  scale_fill_distiller(palette= "PuBu", direction = 1)+
-  ggtitle("Indicador de Empleo (IEM) - Urbano" ) +
-  theme_bw() +
-  theme(panel.grid.major = element_line(colour = "gray80"), 
-        panel.grid.minor = element_line(colour = "gray80"))
-```
-
-```{r}
-# mapview::mapview(la_serena_urb, 
-#                  zcol = "IEM", layer.name = "IEM")
-```
-
-## Indicador de Participación Juvenil en empleo y estudio (IPJ)
-
-Para la construcción de este indicador se utilizó la proporción de jóvenes entre 14 y 24 años que no trabajan ni estudian: es la fracción de jóvenes en este rango edad que no trabajan ni estudian, respecto al total de este segmento etario en cada manzana.
-
-Esta variable representa un riesgo de exclusión socioeconómica en el período de transición entre el ambiente educativo y el laboral, siendo característico de trayectorias de deserción escolar que conducen al desempleo y que podrían incrementar el riesgo de adopción de comportamientos delictivos (MDS, 2019).
-
-Luego, el indicador se normalizó con su inverso aditivo, para asegurar que el valor máximo, sea lo más deseable y el 0 lo menos deseable, convirtiéndose así en un indicador de empleo.
-
-$$IPJ = 1 - \left(\frac{J\_NINI}{E15A24} \right)$$
-
-**Cálculo Indicador de Participación Juvenil en empleo y estudio (IPJ)**
-
-**J_NINI**: Jóvenes que no trabajan ni estudian P17 **E15A24**: Jóvenes entre 15 y 24 años de edad
-
-```{r}
-censo <- censo %>% mutate( NINI_DENS = J_NINI / E15A24)  
-censo <- censo %>% mutate( NINI_DENS = ifelse(NINI_DENS > 1, 1, NINI_DENS))  
-censo <- censo %>% mutate( IPJ = 1 - NINI_DENS )
-```
-
-```{r}
-la_serena_urb <- censo %>% filter(COD_COM == 4101 & MANZ_EN == "URBANO")
-```
-
-**Visualizar la Variable de `IPJ` comuna de La Serena `URBANO`**:
-
-```{r}
-#| label: fig-ipj-urbano
-#| fig-cap: Indicador de Participación Juvenil enempleo y estudio (IPJ) - Urbano
-
-ggplot() +
-  geom_sf(data = la_serena_urb, aes(fill = IPJ), color =NA, 
-          alpha=0.8,  size= 0.1)+
-  scale_fill_distiller(palette= "Purples", direction = 1)+
-  ggtitle("Indicador de Participación Juvenil en empleo y estudio (IPJ) - Urbano" ) +
-  theme_bw() +
-  theme(panel.grid.major = element_line(colour = "gray80"), 
-        panel.grid.minor = element_line(colour = "gray80"))
-```
-
-```{r}
-# mapview::mapview(la_serena_urb, 
-#                  zcol = "IPJ", layer.name = "IPJ")
-```
-
-## Indicador de Resiliencia de Hogares (IRH)
-
-En particular, la monoparentalidad es ampliamente reconocida en la literatura internacional como una situación familiar frágil, que puede afectar las trayectorias de vida de los hijos, en términos de un mayor riesgo de mortalidad (Amato & Patterson, 2017), inestabilidad psicológica (Theodoritsi, Daliana & Antoniou, 2018), problemas de salud (Duriancik & Goff, 2019) y otros.
-
-En suma, el Indicador de Resiliencia de Hogares (en base a la monoparentalidad), en complemento a otras variables, es conceptualmente relevante para evaluar riesgos no monetarios de condiciones sociales.
-
-Este indicador es el inverso aditivo de la proporción de hogares monoparentales dentro de una manzana. Los hogares monoparentales son aquellos con hijos que viven con un solo progenitor, lo que se asocia en diversas formas a la condición social, que abarcan desde un menor ingreso, problemas de salud y delincuencia, entre otros (MDS, 2019).
-
-Al contrario, los hogares biparentales permiten el apoyo entre progenitores y los hogares sin hijos tienen menores exigencias de gasto y tiempo relacionadas con la paternidad, por lo que se considera que en general son más resilientes.
-
-$$IRH = 1 - \left(\frac{MONOPAR}{HOG\_N} \right)$$
-
-**Cálculo de Indicador de Resiliencia de Hogares (IRH)**
-
-**MONOPAR**: Hogares Monoparentales\
-**HOG_N**: Número de Hogares
-
-```{r}
-censo <- censo %>% mutate( MONO_DENS = MONOPAR / HOG_N)
-censo <- censo %>% mutate( MONO_DENS = ifelse(MONO_DENS > 1, 1, MONO_DENS))  
-censo <- censo %>% mutate( IRH = 1 - MONO_DENS)
-```
-
-```{r}
-la_serena_urb <- censo %>% filter(COD_COM == 4101 & MANZ_EN == "URBANO")
-```
-
-**Visualizar la Variable de `IRH` comuna de La Serena `URBANO`**:
-
-```{r}
-#| label: fig-irh-urbano
-#| fig-cap: Indicador de Resiliencia de Hogares (IRH) - Urbano
-
-ggplot() +
-  geom_sf(data = la_serena_urb, aes(fill = IRH), color =NA, 
-          alpha=0.8,  size= 0.1)+
-  scale_fill_distiller(palette= "PuRd", direction = 1)+
-  ggtitle("Indicador de Resiliencia de Hogares (IRH) - Urbano") +
-  theme_bw() +
-  theme(panel.grid.major = element_line(colour = "gray80"), 
-        panel.grid.minor = element_line(colour = "gray80"))
-```
-
-```{r}
-# mapview::mapview(la_serena_urb, 
-#                  zcol = "IRH", layer.name = "IRH")
-```
-
-## Indicador de Calidad de la Vivienda (IVI)
-
-El indicador de calidad de vivienda es una variable sintética de todas las materialidades de la vivienda. Inicialmente, se construyó como un indicador de mala calidad, tomando un valor más alto cuando la calidad de la vivienda es peor y es más bajo cuando es mejor. Fue elaborado como un promedio lineal del 3 sub-indicadores de paredes, suelo y techo. Cada uno de estos sub-indicadores registra el porcentaje de viviendas de la manzana que tienen paredes, suelo o techo considerado insuficiente. Las construcciones consideradas insuficientes son las siguientes:
-
-**Paredes**: Material de los muros exteriores
-
-$$paredes= \frac{(P03A\_4 + P03A\_5 + P03A\_6)}{TOTAL\_V}$$
-
--   P03A_4: Tabique sin forro interior (madera u otro)
--   P03A_5: Adobe, barro, quincha, pirca u otro artesanal tradicional
--   P03A_6: Materiales precarios (lata, cartón, plástico, etc.)
-
-**Techo**: Material en la cubierta del techo
-
-$$techo= \frac{(P03B\_4 + P03B\_6 + P03B\_7)}{TOTAL\_V}$$
-
--   P03B_4: Fonolita o plancha de fieltro embreado
--   P03B_6: Materiales precarios (lata, cartón, plásticos, etc.)
--   P03B_7: Sin cubierta sólida de techo
-
-**Suelo**: Material de construcción del piso
-
-$$suelo= \frac{(P03C\_4 +  P03C\_5)}{TOTAL\_V}$$
-
--   P03C_4: Capa de cemento sobre tierra
--   P03C_5: Tierra
-
-```{r}
-censo <- censo %>%
-  mutate(paredes = (P03A_4 + P03A_5 + P03A_6)/TOTAL_V,
-         techo = (P03B_4 + P03B_6 + P03B_7)/TOTAL_V,
-         suelo = (P03C_4 +  P03C_5)/TOTAL_V)
-
-# eliminar valores infinitos de la división anterior
-censo <- censo %>%
-  mutate(paredes = ifelse(paredes > 1, 1, paredes), 
-         techo = ifelse(techo > 1, 1, techo), 
-         suelo = ifelse(suelo > 1, 1, suelo))
-```
-
-**Cálculo Indicador de Calidad de la Vivienda (IVI)**
-
-$$IVI= 1 - \left(\frac{paredes+ suelo+ techo}{3}\right)$$
-
-```{r}
-censo <- censo %>%  mutate(IVI = (paredes+ suelo+ techo)/3)
-censo <- censo %>%  mutate(IVI =  1 - IVI) # invertir sentido
-```
-
-```{r}
-la_serena_urb <- censo %>% filter(COD_COM == 4101 & MANZ_EN == "URBANO")
-```
-
-**Visualizar la Variable de `IVI` comuna de La Serena `URBANO`**:
-
-```{r}
-#| label: fig-ivi-urbano
-#| fig-cap: Indicador de Calidad de la Vivienda (IVI) - Urbano
-
-
-ggplot() +
-  geom_sf(data = la_serena_urb, aes(fill = IVI), color =NA, 
-          alpha=0.8,  size= 0.1)+
-  scale_fill_distiller(palette= "YlOrRd", direction = 1)+
-  ggtitle("Indicador de Calidad de la Vivienda (IVI) - Urbano") +
-  theme_bw() +
-  theme(panel.grid.major = element_line(colour = "gray80"), 
-        panel.grid.minor = element_line(colour = "gray80"))
-```
-
-```{r}
-# mapview::mapview(la_serena_urb, 
-#                  zcol = "IVI", layer.name = "IVI")
-```
-
-## Indicador de Suficiencia de Viviendas (ISV)
-
-El indicador de Suficiencia de Viviendas se construyó inicialmente como un indicador de hacinamiento. Se realizó a partir de 2 variables que indican el número de viviendas que se encuentran en situación de hacinamiento y el número de viviendas que se encuentran en situación de hacinamiento severo. El indicador corresponde a la suma de 2 veces las viviendas en situación de hacinamiento severo con las viviendas en situación de hacinamiento normal, dividido por el total de viviendas.
-
-Luego, el indicador se normalizó con su inverso aditivo, para asegurar que el valor máximo, sea lo más deseable y el 0 lo menos deseable. Con esto se obtuvo el indicador de suficiencia de viviendas.
-
-El indicador de sificiencia de la vivienda debe ser normalizado, por lo cual se usará la función de normalización *minmax* (@eq-minmax) que se describe a continuación:
-
-$$x^{\prime}=\frac{x-min(x)}{max(x)-min(x)}$$ {#eq-minmax}
-
-```{r}
-# función de normalización
 minmax <- function(x) {
-  x <- (x - min(x, na.rm = TRUE)) / 
-    (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
-  return(x)
+  rango <- range(x, na.rm = TRUE)
+  if (!all(is.finite(rango)) || diff(rango) == 0) {
+    return(rep(NA_real_, length(x)))
+  }
+  (x - rango[1]) / diff(rango)
 }
 ```
 
-**Cálculo de Indicador de Suficiencia de Viviendas (ISV)**
+```{r weighting}
+vars_conteo <- c(
+  "n_per", "n_vp", "n_desocupado", "n_ocupado",
+  "n_mat_paredes_tabique_sin_forro",
+  "n_mat_paredes_artesanal",
+  "n_mat_paredes_precarios",
+  "n_mat_techo_fonolita",
+  "n_mat_techo_precarios",
+  "n_mat_techo_sin_cubierta",
+  "n_mat_piso_capa_cemento",
+  "n_mat_piso_tierra",
+  "n_viv_hacinadas",
+  "n_vp_ocupada",
+  "n_nucleos_hacinados_allegados",
+  "n_hog",
+  "n_jefatura_mujer",
+  "n_hog_menores"
+)
 
-$$ISV = 1 - minmax(NIV\_HAC2 + (2 \times  NIV\_HAC3)$$
+if (any(is.na(data_reg$w) | data_reg$w < 0 | data_reg$w > 1)) {
+  stop("El ponderador w contiene valores faltantes o fuera de [0, 1].")
+}
 
-**NIV_HAC2**: \>= 2.5 personas por habitación (Hacinamiento)\
-**NIV_HAC3**: \>= 5 personas por habitación (Hacinamiento severo)
+control_w <- data_reg %>%
+  st_drop_geometry() %>%
+  group_by(.id) %>%
+  summarise(
+    n_partes = n(),
+    usa_redistribucion = any(w < 1),
+    suma_w = sum(w),
+    .groups = "drop"
+  ) %>%
+  filter(usa_redistribucion)
 
-```{r}
-censo <- censo %>% mutate(ISV = NIV_HAC2 + (2 * NIV_HAC3))
-censo <- censo %>% mutate(ISV = 1 - minmax(ISV))
+if (any(abs(control_w$suma_w - 1) > 1e-6)) {
+  stop("Los pesos de uno o más IDs redistribuidos no suman 1.")
+}
+
+censo <- data_reg %>%
+  transmute(
+    id_original = .id,
+    ID_MANZ,
+    ID_MANZCIT,
+    MANZENT,
+    TIPO_MZ,
+    COD_REGION,
+    COMUNA,
+    AREA_C,
+    LOCALIDAD,
+    n_buildings,
+    area_sum,
+    w,
+    prom_escolaridad18,
+    across(all_of(vars_conteo), ~ .x * w)
+  )
 ```
 
-```{r}
-la_serena_urb <- censo %>% filter(COD_COM == 4101 & MANZ_EN == "URBANO")
+```{r weight-summary, echo=FALSE}
+#| tbl-cap: Control del ponderador geométrico en la localidad estudiada
+
+tibble(
+  control = c(
+    "Geometrías censales de la localidad",
+    "IDs con redistribución",
+    "Partes con w = 0",
+    "IDs redistribuidos cuya suma de w es 1"
+  ),
+  valor = c(
+    nrow(data_reg),
+    nrow(control_w),
+    sum(data_reg$w == 0),
+    sum(abs(control_w$suma_w - 1) <= 1e-6)
+  )
+) %>%
+  kable()
 ```
 
-**Visualizar la Variable de `ISV` comuna de La Serena `URBANO`**:
+## Cálculo de indicadores 2024
 
-```{r}
-#| label: fig-isv-urbano
-#| fig-cap: Indicador de Suficiencia de Viviendas (ISV) - Urbano
+### IEM — Indicador de empleo
 
-ggplot() +
-  geom_sf(data = la_serena_urb, aes(fill = ISV), color =NA, 
-          alpha=0.8,  size= 0.1)+
-  scale_fill_distiller(palette= "YlOrRd", direction = 1)+
-  ggtitle(" Indicador de Suficiencia de Viviendas (ISV) - Urbano") +
-  theme_bw() +
-  theme(panel.grid.major = element_line(colour = "gray80"), 
-        panel.grid.minor = element_line(colour = "gray80"))
+El IEM mide la condición de empleo como el complemento de la proporción de personas desocupadas dentro de la población activa.
+
+**Variables**
+
+- `n_desocupado`: personas desocupadas.
+- `n_ocupado`: personas ocupadas.
+
+$$
+CESA = \frac{n_{desocupado}}{n_{desocupado} + n_{ocupado}}
+$$
+
+$$
+IEM = 1 - CESA
+$$
+
+Si la población activa es cero, el indicador no está definido y se registra como `NA`.
+
+```{r calc-iem}
+censo <- censo %>%
+  mutate(
+    CESA_DENS = proporcion_segura(
+      n_desocupado,
+      n_desocupado + n_ocupado
+    ),
+    IEM = 1 - acotar_01(CESA_DENS)
+  )
 ```
 
-```{r}
-# mapview::mapview(la_serena_urb, 
-#                  zcol = "ISV", layer.name = "ISV")
+```{r map-iem, echo=TRUE, fig.height=6, fig.width=8}
+#| fig-cap: Indicador de empleo en la localidad LA SERENA - COQUIMBO
+
+ggplot(censo) +
+  geom_sf(aes(fill = IEM), color = NA) +
+  scale_fill_viridis_c(
+    option = "C",
+    limits = c(0, 1),
+    na.value = "grey90",
+    name = "IEM"
+  ) +
+  labs(
+    title = "Indicador de empleo",
+    subtitle = "Localidad LA SERENA - COQUIMBO"
+  ) +
+  theme_bw()
+
 ```
 
-## Consolidación de Dimensión Socioeconómica
+### IVI — Indicador de materialidad de la vivienda
 
-**Selección de Variables de Interés**
+El IVI sintetiza carencias de materialidad en paredes, techo y piso. Cada componente se calcula sobre el total de viviendas particulares y luego se invierte para que un valor alto represente una mejor condición material.
 
-```{r}
-# names(censo)
-soc <- censo %>% 
-  dplyr::select(ID_MANZ:PERSONAS, IEJ, IEM, IPJ, IRH, IVI, ISV)
+**Variables**
+
+- Paredes: `n_mat_paredes_tabique_sin_forro`, `n_mat_paredes_artesanal` y `n_mat_paredes_precarios`.
+- Techo: `n_mat_techo_fonolita`, `n_mat_techo_precarios` y `n_mat_techo_sin_cubierta`.
+- Piso: `n_mat_piso_capa_cemento` y `n_mat_piso_tierra`.
+- Denominador: `n_vp`, total de viviendas particulares.
+
+$$
+\begin{aligned}
+paredes &= \frac{tabique\_sin\_forro + artesanal + precarios}{n_{vp}} \\
+techo &= \frac{fonolita + techo\_precario + sin\_cubierta}{n_{vp}} \\
+suelo &= \frac{capa\_cemento + tierra}{n_{vp}} \\
+IVI &= 1 - \frac{paredes + techo + suelo}{3}
+\end{aligned}
+$$
+
+Cada componente se acota al intervalo $[0,1]$ para controlar inconsistencias puntuales derivadas de la agregación.
+
+```{r calc-ivi}
+censo <- censo %>%
+  mutate(
+    paredes = proporcion_segura(
+      n_mat_paredes_tabique_sin_forro +
+        n_mat_paredes_artesanal +
+        n_mat_paredes_precarios,
+      n_vp
+    ),
+    techo = proporcion_segura(
+      n_mat_techo_fonolita +
+        n_mat_techo_precarios +
+        n_mat_techo_sin_cubierta,
+      n_vp
+    ),
+    suelo = proporcion_segura(
+      n_mat_piso_capa_cemento + n_mat_piso_tierra,
+      n_vp
+    ),
+    across(c(paredes, techo, suelo), acotar_01),
+    IVI = 1 - rowMeans(pick(paredes, techo, suelo), na.rm = FALSE)
+  )
 ```
 
-**Cáculo de la dimensión**
-Es una alternativa. Lo oficial imputa NA con valores de los vecinos cercanos.
+```{r map-ivi, echo=TRUE, fig.height=6, fig.width=8}
+#| fig-cap: Indicador de materialidad de la vivienda en la localidad LA SERENA - COQUIMBO
 
-```{r}
-inds <-  c("IEJ", "IEM", "IPJ", "IRH", "IVI", "ISV")
-dim_soc <- soc %>% 
-  st_drop_geometry() %>% 
-  mutate(across(all_of(inds), ~ minmax(.x))) %>% 
-  mutate(dim_soc = rowMeans(across(all_of(inds)), na.rm = TRUE))  %>% # Calcula el promedio
-  mutate(dim_soc = ifelse(PERSONAS == 0, NA, dim_soc)) %>% 
-  dplyr::select(ID_MANZCIT, dim_soc) 
+ggplot(censo) +
+  geom_sf(aes(fill = IVI), color = NA) +
+  scale_fill_viridis_c(
+    option = "D",
+    limits = c(0, 1),
+    na.value = "grey90",
+    name = "IVI"
+  ) +
+  labs(
+    title = "Indicador de materialidad de la vivienda",
+    subtitle = "Localidad LA SERENA - COQUIMBO"
+  ) +
+  theme_bw()
 
-soc <- soc %>% 
-  left_join(dim_soc, by = "ID_MANZCIT")
 ```
 
+### ISV — Proxy de suficiencia de la vivienda
 
-**Visualización de los Indicadores**
+El ISV aproxima la suficiencia habitacional mediante dos señales de hacinamiento: viviendas hacinadas y núcleos hacinados o allegados. No observa una escala directa de severidad; por eso se construye un puntaje de criticidad y se clasifica como **proxy**.
 
-```{r eval=FALSE}
-comuna <- soc %>% filter(COD_COM == 4101 & MANZ_EN == "URBANO")
-mapview(comuna, zcol = "IEJ") + mapview(comuna, zcol = "IEM")+
-  mapview(comuna, zcol = "IPJ") + mapview(comuna, zcol = "IRH")+
-  mapview(comuna, zcol = "IVI") + mapview(comuna, zcol = "ISV")
+**Variables**
+
+- `n_viv_hacinadas`: viviendas hacinadas.
+- `n_vp_ocupada`: viviendas particulares ocupadas.
+- `n_nucleos_hacinados_allegados`: núcleos hacinados o allegados.
+- `n_hog`: total de hogares.
+
+$$
+score_{ISV} =
+\frac{n_{viv\_hacinadas}}{n_{vp\_ocupada}} +
+w_{hac}\frac{n_{nucleos\_hacinados\_allegados}}{n_{hog}}
+$$
+
+Utilizamos $w_{hac}=2$ para representar una mayor criticidad del segundo componente. Luego normalizamos el puntaje dentro de la localidad LA SERENA - COQUIMBO y cambiamos su dirección:
+
+$$
+ISV = 1 - minmax(score_{ISV})
+$$
+
+```{r calc-isv}
+w_hac <- 2
+
+censo <- censo %>%
+  mutate(
+    prop_viv_hacinadas = proporcion_segura(
+      n_viv_hacinadas,
+      n_vp_ocupada
+    ),
+    prop_nucleos_hacinados = proporcion_segura(
+      n_nucleos_hacinados_allegados,
+      n_hog
+    ),
+    score_isv = prop_viv_hacinadas + w_hac * prop_nucleos_hacinados,
+    ISV = 1 - minmax(score_isv)
+  )
+```
+
+```{r map-isv, echo=TRUE, fig.height=6, fig.width=8}
+#| fig-cap: Proxy de suficiencia de la vivienda en la localidad LA SERENA - COQUIMBO
+
+ggplot(censo) +
+  geom_sf(aes(fill = ISV), color = NA) +
+  scale_fill_viridis_c(
+    option = "A",
+    limits = c(0, 1),
+    na.value = "grey90",
+    name = "ISV"
+  ) +
+  labs(
+    title = "Proxy de suficiencia de la vivienda",
+    subtitle = "Localidad LA SERENA - COQUIMBO"
+  ) +
+  theme_bw()
+
+```
+
+::: {.callout-warning title="Alcance del ISV"}
+El valor depende de dos decisiones: el peso operacional $w_{hac}=2$ y los extremos observados en la localidad estudiada. Si cambia el peso o el universo territorial, cambia también el indicador. Debe interpretarse como una posición relativa de suficiencia habitacional dentro de la localidad LA SERENA - COQUIMBO.
+:::
+
+### IEA — Índice de escolaridad adulta
+
+El insumo agregado permite observar `prom_escolaridad18`, el promedio de escolaridad de la población de 18 años o más. Esta medida describe el capital educacional adulto del territorio, no una característica exclusiva de las jefaturas de hogar.
+
+En versiones anteriores del Censo (2017) se utilizaba la sigla `IEJ`, correspondiente al **Índice de Escolaridad del Jefe de Hogar**. Como la variable disponible representa a toda la población de 18 años o más y no solamente a las jefaturas, el indicador pasa a llamarse `IEA`: **Índice de Escolaridad Adulta**. El cálculo no cambia; cambia el nombre para representar correctamente lo que miden los datos.
+
+**Variables**
+
+- `prom_escolaridad18`: promedio de años de escolaridad de la población de 18 años o más.
+- `n_per`: población total, utilizada para identificar entidades sin población.
+
+$$
+IEA = prom_{escolaridad18}, \qquad n_{per} > 0
+$$
+
+```{r calc-iea}
+censo <- censo %>%
+  mutate(
+    IEA = if_else(n_per > 0, prom_escolaridad18, NA_real_)
+  )
+```
+
+```{r map-iea, echo=TRUE, fig.height=6, fig.width=8}
+#| fig-cap: Índice de escolaridad adulta en la localidad LA SERENA - COQUIMBO
+
+ggplot(censo) +
+  geom_sf(aes(fill = IEA), color = NA) +
+  scale_fill_viridis_c(
+    option = "E",
+    na.value = "grey90",
+    name = "Años"
+  ) +
+  labs(
+    title = "Índice de escolaridad adulta",
+    subtitle = "Localidad LA SERENA - COQUIMBO"
+  ) +
+  theme_bw()
+
+```
+
+::: {.callout-note title="Alcance del IEA"}
+El indicador representa una media poblacional adulta. No permite inferir la escolaridad de cada hogar ni atribuir el mismo nivel educacional a todas las personas de la unidad territorial.
+:::
+
+### IRH — Proxy de estructura de hogares
+
+El IRH combina la proporción de hogares con jefatura femenina y la proporción de hogares con menores. La multiplicación representa una **co-ocurrencia esperada** entre ambas señales; no identifica directamente qué hogares cumplen simultáneamente las dos condiciones.
+
+**Variables**
+
+- `n_jefatura_mujer`: hogares con jefatura femenina.
+- `n_hog_menores`: hogares con menores.
+- `n_hog`: total de hogares.
+
+$$
+V_{fam} =
+\left(\frac{n_{jefatura\_mujer}}{n_{hog}}\right)
+\left(\frac{n_{hog\_menores}}{n_{hog}}\right)
+$$
+
+$$
+IRH = 1 - V_{fam}
+$$
+
+```{r calc-irh}
+censo <- censo %>%
+  mutate(
+    prop_jefatura_mujer = proporcion_segura(n_jefatura_mujer, n_hog),
+    prop_hog_menores = proporcion_segura(n_hog_menores, n_hog),
+    score_irh = acotar_01(prop_jefatura_mujer) *
+      acotar_01(prop_hog_menores),
+    IRH = 1 - score_irh
+  )
+```
+
+```{r map-irh, echo=TRUE, fig.height=6, fig.width=8}
+#| fig-cap: Proxy de estructura de hogares en la localidad LA SERENA - COQUIMBO
+
+ggplot(censo) +
+  geom_sf(aes(fill = IRH), color = NA) +
+  scale_fill_viridis_c(
+    option = "B",
+    limits = c(0, 1),
+    na.value = "grey90",
+    name = "IRH"
+  ) +
+  labs(
+    title = "Proxy de estructura de hogares",
+    subtitle = "Localidad LA SERENA - COQUIMBO"
+  ) +
+  theme_bw()
   
 ```
 
-**Guardar Resultados**
+::: {.callout-caution title="Alcance ético y analítico del IRH"}
+La jefatura femenina no constituye por sí misma una carencia. Este proxy tampoco observa monoparentalidad, redes de apoyo, ingresos o capacidad de cuidado. No debe utilizarse para clasificar hogares individuales ni para estigmatizar tipos de familia; su validez debe evaluarse mediante triangulación con otras fuentes.
+:::
 
-```{r eval=FALSE}
-# guardar shapefile
-path_file_out <- paste0("data/socioeconomicos/resultados/",
-                    reg, "_ind_socioeconomicos.shp")
-st_write(soc, path_file_out, delete_dsn = T)
+### Por qué no se calcula IPJ
 
-#guardar en RDS
-path_file_out_rds <- paste0("data/socioeconomicos/resultados/",
-                    reg, "_ind_socioeconomicos.rds")
-saveRDS(soc, path_file_out_rds)  
+Un indicador de participación juvenil requiere identificar a quienes cumplen simultáneamente condiciones de **edad**, **asistencia educativa** y **situación laboral**. Los tabulados agregados disponibles contienen marginales separados —por ejemplo, población por tramo de edad, asistencia y ocupación—, pero no la intersección entre ellos.
+
+Conocer cuántas personas son jóvenes, cuántas estudian y cuántas trabajan no permite saber cuántas personas jóvenes no estudian ni trabajan al mismo tiempo. El numerador es estadísticamente **no identificable** con estas marginales. Construirlo mediante sumas o restas produciría una cifra no sustentada; por ello, IPJ se excluye de forma explícita.
+
+## Construcción de la dimensión socioeconómica 2024
+
+Los cinco indicadores disponibles utilizan escalas distintas. Para otorgarles un rango común, normalizamos cada uno al intervalo $[0,1]$ utilizando como universo la localidad LA SERENA - COQUIMBO. La dimensión final es el promedio simple de los cinco indicadores normalizados y solo se calcula cuando todos están disponibles.
+
+```{r consolidation}
+indicadores <- c("IEM", "IVI", "ISV", "IEA", "IRH")
+indicadores_n <- paste0(indicadores, "_n")
+etiquetas_indicadores <- c(
+  DIM_SOC_2024 = "Dimensión socioeconómica",
+  IEM = "Empleo (IEM)",
+  IVI = "Materialidad de la vivienda (IVI)",
+  ISV = "Suficiencia de la vivienda (ISV)",
+  IEA = "Escolaridad adulta (IEA)",
+  IRH = "Estructura de hogares (IRH)"
+)
+
+sf24 <- censo %>%
+  mutate(
+    across(
+      all_of(indicadores),
+      minmax,
+      .names = "{.col}_n"
+    ),
+    n_indicadores_validos = rowSums(!is.na(pick(all_of(indicadores_n)))),
+    DIM_SOC_2024 = rowMeans(pick(all_of(indicadores_n)), na.rm = TRUE),
+    DIM_SOC_2024 = if_else(
+      n_indicadores_validos == length(indicadores_n),
+      DIM_SOC_2024,
+      NA_real_
+    )
+  ) %>%
+  st_make_valid() %>%
+  select(
+    id_original,
+    ID_MANZ,
+    ID_MANZCIT,
+    MANZENT,
+    TIPO_MZ,
+    COD_REGION,
+    COMUNA,
+    AREA_C,
+    LOCALIDAD,
+    n_buildings,
+    area_sum,
+    w,
+    all_of(indicadores),
+    all_of(indicadores_n),
+    DIM_SOC_2024
+  )
 ```
 
-## Referencias
+::: {.callout-note title="Una dimensión de cinco componentes"}
+La dimensión sintetiza únicamente los cinco indicadores calculables con el insumo 2024. Cada uno recibe el mismo peso. Esta es una decisión pedagógica y debe documentarse si el resultado se reutiliza fuera del curso.
+:::
 
--   [R para Ciencia de Datos](https://es.r4ds.hadley.nz)
--   [RStudio para Estadística Descriptiva en Ciencias Sociales](https://bookdown.org/gboccardo/manual-ED-UCH/)
--   [R para Principiantes4/](https://bookdown.org/jboscomendoza/r-principiantes4/)
--   [Colores en Ggplot2](https://ggplot2-book.org/scale-colour.html)
+```{r map-dimension, echo=TRUE, fig.height=6, fig.width=8}
+#| fig-cap: Dimensión socioeconómica 2024 en la localidad LA SERENA - COQUIMBO
+
+ggplot(sf24) +
+  geom_sf(aes(fill = DIM_SOC_2024), color = NA) +
+  scale_fill_viridis_c(
+    option = "G",
+    limits = c(0, 1),
+    na.value = "grey90",
+    name = "Dimensión"
+  ) +
+  labs(
+    title = "Dimensión socioeconómica 2024",
+    subtitle = "Localidad LA SERENA - COQUIMBO"
+  ) +
+  theme_bw()
+
+```
+
+## Resultados para la localidad LA SERENA - COQUIMBO
+
+### Cobertura y distribución
+
+```{r summary-table}
+#| tbl-cap: Cobertura y distribución de los indicadores socioeconómicos 2024 en el área de estudio
+
+resumen_indicadores <- sf24 %>%
+  st_drop_geometry() %>%
+  select(all_of(indicadores), DIM_SOC_2024) %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = "indicador",
+    values_to = "valor"
+  ) %>%
+  group_by(indicador) %>%
+  summarise(
+    n_validos = sum(!is.na(valor)),
+    pct_faltantes = mean(is.na(valor)) * 100,
+    minimo = min(valor, na.rm = TRUE),
+    mediana = median(valor, na.rm = TRUE),
+    media = mean(valor, na.rm = TRUE),
+    maximo = max(valor, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+kable(resumen_indicadores, digits = 3)
+```
+
+### Distribución de los valores normalizados
+
+```{r plot-distributions, fig.height=7, fig.width=9}
+datos_distribucion <- sf24 %>%
+  st_drop_geometry() %>%
+  select(all_of(indicadores_n), DIM_SOC_2024) %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = "indicador",
+    values_to = "valor"
+  ) %>%
+  mutate(
+    indicador = sub("_n$", "", indicador),
+    indicador = factor(
+      indicador,
+      levels = names(etiquetas_indicadores),
+      labels = unname(etiquetas_indicadores)
+    )
+  )
+
+ggplot(datos_distribucion, aes(x = valor)) +
+  geom_histogram(
+    bins = 30,
+    fill = "#2C7FB8",
+    color = "white",
+    linewidth = 0.2
+  ) +
+  facet_wrap(~ indicador, ncol = 2, scales = "free_y") +
+  scale_x_continuous(limits = c(0, 1)) +
+  labs(
+    title = "Distribución de indicadores — localidad LA SERENA - COQUIMBO",
+    x = "Valor normalizado",
+    y = "Número de geometrías"
+  ) +
+  theme_minimal()
+```
+
+## Controles de calidad
+
+Verificamos que los indicadores normalizados y la dimensión sintética se mantengan dentro del intervalo esperado.
+
+```{r quality-checks}
+variables_01 <- c(indicadores_n, "DIM_SOC_2024")
+
+fuera_de_rango <- sf24 %>%
+  st_drop_geometry() %>%
+  summarise(
+    across(
+      all_of(variables_01),
+      ~ sum(.x < 0 | .x > 1, na.rm = TRUE)
+    )
+  ) %>%
+  pivot_longer(
+    everything(),
+    names_to = "variable",
+    values_to = "n_fuera_de_rango"
+  )
+
+kable(
+  fuera_de_rango,
+  caption = "Valores fuera del intervalo [0, 1]"
+)
+
+stopifnot(all(fuera_de_rango$n_fuera_de_rango == 0))
+```
+
+### Guardar los resultados
+
+GeoPackage conserva la geometría, los nombres de campos y los tipos de datos en un único archivo. El bloque se deja sin ejecutar para evitar sobrescribir resultados durante la publicación del libro.
+
+```{r save-results, eval=FALSE}
+path_resultados <- "results"
+dir.create(path_resultados, recursive = TRUE, showWarnings = FALSE)
+
+st_write(
+  sf24,
+  file.path(
+    path_resultados,
+    "R04_Coquimbo_LaSerena_urbano_ind_socioeconomicos_2024.gpkg"
+  ),
+  delete_dsn = TRUE
+)
+
+saveRDS(
+  sf24,
+  file.path(
+    path_resultados,
+    "R04_Coquimbo_LaSerena_urbano_ind_socioeconomicos_2024.rds"
+  )
+)
+```
+
+## Cierre
+
+Construir un indicador territorial implica mantener una cadena de coherencia entre el problema, la geometría, las variables, la fórmula y la interpretación. En este caso, la corrección geométrica evita duplicar atributos cuando una unidad se redistribuye entre partes, mientras que `w` conserva la consistencia de los conteos asignados.
+
+Los resultados deben leerse considerando cinco límites:
+
+- **Temporalidad:** describen las condiciones observadas por el Censo 2024.
+- **Escala:** caracterizan unidades censales, no personas u hogares individuales.
+- **Redistribución:** `w` distribuye conteos, pero no añade información socioeconómica nueva dentro de una unidad original.
+- **Proxies:** `ISV`, `IEA` e `IRH` son aproximaciones indirectas con supuestos explícitos.
+- **Normalización:** el ISV y la dimensión sintética dependen del universo formado por la localidad LA SERENA - COQUIMBO utilizado para calcular mínimos y máximos.
+
+El producto final no es solo una columna nueva ni un mapa: es una medida documentada, reproducible y defendible.
+
+## Recursos para profundizar
+
+- [Censo de Población y Vivienda — INE](https://www.ine.gob.cl/estadisticas-por-tema/demografia-y-poblacion/censo-de-poblacion-y-vivienda)
+- [R para Ciencia de Datos](https://es.r4ds.hadley.nz/)
+- [Libro de ggplot2](https://ggplot2-book.org/)
+- [Simple Features for R](https://r-spatial.github.io/sf/)

@@ -26,8 +26,7 @@ book:
     - geocode.qmd
     - datos_rasters.qmd
     - inferencia.qmd
-    # - intro_inds.qmd
-    # - indicadores_territoriales.qmd
+    - indicadores_territoriales.qmd
     # - construccion_inds.qmd
     # - indicadores.qmd
     # - proyecto.qmd
