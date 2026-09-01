@@ -124,19 +124,37 @@ Un **proxy** es una medida indirecta: utiliza variables observables relacionadas
 
 El insumo nacional contiene geometrías censales corregidas y variables agregadas de personas, hogares y viviendas. En este capítulo trabajaremos con la localidad censal **LA SERENA - COQUIMBO**, perteneciente a la Región de Coquimbo (`COD_REGION == "04"`) y distribuida entre las comunas de Coquimbo y La Serena. En la base, esta unidad se identifica exactamente mediante `LOCALIDAD == "LA SERENA - COQUIMBO"`.
 
-```{r load-data, echo=TRUE}
+**Lectura de Censo Nacional 2024**
+
+Durante la publicación del libro, el siguiente bloque carga el archivo desde su ubicación en el proyecto. Se ejecuta, pero se oculta porque el estudiantado utilizará una ruta diferente.
+
+```{r load-national-data, eval=TRUE, echo=FALSE}
+# Guardamos la ubicación del archivo para no repetirla al leer los datos.
 path_censo_2024 <- "../sesiones/data/censo-2024/censo_2024_nacional.gpkg"
 
-if (!file.exists(path_censo_2024)) {
-  stop("No se encontró el insumo 2024 en: ", path_censo_2024)
-}
-
+# st_read() lee el GeoPackage y conserva tanto los atributos como las geometrías.
 data_nac <- st_read(path_censo_2024, quiet = TRUE)
+```
 
+Para reproducir el ejercicio, utiliza la ruta correspondiente a tu carpeta de trabajo. Este bloque se muestra como referencia y no se ejecuta al publicar el capítulo.
+
+```{r student-data-path, echo=TRUE, eval=FALSE}
+# Cambia esta ruta si guardaste el archivo en otra carpeta.
+path_censo_2024 <- "data/censo-2024/censo_2024_nacional.gpkg"
+
+# Leemos la capa espacial completa del Censo 2024.
+data_nac <- st_read(path_censo_2024, quiet = TRUE)
+```
+
+**Filtrar por Área de Estudio**
+
+```{r load-data, echo=TRUE}
+# Definimos por separado los tres criterios que delimitan el área de estudio.
 reg <- "04"
 comunas_estudio <- c("COQUIMBO", "LA SERENA")
 localidad <- "LA SERENA - COQUIMBO"
 
+# filter() conserva únicamente las filas que cumplen todos los criterios.
 data_reg <- data_nac %>%
   filter(
     COD_REGION == reg,
@@ -144,10 +162,7 @@ data_reg <- data_nac %>%
     LOCALIDAD == localidad
   )
 
-if (nrow(data_reg) == 0) {
-  stop("No se encontraron geometrías para la localidad: ", localidad)
-}
-
+# nrow() cuenta cuántas geometrías quedaron después del filtro.
 cat("Geometrías de la localidad", localidad, ":", nrow(data_reg), "\n")
 ```
 
@@ -231,29 +246,64 @@ En este capítulo aparecen dos símbolos que no deben confundirse: `w` es el **p
 
 Definimos tres funciones breves para evitar divisiones por cero, acotar proporciones y normalizar los indicadores.
 
-```{r helpers}
+#### Función para calcular proporciones de forma segura
+
+`proporcion_segura()` divide dos columnas elemento por elemento. Cuando el denominador es cero o está ausente, devuelve `NA` en lugar de producir un resultado inválido.
+
+```{r helper-safe-proportion}
+# Calcula una proporción y evita dividir por cero o por un valor ausente.
 proporcion_segura <- function(numerador, denominador) {
+  # if_else() evalúa la condición para cada par de valores.
   if_else(
     !is.na(denominador) & denominador > 0,
     numerador / denominador,
+    # NA_real_ representa un valor numérico decimal ausente.
     NA_real_
   )
 }
+```
 
+#### Función para mantener valores entre 0 y 1
+
+`acotar_01()` corrige valores menores que 0 o mayores que 1. Esto resulta útil cuando una proporción presenta pequeñas inconsistencias y debe permanecer en su intervalo teórico.
+
+```{r helper-clamp}
+# Limita cada valor al intervalo cerrado entre 0 y 1.
 acotar_01 <- function(x) {
-  pmin(pmax(x, 0), 1)
-}
+  # pmax() reemplaza los valores menores que 0 por 0.
+  x_sin_negativos <- pmax(x, 0)
 
+  # pmin() reemplaza los valores mayores que 1 por 1.
+  pmin(x_sin_negativos, 1)
+}
+```
+
+#### Función para normalizar mediante mínimos y máximos
+
+`minmax()` transforma una variable para que su mínimo sea 0 y su máximo sea 1. Si no existe un rango válido —por ejemplo, porque todos los valores son iguales—, devuelve `NA` y evita una división por cero.
+
+```{r helper-minmax}
+# Reescala un vector numérico al intervalo entre 0 y 1.
 minmax <- function(x) {
+  # range() obtiene el mínimo y el máximo e ignora los valores ausentes.
   rango <- range(x, na.rm = TRUE)
+
+  # La normalización no es posible sin extremos finitos o sin variación.
   if (!all(is.finite(rango)) || diff(rango) == 0) {
     return(rep(NA_real_, length(x)))
   }
+
+  # Restamos el mínimo y dividimos por la amplitud total del rango.
   (x - rango[1]) / diff(rango)
 }
 ```
 
-```{r weighting}
+#### Paso 1: identificar los conteos que deben redistribuirse
+
+Primero reunimos en un vector los nombres de las variables absolutas. Esta lista permitirá aplicar la misma operación a todas ellas sin repetir el código.
+
+```{r weighting-variables}
+# Cada texto corresponde al nombre de una columna con un conteo absoluto.
 vars_conteo <- c(
   "n_per", "n_vp", "n_desocupado", "n_ocupado",
   "n_mat_paredes_tabique_sin_forro",
@@ -271,11 +321,25 @@ vars_conteo <- c(
   "n_jefatura_mujer",
   "n_hog_menores"
 )
+```
 
+#### Paso 2: comprobar el rango de los pesos
+
+Antes de usarlos, verificamos que todos los valores de `w` estén presentes y pertenezcan al intervalo $[0,1]$. La función `stop()` detiene la ejecución si detecta un problema.
+
+```{r validate-weight-range}
+# any() será TRUE si al menos un peso incumple alguna condición.
 if (any(is.na(data_reg$w) | data_reg$w < 0 | data_reg$w > 1)) {
   stop("El ponderador w contiene valores faltantes o fuera de [0, 1].")
 }
+```
 
+#### Paso 3: comprobar la suma de los pesos
+
+Luego agrupamos las partes que provienen de un mismo ID. En los casos redistribuidos, sus pesos deben sumar 1 para conservar el total original.
+
+```{r validate-weight-sum}
+# Resumimos las partes de cada unidad censal original.
 control_w <- data_reg %>%
   st_drop_geometry() %>%
   group_by(.id) %>%
@@ -287,10 +351,18 @@ control_w <- data_reg %>%
   ) %>%
   filter(usa_redistribucion)
 
+# La tolerancia 1e-6 evita rechazar pequeñas diferencias de redondeo.
 if (any(abs(control_w$suma_w - 1) > 1e-6)) {
   stop("Los pesos de uno o más IDs redistribuidos no suman 1.")
 }
+```
 
+#### Paso 4: aplicar los pesos a los conteos
+
+Finalmente construimos `censo`. `transmute()` crea una tabla nueva con las columnas que necesitamos, mientras `across()` multiplica cada conteo de la lista por su peso `w`. El promedio de escolaridad se conserva sin ponderar porque no es un conteo absoluto.
+
+```{r apply-weights}
+# Creamos la base de trabajo y redistribuimos únicamente los conteos absolutos.
 censo <- data_reg %>%
   transmute(
     id_original = .id,
@@ -305,7 +377,9 @@ censo <- data_reg %>%
     n_buildings,
     area_sum,
     w,
+    # Esta variable ya es un promedio y no debe multiplicarse por w.
     prom_escolaridad18,
+    # .x representa, por turno, cada columna incluida en vars_conteo.
     across(all_of(vars_conteo), ~ .x * w)
   )
 ```
@@ -352,21 +426,29 @@ $$
 Si la población activa es cero, el indicador no está definido y se registra como `NA`.
 
 ```{r calc-iem}
+# Añadimos a la base la tasa de desocupación y su indicador complementario.
 censo <- censo %>%
   mutate(
+    # Calculamos la proporción de personas desocupadas en la población activa.
     CESA_DENS = proporcion_segura(
       n_desocupado,
       n_desocupado + n_ocupado
     ),
+    # Invertimos la proporción: un IEM alto representa una mejor condición.
     IEM = 1 - acotar_01(CESA_DENS)
   )
 ```
 
+Todos los mapas del capítulo siguen la misma estructura: `ggplot()` inicia el gráfico, `geom_sf()` dibuja las geometrías, `scale_fill_viridis_c()` define la escala de colores y `labs()` agrega los textos. Los valores ausentes se muestran en gris claro.
+
 ```{r map-iem, echo=TRUE, fig.height=6, fig.width=8}
 #| fig-cap: Indicador de empleo en la localidad LA SERENA - COQUIMBO
 
+# Iniciamos el mapa usando la base espacial censo.
 ggplot(censo) +
+  # Dibujamos cada geometría y la coloreamos según su valor de IEM.
   geom_sf(aes(fill = IEM), color = NA) +
+  # Usamos una escala continua entre 0 y 1.
   scale_fill_viridis_c(
     option = "C",
     limits = c(0, 1),
@@ -404,6 +486,7 @@ $$
 Cada componente se acota al intervalo $[0,1]$ para controlar inconsistencias puntuales derivadas de la agregación.
 
 ```{r calc-ivi}
+# Calculamos por separado las tres proporciones de materialidad insuficiente.
 censo <- censo %>%
   mutate(
     paredes = proporcion_segura(
@@ -422,7 +505,9 @@ censo <- censo %>%
       n_mat_piso_capa_cemento + n_mat_piso_tierra,
       n_vp
     ),
+    # Ajustamos las tres proporciones para mantenerlas entre 0 y 1.
     across(c(paredes, techo, suelo), acotar_01),
+    # Promediamos las carencias e invertimos el resultado.
     IVI = 1 - rowMeans(pick(paredes, techo, suelo), na.rm = FALSE)
   )
 ```
@@ -470,8 +555,10 @@ ISV = 1 - minmax(score_{ISV})
 $$
 
 ```{r calc-isv}
+# Este peso da mayor importancia al componente de núcleos hacinados o allegados.
 w_hac <- 2
 
+# Calculamos las dos proporciones y luego las combinamos en un puntaje.
 censo <- censo %>%
   mutate(
     prop_viv_hacinadas = proporcion_segura(
@@ -482,7 +569,9 @@ censo <- censo %>%
       n_nucleos_hacinados_allegados,
       n_hog
     ),
+    # El puntaje aumenta cuando las señales de hacinamiento son mayores.
     score_isv = prop_viv_hacinadas + w_hac * prop_nucleos_hacinados,
+    # Normalizamos e invertimos: un ISV alto representa mayor suficiencia.
     ISV = 1 - minmax(score_isv)
   )
 ```
@@ -526,8 +615,10 @@ IEA = prom_{escolaridad18}, \qquad n_{per} > 0
 $$
 
 ```{r calc-iea}
+# Conservamos el promedio de escolaridad solo en unidades con población.
 censo <- censo %>%
   mutate(
+    # Las unidades sin población reciben un valor ausente.
     IEA = if_else(n_per > 0, prom_escolaridad18, NA_real_)
   )
 ```
@@ -575,12 +666,15 @@ IRH = 1 - V_{fam}
 $$
 
 ```{r calc-irh}
+# Calculamos ambas proporciones sobre el mismo universo: el total de hogares.
 censo <- censo %>%
   mutate(
     prop_jefatura_mujer = proporcion_segura(n_jefatura_mujer, n_hog),
     prop_hog_menores = proporcion_segura(n_hog_menores, n_hog),
+    # Multiplicamos las proporciones para obtener la co-ocurrencia esperada.
     score_irh = acotar_01(prop_jefatura_mujer) *
       acotar_01(prop_hog_menores),
+    # Invertimos el puntaje para mantener la orientación favorable común.
     IRH = 1 - score_irh
   )
 ```
@@ -618,34 +712,64 @@ Conocer cuántas personas son jóvenes, cuántas estudian y cuántas trabajan no
 
 Los cinco indicadores disponibles utilizan escalas distintas. Para otorgarles un rango común, normalizamos cada uno al intervalo $[0,1]$ utilizando como universo la localidad LA SERENA - COQUIMBO. La dimensión final es el promedio simple de los cinco indicadores normalizados y solo se calcula cuando todos están disponibles.
 
-```{r consolidation}
-indicadores <- c("IEM", "IVI", "ISV", "IEA", "IRH")
-indicadores_n <- paste0(indicadores, "_n")
-etiquetas_indicadores <- c(
-  DIM_SOC_2024 = "Dimensión socioeconómica",
-  IEM = "Empleo (IEM)",
-  IVI = "Materialidad de la vivienda (IVI)",
-  ISV = "Suficiencia de la vivienda (ISV)",
-  IEA = "Escolaridad adulta (IEA)",
-  IRH = "Estructura de hogares (IRH)"
-)
+### Paso 1: identificar los indicadores
 
-sf24 <- censo %>%
+Guardamos sus nombres en un vector. A partir de ellos creamos también los nombres que tendrán las versiones normalizadas.
+
+```{r indicator-names}
+# Estos son los cinco indicadores que formarán la dimensión socioeconómica.
+indicadores <- c("IEM", "IVI", "ISV", "IEA", "IRH")
+
+# paste0() agrega el sufijo "_n" a cada nombre.
+indicadores_n <- paste0(indicadores, "_n")
+```
+
+### Paso 2: normalizar los cinco indicadores
+
+`across()` aplica `minmax()` a todas las columnas indicadas. La opción `.names` conserva el nombre original y agrega el sufijo `_n` a la columna nueva.
+
+```{r normalize-indicators}
+# Agregamos una versión normalizada de cada indicador a la base censo.
+censo <- censo %>%
   mutate(
     across(
       all_of(indicadores),
       minmax,
       .names = "{.col}_n"
-    ),
+    )
+  )
+```
+
+### Paso 3: calcular la dimensión socioeconómica
+
+Primero contamos cuántos indicadores normalizados están disponibles en cada geometría. Después calculamos su promedio y lo conservamos solamente cuando los cinco componentes son válidos.
+
+```{r combine-indicators}
+# Creamos la dimensión como un promedio simple de sus cinco componentes.
+sf24 <- censo %>%
+  mutate(
+    # rowSums() cuenta los valores disponibles de cada fila.
     n_indicadores_validos = rowSums(!is.na(pick(all_of(indicadores_n)))),
+    # rowMeans() promedia los cinco indicadores normalizados de cada fila.
     DIM_SOC_2024 = rowMeans(pick(all_of(indicadores_n)), na.rm = TRUE),
+    # Si falta algún indicador, reemplazamos el promedio por NA.
     DIM_SOC_2024 = if_else(
       n_indicadores_validos == length(indicadores_n),
       DIM_SOC_2024,
       NA_real_
     )
-  ) %>%
+  )
+```
+
+### Paso 4: preparar la base de resultados
+
+Corregimos cualquier geometría inválida y seleccionamos solo las columnas necesarias para analizar, cartografiar y guardar el resultado final.
+
+```{r prepare-results}
+# st_make_valid() repara geometrías que presenten problemas topológicos.
+sf24 <- sf24 %>%
   st_make_valid() %>%
+  # select() conserva y ordena las variables relevantes.
   select(
     id_original,
     ID_MANZ,
@@ -692,17 +816,20 @@ ggplot(sf24) +
 
 ### Cobertura y distribución
 
-```{r summary-table}
-#| tbl-cap: Cobertura y distribución de los indicadores socioeconómicos 2024 en el área de estudio
+Primero transformamos la base desde un formato ancho —una columna por indicador— a un formato largo —una fila por indicador y observación—. Este formato permite resumir todas las variables con el mismo código.
 
+```{r prepare-summary}
+# Quitamos temporalmente la geometría porque este resumen utiliza solo atributos.
 resumen_indicadores <- sf24 %>%
   st_drop_geometry() %>%
   select(all_of(indicadores), DIM_SOC_2024) %>%
+  # pivot_longer() reúne las columnas seleccionadas en dos columnas nuevas.
   pivot_longer(
     cols = everything(),
     names_to = "indicador",
     values_to = "valor"
   ) %>%
+  # Calculamos las estadísticas por separado para cada indicador.
   group_by(indicador) %>%
   summarise(
     n_validos = sum(!is.na(valor)),
@@ -713,13 +840,33 @@ resumen_indicadores <- sf24 %>%
     maximo = max(valor, na.rm = TRUE),
     .groups = "drop"
   )
+```
 
+Después presentamos el resumen como una tabla con tres decimales.
+
+```{r summary-table}
+#| tbl-cap: Cobertura y distribución de los indicadores socioeconómicos 2024 en el área de estudio
+
+# kable() convierte el objeto de resumen en una tabla para el capítulo.
 kable(resumen_indicadores, digits = 3)
 ```
 
 ### Distribución de los valores normalizados
 
-```{r plot-distributions, fig.height=7, fig.width=9}
+Para facilitar la lectura del gráfico, definimos etiquetas descriptivas y volvemos a organizar los datos en formato largo.
+
+```{r prepare-distributions}
+# Asociamos cada nombre de variable con la etiqueta que verá el lector.
+etiquetas_indicadores <- c(
+  DIM_SOC_2024 = "Dimensión socioeconómica",
+  IEM = "Empleo (IEM)",
+  IVI = "Materialidad de la vivienda (IVI)",
+  ISV = "Suficiencia de la vivienda (ISV)",
+  IEA = "Escolaridad adulta (IEA)",
+  IRH = "Estructura de hogares (IRH)"
+)
+
+# Preparamos una columna común de valores para construir los histogramas.
 datos_distribucion <- sf24 %>%
   st_drop_geometry() %>%
   select(all_of(indicadores_n), DIM_SOC_2024) %>%
@@ -729,14 +876,21 @@ datos_distribucion <- sf24 %>%
     values_to = "valor"
   ) %>%
   mutate(
+    # Quitamos el sufijo "_n" para recuperar el nombre original.
     indicador = sub("_n$", "", indicador),
+    # factor() fija el orden y reemplaza los códigos por etiquetas legibles.
     indicador = factor(
       indicador,
       levels = names(etiquetas_indicadores),
       labels = unname(etiquetas_indicadores)
     )
   )
+```
 
+Cada panel del siguiente gráfico muestra cuántas geometrías se concentran en distintos tramos de un indicador.
+
+```{r plot-distributions, fig.height=7, fig.width=9}
+# aes(x = valor) indica que los valores normalizados ocuparán el eje horizontal.
 ggplot(datos_distribucion, aes(x = valor)) +
   geom_histogram(
     bins = 30,
@@ -759,8 +913,10 @@ ggplot(datos_distribucion, aes(x = valor)) +
 Verificamos que los indicadores normalizados y la dimensión sintética se mantengan dentro del intervalo esperado.
 
 ```{r quality-checks}
+# Reunimos las variables cuyo intervalo esperado es [0, 1].
 variables_01 <- c(indicadores_n, "DIM_SOC_2024")
 
+# Contamos los valores que quedan fuera del intervalo en cada variable.
 fuera_de_rango <- sf24 %>%
   st_drop_geometry() %>%
   summarise(
@@ -780,6 +936,7 @@ kable(
   caption = "Valores fuera del intervalo [0, 1]"
 )
 
+# stopifnot() detiene la ejecución si algún conteo es distinto de cero.
 stopifnot(all(fuera_de_rango$n_fuera_de_rango == 0))
 ```
 
@@ -788,9 +945,11 @@ stopifnot(all(fuera_de_rango$n_fuera_de_rango == 0))
 GeoPackage conserva la geometría, los nombres de campos y los tipos de datos en un único archivo. El bloque se deja sin ejecutar para evitar sobrescribir resultados durante la publicación del libro.
 
 ```{r save-results, eval=FALSE}
+# Creamos la carpeta solo si todavía no existe.
 path_resultados <- "results"
 dir.create(path_resultados, recursive = TRUE, showWarnings = FALSE)
 
+# Guardamos una copia interoperable en formato GeoPackage.
 st_write(
   sf24,
   file.path(
@@ -800,6 +959,7 @@ st_write(
   delete_dsn = TRUE
 )
 
+# Guardamos otra copia en el formato nativo de R.
 saveRDS(
   sf24,
   file.path(
