@@ -108,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles/style.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -235,6 +235,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Tarea 1: Programación en R</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tarea_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tarea 2: Proyecto Final</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -297,23 +303,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">E.1</span> Introducción</a></li>
   <li><a href="#objetivos" id="toc-objetivos" class="nav-link" data-scroll-target="#objetivos"><span class="header-section-number">E.2</span> Objetivos</a></li>
   <li><a href="#justificación" id="toc-justificación" class="nav-link" data-scroll-target="#justificación"><span class="header-section-number">E.3</span> Justificación</a></li>
-  <li><a href="#tipos-de-quiebre-reseña-breve" id="toc-tipos-de-quiebre-reseña-breve" class="nav-link" data-scroll-target="#tipos-de-quiebre-reseña-breve"><span class="header-section-number">E.4</span> Tipos de quiebre (reseña breve)</a></li>
-  <li><a href="#parte-práctica-r-mapas-con-quiebres" id="toc-parte-práctica-r-mapas-con-quiebres" class="nav-link" data-scroll-target="#parte-práctica-r-mapas-con-quiebres"><span class="header-section-number">E.5</span> Parte práctica (R): mapas con quiebres</a>
+  <li><a href="#qué-es-un-quiebre-de-clase" id="toc-qué-es-un-quiebre-de-clase" class="nav-link" data-scroll-target="#qué-es-un-quiebre-de-clase"><span class="header-section-number">E.4</span> ¿Qué es un quiebre de clase?</a></li>
+  <li><a href="#métodos-de-clasificación" id="toc-métodos-de-clasificación" class="nav-link" data-scroll-target="#métodos-de-clasificación"><span class="header-section-number">E.5</span> Métodos de clasificación</a>
   <ul class="collapse">
-  <li><a href="#preparación" id="toc-preparación" class="nav-link" data-scroll-target="#preparación"><span class="header-section-number">E.5.1</span> Preparación</a></li>
-  <li><a href="#mapa-base-paleta-continua" id="toc-mapa-base-paleta-continua" class="nav-link" data-scroll-target="#mapa-base-paleta-continua"><span class="header-section-number">E.5.2</span> Mapa Base (Paleta Continua)</a></li>
-  <li><a href="#quiebres-manuales-fixed" id="toc-quiebres-manuales-fixed" class="nav-link" data-scroll-target="#quiebres-manuales-fixed"><span class="header-section-number">E.5.3</span> Quiebres manuales (fixed)</a></li>
-  <li><a href="#quiebres-por-cuantiles-quantile" id="toc-quiebres-por-cuantiles-quantile" class="nav-link" data-scroll-target="#quiebres-por-cuantiles-quantile"><span class="header-section-number">E.5.4</span> Quiebres por cuantiles (quantile)</a></li>
-  <li><a href="#quiebres-de-jenks-jenks-natural-breaks" id="toc-quiebres-de-jenks-jenks-natural-breaks" class="nav-link" data-scroll-target="#quiebres-de-jenks-jenks-natural-breaks"><span class="header-section-number">E.5.5</span> Quiebres de Jenks (jenks / Natural Breaks)</a></li>
-  <li><a href="#quiebres-de-fisher-fisher" id="toc-quiebres-de-fisher-fisher" class="nav-link" data-scroll-target="#quiebres-de-fisher-fisher"><span class="header-section-number">E.5.6</span> Quiebres de Fisher (fisher)</a></li>
+  <li><a href="#quiebres-manuales-fixed" id="toc-quiebres-manuales-fixed" class="nav-link" data-scroll-target="#quiebres-manuales-fixed"><span class="header-section-number">E.5.1</span> Quiebres manuales (<code>fixed</code>)</a></li>
+  <li><a href="#cuantiles-quantile" id="toc-cuantiles-quantile" class="nav-link" data-scroll-target="#cuantiles-quantile"><span class="header-section-number">E.5.2</span> Cuantiles (<code>quantile</code>)</a></li>
+  <li><a href="#quiebres-naturales-de-jenks-jenks" id="toc-quiebres-naturales-de-jenks-jenks" class="nav-link" data-scroll-target="#quiebres-naturales-de-jenks-jenks"><span class="header-section-number">E.5.3</span> Quiebres naturales de Jenks (<code>jenks</code>)</a></li>
+  <li><a href="#fisher-fisher-o-fisherjenks" id="toc-fisher-fisher-o-fisherjenks" class="nav-link" data-scroll-target="#fisher-fisher-o-fisherjenks"><span class="header-section-number">E.5.4</span> Fisher (<code>fisher</code> o Fisher–Jenks)</a></li>
   </ul></li>
-  <li><a href="#recomendaciones-prácticas" id="toc-recomendaciones-prácticas" class="nav-link" data-scroll-target="#recomendaciones-prácticas"><span class="header-section-number">E.6</span> Recomendaciones prácticas</a></li>
-  <li><a href="#comparación-visual-de-los-métodos-de-quiebres" id="toc-comparación-visual-de-los-métodos-de-quiebres" class="nav-link" data-scroll-target="#comparación-visual-de-los-métodos-de-quiebres"><span class="header-section-number">E.7</span> Comparación Visual de los Métodos de Quiebres</a></li>
+  <li><a href="#parte-práctica-r-de-la-distribución-al-mapa" id="toc-parte-práctica-r-de-la-distribución-al-mapa" class="nav-link" data-scroll-target="#parte-práctica-r-de-la-distribución-al-mapa"><span class="header-section-number">E.6</span> Parte práctica (R): de la distribución al mapa</a>
+  <ul class="collapse">
+  <li><a href="#preparación" id="toc-preparación" class="nav-link" data-scroll-target="#preparación"><span class="header-section-number">E.6.1</span> Preparación</a></li>
+  <li><a href="#mapa-base-paleta-continua" id="toc-mapa-base-paleta-continua" class="nav-link" data-scroll-target="#mapa-base-paleta-continua"><span class="header-section-number">E.6.2</span> Mapa base (paleta continua)</a></li>
+  <li><a href="#quiebres-manuales-fixed-1" id="toc-quiebres-manuales-fixed-1" class="nav-link" data-scroll-target="#quiebres-manuales-fixed-1"><span class="header-section-number">E.6.3</span> Quiebres manuales (<code>fixed</code>)</a></li>
+  <li><a href="#quiebres-por-cuantiles-quantile" id="toc-quiebres-por-cuantiles-quantile" class="nav-link" data-scroll-target="#quiebres-por-cuantiles-quantile"><span class="header-section-number">E.6.4</span> Quiebres por cuantiles (<code>quantile</code>)</a></li>
+  <li><a href="#quiebres-de-jenks-jenks-o-natural-breaks" id="toc-quiebres-de-jenks-jenks-o-natural-breaks" class="nav-link" data-scroll-target="#quiebres-de-jenks-jenks-o-natural-breaks"><span class="header-section-number">E.6.5</span> Quiebres de Jenks (<code>jenks</code> o <em>Natural Breaks</em>)</a></li>
+  <li><a href="#quiebres-de-fisher-fisher" id="toc-quiebres-de-fisher-fisher" class="nav-link" data-scroll-target="#quiebres-de-fisher-fisher"><span class="header-section-number">E.6.6</span> Quiebres de Fisher (<code>fisher</code>)</a></li>
+  </ul></li>
+  <li><a href="#recomendaciones-prácticas" id="toc-recomendaciones-prácticas" class="nav-link" data-scroll-target="#recomendaciones-prácticas"><span class="header-section-number">E.7</span> Recomendaciones prácticas</a></li>
+  <li><a href="#comparación-visual-de-los-métodos-de-quiebres" id="toc-comparación-visual-de-los-métodos-de-quiebres" class="nav-link" data-scroll-target="#comparación-visual-de-los-métodos-de-quiebres"><span class="header-section-number">E.8</span> Comparación Visual de los Métodos de Quiebres</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./recursos.html">Appendices</a></li><li class="breadcrumb-item"><a href="./quiebres.html"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Mapas y Quiebres</span></a></li></ol></nav>
 <div class="quarto-title">
@@ -358,31 +371,116 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="E.3" class="anchored" data-anchor-id="justificación"><span class="header-section-number">E.3</span> Justificación</h2>
 <ul>
 <li><strong>Riesgo de sesgo visual</strong>: un quiebre inapropiado puede exagerar o esconder cambios, afectando decisiones (priorización de recursos, focalización territorial).</li>
-<li><strong>Percepción humana del color</strong>: paletas mal elegidas (e.g., arcoíris) introducen artefactos perceptuales; una paleta <strong>secuencial uniforme</strong> comunica magnitudes de forma estable y comprensible.</li>
+<li><strong>Percepción humana del color</strong>: paletas mal elegidas (p.&nbsp;ej., arcoíris) introducen artefactos perceptuales; una paleta <strong>secuencial uniforme</strong> comunica magnitudes de forma estable y comprensible.</li>
 <li><strong>Transparencia</strong>: exponer el criterio de quiebre y el tratamiento de <code>NA</code> es parte de la <strong>ética de la comunicación</strong> en políticas públicas.</li>
 </ul>
 </section>
-<section id="tipos-de-quiebre-reseña-breve" class="level2" data-number="E.4">
-<h2 data-number="E.4" class="anchored" data-anchor-id="tipos-de-quiebre-reseña-breve"><span class="header-section-number">E.4</span> Tipos de quiebre (reseña breve)</h2>
-<ul>
-<li><strong>Manual (fixed)</strong>: Tú defines los cortes (con conocimiento experto, umbrales normativos, metas). Máximo control, pero exige <strong>justificación</strong>.</li>
-<li><strong>Cuantiles (quantile)</strong>: Cada clase contiene ~la misma cantidad de unidades espaciales. Resalta <strong>ranks/ordenamientos</strong>, pero los límites dependen de la distribución muestral.</li>
-<li><strong>Jenks (jenks)</strong>: También llamado <em>Natural Breaks</em>. Minimiza varianza intra-clase y maximiza varianza inter-clase; tiende a generar clases “naturales” según la distribución. Sensible a outliers y al número de clases.</li>
-<li><strong>Fisher (fisher)</strong>: Variante/optimización del criterio Jenks para particionar con mínima varianza intra-clase. Suele dar cortes similares a Jenks, con búsqueda óptima global.</li>
-</ul>
+<section id="qué-es-un-quiebre-de-clase" class="level2" data-number="E.4">
+<h2 data-number="E.4" class="anchored" data-anchor-id="qué-es-un-quiebre-de-clase"><span class="header-section-number">E.4</span> ¿Qué es un quiebre de clase?</h2>
+<p>Una variable cuantitativa puede representarse con una escala continua o agruparse en intervalos. Los <strong>quiebres</strong> son los valores que delimitan esos intervalos. Por ejemplo, los cortes 5, 8 y 12 separan la variable en cuatro clases. Cada unidad espacial recibe el color de la clase en la que cae su valor.</p>
+<p>Clasificar siempre implica una simplificación: dentro de una misma clase, valores distintos se muestran con el mismo color; a ambos lados de un corte, valores muy parecidos pueden recibir colores diferentes. Por eso, antes de elegir un método es necesario definir:</p>
+<ol type="1">
+<li><strong>El propósito del mapa:</strong> comparar posiciones relativas, comunicar umbrales o explorar agrupamientos en la distribución.</li>
+<li><strong>El número de clases:</strong> pocas clases facilitan la lectura, pero resumen más; muchas conservan detalle, pero hacen más difícil distinguir colores y explicar la leyenda. Como punto de partida suelen funcionar entre cuatro y siete clases.</li>
+<li><strong>El universo de comparación:</strong> si se compararán territorios o años, conviene usar los mismos cortes en todos los mapas. Recalcularlos para cada subconjunto puede producir colores iguales que representan valores distintos.</li>
+<li><strong>La forma de la distribución:</strong> asimetría, valores extremos, vacíos y valores repetidos pueden modificar considerablemente los resultados.</li>
+</ol>
+</section>
+<section id="métodos-de-clasificación" class="level2" data-number="E.5">
+<h2 data-number="E.5" class="anchored" data-anchor-id="métodos-de-clasificación"><span class="header-section-number">E.5</span> Métodos de clasificación</h2>
+<section id="quiebres-manuales-fixed" class="level3" data-number="E.5.1">
+<h3 data-number="E.5.1" class="anchored" data-anchor-id="quiebres-manuales-fixed"><span class="header-section-number">E.5.1</span> Quiebres manuales (<code>fixed</code>)</h3>
+<p>Los cortes se definen <strong>antes de observar o clasificar el mapa</strong>, a partir de criterios externos: umbrales normativos, metas institucionales, categorías disciplinares o una escala común acordada. El algoritmo no busca grupos en los datos; aplica exactamente los límites especificados por quien analiza.</p>
+<p><strong>Cuándo utilizarlo.</strong> Es la mejor opción cuando las categorías tienen significado sustantivo —por ejemplo, cumplimiento de una norma— o cuando se requiere comparar varios lugares o periodos con una escala idéntica.</p>
+<p><strong>Consideraciones.</strong> Cada corte debe justificarse y documentarse. Es necesario comprobar que el mínimo y el máximo queden cubiertos, que no se generen clases vacías y que los umbrales sigan siendo pertinentes para el contexto. Si los cortes se eligen solo después de mirar el patrón espacial, existe el riesgo de construir una narrativa a conveniencia. En este capítulo, 5, 8, 12 y 15 son cortes <strong>exclusivamente didácticos</strong>, no umbrales normativos.</p>
+</section>
+<section id="cuantiles-quantile" class="level3" data-number="E.5.2">
+<h3 data-number="E.5.2" class="anchored" data-anchor-id="cuantiles-quantile"><span class="header-section-number">E.5.2</span> Cuantiles (<code>quantile</code>)</h3>
+<p>Primero se ordenan los valores y luego se ubican los cortes para que cada clase contenga aproximadamente la misma cantidad de unidades espaciales. Con cinco clases, cada una intenta reunir cerca del 20 % de las observaciones. Las clases suelen tener anchos numéricos diferentes: un intervalo puede abarcar décimas y otro varios puntos.</p>
+<p><strong>Cuándo utilizarlo.</strong> Es apropiado para comunicar <strong>posición relativa</strong> —los grupos con valores más bajos o más altos dentro del universo estudiado— y para asegurar que todos los colores tengan presencia en el mapa.</p>
+<p><strong>Consideraciones.</strong> No debe interpretarse como una división en magnitudes equivalentes. Puede separar valores casi iguales solo para equilibrar cantidades y, cuando hay muchos empates, puede producir menos clases de las solicitadas. Además, los cortes cambian al cambiar la muestra; por ello no es recomendable recalcularlos por separado si se desea comparar años o territorios.</p>
+</section>
+<section id="quiebres-naturales-de-jenks-jenks" class="level3" data-number="E.5.3">
+<h3 data-number="E.5.3" class="anchored" data-anchor-id="quiebres-naturales-de-jenks-jenks"><span class="header-section-number">E.5.3</span> Quiebres naturales de Jenks (<code>jenks</code>)</h3>
+<p>Jenks busca cortes que agrupen valores semejantes. En términos simples, intenta reducir la variación <strong>dentro</strong> de cada clase y aumentar la separación <strong>entre</strong> clases. Por ello, los cortes suelen ubicarse en saltos o zonas poco densas de la distribución, en vez de repartir las observaciones por igual.</p>
+<p><strong>Cuándo utilizarlo.</strong> Resulta útil en mapas exploratorios de una sola distribución, especialmente cuando esta es asimétrica, presenta grupos reconocibles o tiene rangos de concentración distintos.</p>
+<p><strong>Consideraciones.</strong> El resultado depende de los datos y del número de clases. Los valores extremos pueden atraer un corte y dejar clases con pocas observaciones. Como los límites cambian con la muestra, dos mapas calculados por separado no son directamente comparables aunque utilicen la misma paleta. También se debe informar el número de clases elegido.</p>
+</section>
+<section id="fisher-fisher-o-fisherjenks" class="level3" data-number="E.5.4">
+<h3 data-number="E.5.4" class="anchored" data-anchor-id="fisher-fisher-o-fisherjenks"><span class="header-section-number">E.5.4</span> Fisher (<code>fisher</code> o Fisher–Jenks)</h3>
+<p>Fisher utiliza programación dinámica para encontrar la partición que minimiza de forma global la variación dentro de las clases para el número solicitado. Comparte el objetivo general de los quiebres naturales, pero busca sistemáticamente la solución óptima bajo ese criterio; por eso suele producir límites iguales o muy próximos a Jenks, aunque no necesariamente idénticos.</p>
+<p><strong>Cuándo utilizarlo.</strong> Es conveniente cuando se desea una clasificación natural reproducible y una solución óptima para la distribución analizada. Es especialmente útil para contrastar el resultado de Jenks o cuando pequeñas diferencias en los cortes importan.</p>
+<p><strong>Consideraciones.</strong> “Óptimo” se refiere solo a minimizar la variación interna; no significa que la clasificación sea automáticamente la más adecuada para comunicar o tomar decisiones. Sigue siendo dependiente de la muestra, del número de clases y de los valores extremos. Tampoco resuelve por sí solo la comparabilidad temporal o territorial.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Método</th>
+<th>Pregunta que responde</th>
+<th>Conviene cuando…</th>
+<th>Precaución principal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Manual</td>
+<td>¿Qué unidades cruzan umbrales con significado externo?</td>
+<td>Hay normas, metas o se necesita una escala común</td>
+<td>Justificar los cortes y revisar clases vacías</td>
+</tr>
+<tr class="even">
+<td>Cuantiles</td>
+<td>¿Qué unidades ocupan posiciones relativas similares?</td>
+<td>Interesa el orden y una cantidad parecida de casos por clase</td>
+<td>Puede separar valores casi iguales y cambia con la muestra</td>
+</tr>
+<tr class="odd">
+<td>Jenks</td>
+<td>¿Dónde aparecen agrupamientos o saltos en estos datos?</td>
+<td>Se explora una distribución irregular en un mapa</td>
+<td>Es sensible a extremos, al número de clases y a la muestra</td>
+</tr>
+<tr class="even">
+<td>Fisher</td>
+<td>¿Cuál es la partición de mínima variación interna?</td>
+<td>Se busca una solución natural óptima y reproducible</td>
+<td>La optimalidad estadística no garantiza pertinencia sustantiva</td>
+</tr>
+</tbody>
+</table>
 <hr>
 </section>
-<section id="parte-práctica-r-mapas-con-quiebres" class="level2" data-number="E.5">
-<h2 data-number="E.5" class="anchored" data-anchor-id="parte-práctica-r-mapas-con-quiebres"><span class="header-section-number">E.5</span> Parte práctica (R): mapas con quiebres</h2>
-<p>A continuación se construirá mapas con la variable de el indicador de Escolaridad del Jefe de Hogar (EIJ) con diferentes tipos de quiebres para evidenciar las diferencias que existen de forma práctica. Adicionalmente consideraremos lo siguiente:</p>
+</section>
+<section id="parte-práctica-r-de-la-distribución-al-mapa" class="level2 page-columns page-full" data-number="E.6">
+<h2 data-number="E.6" class="anchored" data-anchor-id="parte-práctica-r-de-la-distribución-al-mapa"><span class="header-section-number">E.6</span> Parte práctica (R): de la distribución al mapa</h2>
+<p>Aplicaremos los cuatro métodos al <strong>Indicador de Escolaridad del Jefe de Hogar (<code>IEJ</code>)</strong> de las manzanas urbanas de la comuna de La Serena. Antes de construir cada mapa se mostrará un histograma: las barras describen la distribución observada y las líneas verticales indican los quiebres internos. Esta lectura previa permite entender qué valores agrupa cada método antes de examinar su patrón espacial.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Alcance de los datos">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Alcance de los datos
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La base de indicadores socioeconómicos utilizada en esta práctica fue elaborada a partir del <strong>Censo 2017</strong> y se incluye <strong>solo con fines didácticos y a modo de ejemplo</strong>. Los resultados no deben interpretarse como un diagnóstico vigente ni los cortes empleados como umbrales oficiales. Para análisis aplicados se debe revisar la definición de cada indicador, validar la fuente y utilizar la información oficial más actualizada disponible.</p>
+</div>
+</div>
+<p>Además, durante el ejercicio:</p>
 <ul>
 <li>Controlamos <code>NA</code> como “Sin información” (color gris), y damos opción de ocultarlo de la leyenda.</li>
 <li>Ajustamos la paleta automáticamente si el número de clases cambia.</li>
 </ul>
-<section id="preparación" class="level3" data-number="E.5.1">
-<h3 data-number="E.5.1" class="anchored" data-anchor-id="preparación"><span class="header-section-number">E.5.1</span> Preparación</h3>
-<section id="librerias" class="level4">
-<h4 class="anchored" data-anchor-id="librerias">Librerias</h4>
+<section id="preparación" class="level3" data-number="E.6.1">
+<h3 data-number="E.6.1" class="anchored" data-anchor-id="preparación"><span class="header-section-number">E.6.1</span> Preparación</h3>
+<section id="librerías" class="level4">
+<h4 class="anchored" data-anchor-id="librerías">Librerías</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Librerías ---------------------------------------------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
@@ -394,7 +492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="funciones-de-ayuda" class="level4">
-<h4 class="anchored" data-anchor-id="funciones-de-ayuda">Funciones de Ayuda</h4>
+<h4 class="anchored" data-anchor-id="funciones-de-ayuda">Funciones de ayuda</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Utilidades (helpers) ----------------------------------------------------</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegura que la paleta tenga exactamente K colores</span></span>
@@ -413,10 +511,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcula cortes robustos con classInt (evita n &gt; únicos y duplicados)</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>robust_breaks <span class="ot">&lt;-</span> <span class="cf">function</span>(x, n, <span class="at">style =</span> <span class="st">"quantile"</span>) {</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  x_ok <span class="ot">&lt;-</span> x[<span class="fu">is.finite</span>(x)]</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  n_eff <span class="ot">&lt;-</span> <span class="fu">min</span>(n, <span class="fu">max</span>(<span class="dv">1</span>, <span class="fu">length</span>(<span class="fu">unique</span>(x_ok)) <span class="sc">-</span> <span class="dv">1</span>))</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  ci <span class="ot">&lt;-</span> <span class="fu">classIntervals</span>(x_ok, <span class="at">n =</span> n_eff, <span class="at">style =</span> style)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort</span>(<span class="fu">unique</span>(ci<span class="sc">$</span>brks))</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(x_ok) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"La variable no contiene valores finitos."</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(<span class="fu">unique</span>(x_ok)) <span class="sc">&lt;</span> <span class="dv">2</span>) {</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Se necesitan al menos dos valores distintos para calcular quiebres."</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  n_eff <span class="ot">&lt;-</span> <span class="fu">min</span>(n, <span class="fu">length</span>(<span class="fu">unique</span>(x_ok)) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  ci <span class="ot">&lt;-</span> <span class="fu">classIntervals</span>(x_ok, <span class="at">n =</span> n_eff, <span class="at">style =</span> style)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort</span>(<span class="fu">unique</span>(ci<span class="sc">$</span>brks))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafica la distribución y superpone los quiebres internos</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>plot_break_distribution <span class="ot">&lt;-</span> <span class="cf">function</span>(x, brks, metodo, <span class="at">bins =</span> <span class="dv">30</span>) {</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">IEJ =</span> x[<span class="fu">is.finite</span>(x)])</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  cortes <span class="ot">&lt;-</span> brks[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">length</span>(brks))]</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  cortes_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">corte =</span> cortes,</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">etiqueta =</span> <span class="fu">format</span>(<span class="fu">round</span>(cortes, <span class="dv">2</span>), <span class="at">trim =</span> <span class="cn">TRUE</span>, <span class="at">nsmall =</span> <span class="dv">1</span>)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(datos, <span class="fu">aes</span>(<span class="at">x =</span> IEJ)) <span class="sc">+</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>      <span class="at">bins =</span> bins,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"#43a2ca"</span>,</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> <span class="st">"white"</span>,</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>      <span class="at">linewidth =</span> <span class="fl">0.25</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> cortes_df,</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">xintercept =</span> corte),</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> <span class="st">"#b2182b"</span>,</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">linewidth =</span> <span class="fl">0.85</span>,</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">linetype =</span> <span class="st">"22"</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_label</span>(</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> cortes_df,</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">x =</span> corte, <span class="at">y =</span> <span class="cn">Inf</span>, <span class="at">label =</span> etiqueta),</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>      <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">90</span>,</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>      <span class="at">vjust =</span> <span class="fl">1.2</span>,</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="fl">3.2</span>,</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>      <span class="at">linewidth =</span> <span class="dv">0</span>,</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.padding =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">0.12</span>, <span class="st">"lines"</span>),</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> <span class="st">"#7f0000"</span>,</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"white"</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.04</span>))) <span class="sc">+</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.12</span>))) <span class="sc">+</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Distribución del IEJ —"</span>, metodo),</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Las líneas verticales muestran los quiebres internos"</span>,</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Valor del IEJ"</span>,</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Número de manzanas"</span>,</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Fuente: indicadores socioeconómicos derivados del Censo 2017; uso didáctico."</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">colour =</span> <span class="st">"#17324d"</span>),</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"grey35"</span>),</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"grey40"</span>, <span class="at">hjust =</span> <span class="dv">0</span>)</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="datos" class="level4">
@@ -430,11 +590,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura de insumo espacial</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>path_file <span class="ot">&lt;-</span> <span class="fu">paste0</span>(path_resultados, reg, <span class="st">"_ind_socioeconomicos.shp"</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ind_soc <span class="ot">&lt;-</span> <span class="fu">st_read</span>(path_file, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ind_soc <span class="ot">&lt;-</span> <span class="fu">st_read</span>(path_file, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Texto común para documentar la fuente en las salidas gráficas</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>nota_fuente <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Fuente: indicadores socioeconómicos derivados del Censo 2017;"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"uso didáctico."</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="área-de-estudio" class="level4">
-<h4 class="anchored" data-anchor-id="área-de-estudio">Área de Estudio</h4>
+<h4 class="anchored" data-anchor-id="área-de-estudio">Área de estudio</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección de Área de Estudio --------------------------------------------</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>la_serena_urb <span class="ot">&lt;-</span> ind_soc <span class="sc">%&gt;%</span> </span>
@@ -443,7 +609,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="paleta-de-colores" class="level4">
-<h4 class="anchored" data-anchor-id="paleta-de-colores">Paleta de Colores</h4>
+<h4 class="anchored" data-anchor-id="paleta-de-colores">Paleta de colores</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paleta de Colores (secuencial) ------------------------------------------</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Referencia: https://colorbrewer2.org/#type=sequential&amp;scheme=GnBu&amp;n=5</span></span>
@@ -451,8 +617,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="mapa-base-paleta-continua" class="level3" data-number="E.5.2">
-<h3 data-number="E.5.2" class="anchored" data-anchor-id="mapa-base-paleta-continua"><span class="header-section-number">E.5.2</span> Mapa Base (Paleta Continua)</h3>
+<section id="mapa-base-paleta-continua" class="level3" data-number="E.6.2">
+<h3 data-number="E.6.2" class="anchored" data-anchor-id="mapa-base-paleta-continua"><span class="header-section-number">E.6.2</span> Mapa base (paleta continua)</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa con Colores Continuo -----------------------------------------------</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>map_cont <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -462,12 +628,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">na.value =</span> <span class="st">"grey90"</span>) <span class="sc">+</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Escolaridad del Jefe de Hogar (IEJ)"</span>,</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Sin quiebres — continuo"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>),</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>map_cont</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> nota_fuente) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>map_cont</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -477,15 +644,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="quiebres-manuales-fixed" class="level3" data-number="E.5.3">
-<h3 data-number="E.5.3" class="anchored" data-anchor-id="quiebres-manuales-fixed"><span class="header-section-number">E.5.3</span> Quiebres manuales (fixed)</h3>
-<ul>
-<li>Útiles cuando hay umbrales normativos o cortes con sentido sustantivo (p.&nbsp;ej., metas, percentiles de política).</li>
-<li>Documenta la justificación de cada punto de corte.</li>
-</ul>
+<section id="quiebres-manuales-fixed-1" class="level3 page-columns page-full" data-number="E.6.3">
+<h3 data-number="E.6.3" class="anchored" data-anchor-id="quiebres-manuales-fixed-1"><span class="header-section-number">E.6.3</span> Quiebres manuales (<code>fixed</code>)</h3>
+<p>Para el ejemplo se proponen los valores 5, 8, 12 y 15. El mínimo y el máximo observados se agregan automáticamente para cubrir todo el rango. El histograma permite comprobar que estos cortes producen clases de distinto ancho y con cantidades desiguales de manzanas. Esto no es un error: en una clasificación manual prima el significado de los umbrales, no el equilibrio estadístico.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definición manual para fines didácticos; no corresponde a umbrales oficiales</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>min_iej <span class="ot">&lt;-</span> <span class="fu">min</span>(la_serena_urb<span class="sc">$</span>IEJ, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>max_iej <span class="ot">&lt;-</span> <span class="fu">max</span>(la_serena_urb<span class="sc">$</span>IEJ, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>cortes_manuales <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">15</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Conserva solo los cortes que caen dentro del rango observado</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>brks_manual <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(<span class="fu">c</span>(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  min_iej,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  cortes_manuales[cortes_manuales <span class="sc">&gt;</span> min_iej <span class="sc">&amp;</span> cortes_manuales <span class="sc">&lt;</span> max_iej],</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  max_iej</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>graf_dist_manual <span class="ot">&lt;-</span> <span class="fu">plot_break_distribution</span>(</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  la_serena_urb<span class="sc">$</span>IEJ,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  brks_manual,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"quiebres manuales"</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>graf_dist_manual</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-dist-manual" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-dist-manual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="quiebres_files/figure-html/fig-dist-manual-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-dist-manual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;E.1: Distribución del IEJ y quiebres manuales.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Las líneas se encuentran en valores definidos por quien analiza. Antes de reutilizar este código, reemplaza <code>cortes_manuales</code> por límites respaldados por una norma, una hipótesis o un criterio sustantivo explícito.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploración rápida</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(la_serena_urb<span class="sc">$</span>IEJ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas y variable de clases</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>labs_m <span class="ot">&lt;-</span> <span class="fu">labels_from_breaks</span>(brks_manual)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable de clases + NA explícito</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>la_serena_urb <span class="ot">&lt;-</span> la_serena_urb <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qm =</span> <span class="fu">cut</span>(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>      IEJ,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> brks_manual,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">include.lowest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> labs_m</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qm =</span> forcats<span class="sc">::</span><span class="fu">fct_na_value_to_level</span>(IEJ_qm, <span class="at">level =</span> <span class="st">"Sin información"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Paleta nombrada (añade gris para NA)</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>niveles_sin_na <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qm), <span class="st">"Sin información"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>pal_m <span class="ot">&lt;-</span> <span class="fu">ensure_palette_length</span>(pal_iej, <span class="fu">length</span>(niveles_sin_na))</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>vals_m <span class="ot">&lt;-</span> <span class="fu">setNames</span>(pal_m, niveles_sin_na)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>vals_m <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_m, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>map_q_manual <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> la_serena_urb, <span class="fu">aes</span>(<span class="at">fill =</span> IEJ_qm),</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> vals_m, <span class="at">name =</span> <span class="st">"IEJ"</span>,</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                    <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Indicador de Escolaridad del Jefe de Hogar (IEJ)"</span>,</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Quiebres manuales"</span>,</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> nota_fuente) <span class="sc">+</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>),</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>map_q_manual</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -493,92 +723,79 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(la_serena_urb<span class="sc">$</span>IEJ, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  0.0 18.2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definición manual (ejemplo)</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>min_iej <span class="ot">&lt;-</span> <span class="fu">min</span>(la_serena_urb<span class="sc">$</span>IEJ, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>max_iej <span class="ot">&lt;-</span> <span class="fu">max</span>(la_serena_urb<span class="sc">$</span>IEJ, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(<span class="fu">c</span>(min_iej, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">15</span>, max_iej)))</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>labs_q <span class="ot">&lt;-</span> <span class="fu">labels_from_breaks</span>(brks)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable de clases + NA explícito</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>la_serena_urb <span class="ot">&lt;-</span> la_serena_urb <span class="sc">%&gt;%</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qm =</span> <span class="fu">cut</span>(IEJ, <span class="at">breaks =</span> brks, <span class="at">include.lowest =</span> <span class="cn">TRUE</span>, <span class="at">labels =</span> labs_q),</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qm =</span> forcats<span class="sc">::</span><span class="fu">fct_na_value_to_level</span>(IEJ_qm, <span class="at">level =</span> <span class="st">"Sin información"</span>)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Paleta nombrada (añade gris para NA)</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>niveles_sin_na <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qm), <span class="st">"Sin información"</span>)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>pal_m <span class="ot">&lt;-</span> <span class="fu">ensure_palette_length</span>(pal_iej, <span class="fu">length</span>(niveles_sin_na))</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>vals_m <span class="ot">&lt;-</span> <span class="fu">setNames</span>(pal_m, niveles_sin_na)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>vals_m <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_m, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>map_q_manual <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> la_serena_urb, <span class="fu">aes</span>(<span class="at">fill =</span> IEJ_qm),</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> vals_m, <span class="at">name =</span> <span class="st">"IEJ"</span>,</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                    <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Indicador de Escolaridad del Jefe de Hogar (IEJ)"</span>,</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Quiebres manuales"</span>) <span class="sc">+</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>),</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>map_q_manual</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="quiebres_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
+</section>
+<section id="quiebres-por-cuantiles-quantile" class="level3 page-columns page-full" data-number="E.6.4">
+<h3 data-number="E.6.4" class="anchored" data-anchor-id="quiebres-por-cuantiles-quantile"><span class="header-section-number">E.6.4</span> Quiebres por cuantiles (<code>quantile</code>)</h3>
+<p>Con cinco clases, el método intenta ubicar cuatro líneas de modo que cada intervalo contenga cerca de una quinta parte de las manzanas con información. En el histograma es normal observar líneas más juntas en las zonas de alta concentración y más separadas en las colas. Lo que se iguala es la <strong>cantidad de observaciones</strong>, no la distancia numérica entre cortes.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span>  <span class="co"># número de clases</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generación de Quiebres</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>brks_quantile <span class="ot">&lt;-</span> <span class="fu">robust_breaks</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  la_serena_urb<span class="sc">$</span>IEJ,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">style =</span> <span class="st">"quantile"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>graf_dist_quantile <span class="ot">&lt;-</span> <span class="fu">plot_break_distribution</span>(</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  la_serena_urb<span class="sc">$</span>IEJ,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  brks_quantile,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"cuantiles"</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>graf_dist_quantile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-dist-quantile" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-dist-quantile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="quiebres_files/figure-html/fig-dist-quantile-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-dist-quantile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;E.2: Distribución del IEJ y quiebres por cuantiles.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="quiebres-por-cuantiles-quantile" class="level3" data-number="E.5.4">
-<h3 data-number="E.5.4" class="anchored" data-anchor-id="quiebres-por-cuantiles-quantile"><span class="header-section-number">E.5.4</span> Quiebres por cuantiles (quantile)</h3>
-<ul>
-<li>Cada clase agrupa ~el mismo número de elemenmtos.</li>
-<li>Destaca rangos relativos (quién está en el top/bottom) y es estable frente a valores extremos, pero los límites son muestra-dependientes.</li>
-</ul>
+<p>La mayor concentración de líneas señala el tramo donde pequeños cambios de IEJ pueden hacer que una manzana cambie de color. El mapa siguiente debe leerse como una comparación de posiciones relativas dentro de La Serena urbana, no como una escala de intervalos equivalentes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span>  <span class="co"># número de clases</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generación de Quiebres</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">robust_breaks</span>(la_serena_urb<span class="sc">$</span>IEJ, <span class="at">n =</span> n, <span class="at">style =</span> <span class="st">"quantile"</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas legibles para la leyenda (incluye el límite inferior cerrado en el primer tramo)</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>labs_q <span class="ot">&lt;-</span> <span class="fu">labels_from_breaks</span>(brks)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># crear variable con clasificación con quiebres </span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>la_serena_urb <span class="ot">&lt;-</span> la_serena_urb <span class="sc">%&gt;%</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qq =</span> <span class="fu">cut</span>(IEJ, <span class="at">breaks =</span> brks, <span class="at">include.lowest =</span> <span class="cn">TRUE</span>, <span class="at">labels =</span> labs_q),</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qq =</span> forcats<span class="sc">::</span><span class="fu">fct_na_value_to_level</span>(IEJ_qq, <span class="at">level =</span> <span class="st">"Sin información"</span>)</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Construir vector de colores nombrado (añadimos color para "Sin información")</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>niveles_sin_na <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qq), <span class="st">"Sin información"</span>)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>pal_q <span class="ot">&lt;-</span> <span class="fu">ensure_palette_length</span>(pal_iej, <span class="fu">length</span>(niveles_sin_na))</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>vals_qq <span class="ot">&lt;-</span> <span class="fu">setNames</span>(pal_q, niveles_sin_na)</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>vals_qq <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_qq, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa </span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>map_q_quantile <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> la_serena_urb, <span class="fu">aes</span>(<span class="at">fill =</span> IEJ_qq),</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> vals_qq, <span class="at">name =</span> <span class="st">"IEJ"</span>,</span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>                    <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Indicador de Escolaridad del Jefe de Hogar (IEJ)"</span>,</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Quiebres por cuantiles"</span>) <span class="sc">+</span></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>),</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>map_q_quantile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas legibles para la leyenda (incluye el límite inferior cerrado en el primer tramo)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>labs_q <span class="ot">&lt;-</span> <span class="fu">labels_from_breaks</span>(brks_quantile)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># crear variable con clasificación con quiebres </span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>la_serena_urb <span class="ot">&lt;-</span> la_serena_urb <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qq =</span> <span class="fu">cut</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      IEJ,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> brks_quantile,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">include.lowest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> labs_q</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qq =</span> forcats<span class="sc">::</span><span class="fu">fct_na_value_to_level</span>(IEJ_qq, <span class="at">level =</span> <span class="st">"Sin información"</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Construir vector de colores nombrado (añadimos color para "Sin información")</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>niveles_sin_na <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qq), <span class="st">"Sin información"</span>)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>pal_q <span class="ot">&lt;-</span> <span class="fu">ensure_palette_length</span>(pal_iej, <span class="fu">length</span>(niveles_sin_na))</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>vals_qq <span class="ot">&lt;-</span> <span class="fu">setNames</span>(pal_q, niveles_sin_na)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>vals_qq <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_qq, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa </span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>map_q_quantile <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> la_serena_urb, <span class="fu">aes</span>(<span class="at">fill =</span> IEJ_qq),</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> vals_qq, <span class="at">name =</span> <span class="st">"IEJ"</span>,</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>                    <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Indicador de Escolaridad del Jefe de Hogar (IEJ)"</span>,</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Quiebres por cuantiles"</span>,</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> nota_fuente) <span class="sc">+</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>),</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>map_q_quantile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -588,26 +805,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="quiebres-de-jenks-jenks-natural-breaks" class="level3" data-number="E.5.5">
-<h3 data-number="E.5.5" class="anchored" data-anchor-id="quiebres-de-jenks-jenks-natural-breaks"><span class="header-section-number">E.5.5</span> Quiebres de Jenks (jenks / Natural Breaks)</h3>
-<ul>
-<li>Busca minimizar la varianza intra-clase y maximizar la varianza inter-clase; “acomoda” cortes donde los datos cambian más.</li>
-<li>Puede ser sensible a outliers y a la elección de n.</li>
-</ul>
+<section id="quiebres-de-jenks-jenks-o-natural-breaks" class="level3 page-columns page-full" data-number="E.6.5">
+<h3 data-number="E.6.5" class="anchored" data-anchor-id="quiebres-de-jenks-jenks-o-natural-breaks"><span class="header-section-number">E.6.5</span> Quiebres de Jenks (<code>jenks</code> o <em>Natural Breaks</em>)</h3>
+<p>Ahora los cortes se adaptan a los agrupamientos de la distribución. Las líneas tienden a aparecer donde hay cambios de densidad o separaciones entre valores. A diferencia de los cuantiles, no se espera que cada clase tenga el mismo número de manzanas.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generación de Quiebres</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>brks_jenks <span class="ot">&lt;-</span> <span class="fu">robust_breaks</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  la_serena_urb<span class="sc">$</span>IEJ,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">style =</span> <span class="st">"jenks"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>graf_dist_jenks <span class="ot">&lt;-</span> <span class="fu">plot_break_distribution</span>(</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  la_serena_urb<span class="sc">$</span>IEJ,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  brks_jenks,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Jenks (quiebres naturales)"</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>graf_dist_jenks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-dist-jenks" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-dist-jenks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="quiebres_files/figure-html/fig-dist-jenks-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-dist-jenks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;E.3: Distribución del IEJ y quiebres naturales de Jenks.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Si una línea deja muy pocas barras a un lado, conviene revisar si está aislando valores extremos. Esa clase puede ser estadísticamente coherente, pero quizá resulte poco útil para el propósito comunicacional del mapa.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generación de Quiebres</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">robust_breaks</span>(la_serena_urb<span class="sc">$</span>IEJ, <span class="at">n =</span> n, <span class="at">style =</span> <span class="st">"jenks"</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas legibles para la leyenda (incluye el límite inferior cerrado en el primer tramo)</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>labs_q <span class="ot">&lt;-</span> <span class="fu">labels_from_breaks</span>(brks)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># crear variable con clasificación con quiebres</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>la_serena_urb <span class="ot">&lt;-</span> la_serena_urb <span class="sc">%&gt;%</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qj =</span> <span class="fu">cut</span>(IEJ, <span class="at">breaks =</span> brks, <span class="at">include.lowest =</span> <span class="cn">TRUE</span>, <span class="at">labels =</span> labs_q),</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qj =</span> <span class="fu">fct_explicit_na</span>(IEJ_qj, <span class="at">na_level =</span> <span class="st">"Sin información"</span>)</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas legibles para la leyenda (incluye el límite inferior cerrado en el primer tramo)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>labs_j <span class="ot">&lt;-</span> <span class="fu">labels_from_breaks</span>(brks_jenks)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># crear variable con clasificación con quiebres</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>la_serena_urb <span class="ot">&lt;-</span> la_serena_urb <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qj =</span> <span class="fu">cut</span>(</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      IEJ,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> brks_jenks,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">include.lowest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> labs_j</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qj =</span> forcats<span class="sc">::</span><span class="fu">fct_na_value_to_level</span>(IEJ_qj, <span class="at">level =</span> <span class="st">"Sin información"</span>)</span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Construir vector de colores nombrado (añadimos color para "Sin información")</span></span>
@@ -624,12 +869,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>                    <span class="at">drop =</span> <span class="cn">FALSE</span> ) <span class="sc">+</span></span>
 <span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Indicador de Escolaridad del Jefe de Hogar (IEJ)"</span>,</span>
 <span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Quiebres de Jenks"</span>,</span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()  <span class="sc">+</span></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>),</span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>map_q_jenks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> nota_fuente) <span class="sc">+</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()  <span class="sc">+</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>),</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>map_q_jenks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -639,48 +885,77 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="quiebres-de-fisher-fisher" class="level3" data-number="E.5.6">
-<h3 data-number="E.5.6" class="anchored" data-anchor-id="quiebres-de-fisher-fisher"><span class="header-section-number">E.5.6</span> Quiebres de Fisher (fisher)</h3>
-<ul>
-<li>Conocido como Fisher-Jenks; busca la partición óptima que minimiza la suma de varianzas dentro de clases.</li>
-<li>Suele producir resultados parecidos a Jenks, con énfasis en la optimalidad global.</li>
-</ul>
-<div class="cell">
+<section id="quiebres-de-fisher-fisher" class="level3 page-columns page-full" data-number="E.6.6">
+<h3 data-number="E.6.6" class="anchored" data-anchor-id="quiebres-de-fisher-fisher"><span class="header-section-number">E.6.6</span> Quiebres de Fisher (<code>fisher</code>)</h3>
+<p>Fisher parte de la misma idea de formar clases internamente homogéneas, pero busca la partición global de mínima variación interna. El histograma permite verificar cuánto se parece su solución a Jenks y localizar cualquier diferencia. Una similitud alta es esperable: ambos optimizan una noción de homogeneidad, aunque lo hacen mediante procedimientos distintos.</p>
+<div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generación de Quiebres</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">robust_breaks</span>(la_serena_urb<span class="sc">$</span>IEJ, <span class="at">n =</span> n, <span class="at">style =</span> <span class="st">"fisher"</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas legibles para la leyenda (incluye el límite inferior cerrado en el primer tramo)</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>labs_q <span class="ot">&lt;-</span> <span class="fu">labels_from_breaks</span>(brks)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># crear variable con clasificación con quiebres </span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>la_serena_urb <span class="ot">&lt;-</span> la_serena_urb <span class="sc">%&gt;%</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qf =</span> <span class="fu">cut</span>(IEJ, <span class="at">breaks =</span> brks, <span class="at">include.lowest =</span> <span class="cn">TRUE</span>, <span class="at">labels =</span> labs_q),</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qf =</span> <span class="fu">fct_explicit_na</span>(IEJ_qf, <span class="at">na_level =</span> <span class="st">"Sin información"</span>)</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>brks_fisher <span class="ot">&lt;-</span> <span class="fu">robust_breaks</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  la_serena_urb<span class="sc">$</span>IEJ,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">style =</span> <span class="st">"fisher"</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>graf_dist_fisher <span class="ot">&lt;-</span> <span class="fu">plot_break_distribution</span>(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  la_serena_urb<span class="sc">$</span>IEJ,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  brks_fisher,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Fisher--Jenks"</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Construir vector de colores nombrado (añadimos color para "Sin información")</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>niveles_sin_na <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qf), <span class="st">"Sin información"</span>)</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>pal_f <span class="ot">&lt;-</span> <span class="fu">ensure_palette_length</span>(pal_iej, <span class="fu">length</span>(niveles_sin_na))</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>vals_qf <span class="ot">&lt;-</span> <span class="fu">setNames</span>(pal_f, niveles_sin_na)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>vals_qf <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_qf, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa </span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>map_q_fisher <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> la_serena_urb, <span class="fu">aes</span>(<span class="at">fill =</span> IEJ_qf),</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> vals_qf, <span class="at">name =</span> <span class="st">"IEJ"</span>,</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>                    <span class="at">drop =</span> <span class="cn">FALSE</span> ) <span class="sc">+</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Indicador de Escolaridad del Jefe de Hogar (IEJ)"</span>,</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Quiebres de Fisher"</span>,</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()  <span class="sc">+</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>),</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>map_q_fisher</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>graf_dist_fisher</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-dist-fisher" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-dist-fisher-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="quiebres_files/figure-html/fig-dist-fisher-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-dist-fisher-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;E.4: Distribución del IEJ y quiebres de Fisher.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>El criterio matemático ayuda a resumir la distribución, pero no reemplaza la decisión cartográfica. Antes de adoptar estos cortes se debe evaluar si las clases resultantes son interpretables y si el mapa se comparará con otros periodos o territorios.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas legibles para la leyenda (incluye el límite inferior cerrado en el primer tramo)</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>labs_f <span class="ot">&lt;-</span> <span class="fu">labels_from_breaks</span>(brks_fisher)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># crear variable con clasificación con quiebres </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>la_serena_urb <span class="ot">&lt;-</span> la_serena_urb <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qf =</span> <span class="fu">cut</span>(</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>      IEJ,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> brks_fisher,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">include.lowest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> labs_f</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">IEJ_qf =</span> forcats<span class="sc">::</span><span class="fu">fct_na_value_to_level</span>(IEJ_qf, <span class="at">level =</span> <span class="st">"Sin información"</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Construir vector de colores nombrado (añadimos color para "Sin información")</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>niveles_sin_na <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qf), <span class="st">"Sin información"</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>pal_f <span class="ot">&lt;-</span> <span class="fu">ensure_palette_length</span>(pal_iej, <span class="fu">length</span>(niveles_sin_na))</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>vals_qf <span class="ot">&lt;-</span> <span class="fu">setNames</span>(pal_f, niveles_sin_na)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>vals_qf <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_qf, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa </span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>map_q_fisher <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> la_serena_urb, <span class="fu">aes</span>(<span class="at">fill =</span> IEJ_qf),</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> vals_qf, <span class="at">name =</span> <span class="st">"IEJ"</span>,</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>                    <span class="at">drop =</span> <span class="cn">FALSE</span> ) <span class="sc">+</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Indicador de Escolaridad del Jefe de Hogar (IEJ)"</span>,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Quiebres de Fisher"</span>,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> nota_fuente) <span class="sc">+</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()  <span class="sc">+</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>),</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>map_q_fisher</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -691,92 +966,94 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="recomendaciones-prácticas" class="level2" data-number="E.6">
-<h2 data-number="E.6" class="anchored" data-anchor-id="recomendaciones-prácticas"><span class="header-section-number">E.6</span> Recomendaciones prácticas</h2>
-<ul>
-<li>Decide el “mensaje” antes del método:
-<ul>
-<li>¿Quieres comparar posiciones relativas? → Cuantiles.</li>
-<li>¿Quieres resaltar agrupamientos naturales? → Jenks/Fisher.</li>
-<li>¿Tienes umbrales normativos? → Manual (fixed).</li>
-</ul></li>
-<li>Consistencia: conserva el mismo esquema entre mapas comparables (años, comunas).</li>
-<li>Leyenda honesta: especifica el tipo de quiebre y muestra/explica “Sin información”.</li>
-<li>Accesibilidad: usa paletas color-blind friendly (<a href="https://colorbrewer2.org/#type=sequential&amp;scheme=GnBu&amp;n=5">ColorBrewer</a> es una buena base). <!-- - MAUP: recuerda que el patrón también depende de la unidad espacial (manzana, zona, comuna). Describe la unidad en el título o pie. --></li>
-</ul>
+<section id="recomendaciones-prácticas" class="level2" data-number="E.7">
+<h2 data-number="E.7" class="anchored" data-anchor-id="recomendaciones-prácticas"><span class="header-section-number">E.7</span> Recomendaciones prácticas</h2>
+<ol type="1">
+<li><strong>Define primero la pregunta.</strong> Usa cortes manuales para umbrales con significado externo; cuantiles para posiciones relativas; y Jenks o Fisher para explorar agrupamientos propios de una distribución.</li>
+<li><strong>Mira la distribución antes del mapa.</strong> Revisa el histograma, los valores extremos, los empates y cuántas observaciones quedan en cada clase. Una clase casi vacía merece una explicación o una revisión.</li>
+<li><strong>Prueba la sensibilidad.</strong> Compara, por ejemplo, cuatro, cinco y seis clases. Si la historia territorial cambia drásticamente, la conclusión es frágil y debe comunicarse con cautela.</li>
+<li><strong>Mantén la comparabilidad.</strong> Para comparar años, comunas o regiones, calcula una escala común sobre el universo completo o utiliza cortes manuales constantes. No basta con repetir los mismos colores.</li>
+<li><strong>Construye una leyenda honesta.</strong> Informa el método, el número de clases, los límites, la unidad del indicador y el tratamiento de <code>NA</code>. “Sin información” no significa cero.</li>
+<li><strong>Cuida la percepción del color.</strong> Para magnitudes ordenadas usa una paleta secuencial y perceptualmente ordenada. <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=GnBu&amp;n=5">ColorBrewer</a> es una buena base para seleccionar alternativas accesibles.</li>
+<li><strong>Recuerda que estos métodos no son espaciales.</strong> Los cortes utilizan los valores, pero no la vecindad entre unidades. Además, el patrón puede cambiar al modificar la unidad geográfica —manzana, zona o comuna—, efecto relacionado con el problema de la unidad espacial modificable (MAUP).</li>
+</ol>
+<p>En una publicación o informe, una formulación transparente sería: “El indicador se clasificó en cinco clases mediante cuantiles, calculados sobre todas las manzanas del área de estudio; las unidades sin dato se muestran en gris”.</p>
 </section>
-<section id="comparación-visual-de-los-métodos-de-quiebres" class="level2" data-number="E.7">
-<h2 data-number="E.7" class="anchored" data-anchor-id="comparación-visual-de-los-métodos-de-quiebres"><span class="header-section-number">E.7</span> Comparación Visual de los Métodos de Quiebres</h2>
+<section id="comparación-visual-de-los-métodos-de-quiebres" class="level2" data-number="E.8">
+<h2 data-number="E.8" class="anchored" data-anchor-id="comparación-visual-de-los-métodos-de-quiebres"><span class="header-section-number">E.8</span> Comparación Visual de los Métodos de Quiebres</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Helpers de seguridad -------------------------------------------------</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ensure_palette_length <span class="ot">&lt;-</span> <span class="cf">function</span>(pal, K) {</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(pal) <span class="sc">==</span> K) <span class="fu">return</span>(pal)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  grDevices<span class="sc">::</span><span class="fu">colorRampPalette</span>(pal)(K)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>mk_named_pal <span class="ot">&lt;-</span> <span class="cf">function</span>(levels_vec, base_pal) {</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  base_pal <span class="ot">&lt;-</span> <span class="fu">ensure_palette_length</span>(base_pal, <span class="fu">length</span>(levels_vec))</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(base_pal, levels_vec)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>make_map <span class="ot">&lt;-</span> <span class="cf">function</span>(df, fill_var, vals_named, subt) {</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># aserciones útiles</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">is.factor</span>(df[[fill_var]]))</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">all</span>(<span class="fu">levels</span>(df[[fill_var]]) <span class="sc">%in%</span> <span class="fu">names</span>(vals_named)))</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">fill =</span> .data[[fill_var]]),</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> vals_named, <span class="at">name =</span> <span class="st">"IEJ"</span>, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="cn">NULL</span>, <span class="at">subtitle =</span> subt, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1) Asegurar que las variables de clase existen y son factor ----------</span></span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">is.factor</span>(la_serena_urb<span class="sc">$</span>IEJ_qm),</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>          <span class="fu">is.factor</span>(la_serena_urb<span class="sc">$</span>IEJ_qq),</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>          <span class="fu">is.factor</span>(la_serena_urb<span class="sc">$</span>IEJ_qj),</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>          <span class="fu">is.factor</span>(la_serena_urb<span class="sc">$</span>IEJ_qf))</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 2) Paletas nombradas por método (incluye “Sin información”) ----------</span></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Base secuencial (ajústala si usas otra)</span></span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>pal_base <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'#f0f9e8'</span>,<span class="st">'#bae4bc'</span>,<span class="st">'#7bccc4'</span>,<span class="st">'#43a2ca'</span>,<span class="st">'#0868ac'</span>)</span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>niv_m  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qm), <span class="st">"Sin información"</span>)</span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>niv_q  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qq), <span class="st">"Sin información"</span>)</span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>niv_j  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qj), <span class="st">"Sin información"</span>)</span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>niv_f  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qf), <span class="st">"Sin información"</span>)</span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>vals_m  <span class="ot">&lt;-</span> <span class="fu">mk_named_pal</span>(niv_m, pal_base);  vals_m  <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_m,  <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>vals_qq <span class="ot">&lt;-</span> <span class="fu">mk_named_pal</span>(niv_q, pal_base);  vals_qq <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_qq, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>vals_qj <span class="ot">&lt;-</span> <span class="fu">mk_named_pal</span>(niv_j, pal_base);  vals_qj <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_qj, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>vals_qf <span class="ot">&lt;-</span> <span class="fu">mk_named_pal</span>(niv_f, pal_base);  vals_qf <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_qf, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 3) Construir cada mapa de forma segura --------------------------------</span></span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">make_map</span>(la_serena_urb, <span class="st">"IEJ_qm"</span>, vals_m,  <span class="st">"Manual (fixed)"</span>)</span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">make_map</span>(la_serena_urb, <span class="st">"IEJ_qq"</span>, vals_qq, <span class="st">"Cuantiles"</span>)</span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">make_map</span>(la_serena_urb, <span class="st">"IEJ_qj"</span>, vals_qj, <span class="st">"Jenks (Natural)"</span>)</span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>m4 <span class="ot">&lt;-</span> <span class="fu">make_map</span>(la_serena_urb, <span class="st">"IEJ_qf"</span>, vals_qf, <span class="st">"Fisher-Jenks"</span>)</span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 4) Componer 2×2 con patchwork ----------------------------------------</span></span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("patchwork") # si hace falta</span></span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>comparativa_maps <span class="ot">&lt;-</span> (m1 <span class="sc">+</span> m2) <span class="sc">/</span> (m3 <span class="sc">+</span> m4) <span class="sc">+</span></span>
-<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
-<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"IEJ — Comparativa de quiebres"</span>,</span>
-<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Visualización lado a lado para contrastar patrones espaciales"</span>,</span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Nota: los rangos de clase difieren por método. Ver tabla comparativa para límites numéricos."</span></span>
-<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">&amp;</span></span>
-<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"grey40"</span>))</span>
-<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>comparativa_maps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Helpers de seguridad -------------------------------------------------</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ensure_palette_length <span class="ot">&lt;-</span> <span class="cf">function</span>(pal, K) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(pal) <span class="sc">==</span> K) <span class="fu">return</span>(pal)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  grDevices<span class="sc">::</span><span class="fu">colorRampPalette</span>(pal)(K)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>mk_named_pal <span class="ot">&lt;-</span> <span class="cf">function</span>(levels_vec, base_pal) {</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  base_pal <span class="ot">&lt;-</span> <span class="fu">ensure_palette_length</span>(base_pal, <span class="fu">length</span>(levels_vec))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(base_pal, levels_vec)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>make_map <span class="ot">&lt;-</span> <span class="cf">function</span>(df, fill_var, vals_named, subt) {</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># aserciones útiles</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">is.factor</span>(df[[fill_var]]))</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">all</span>(<span class="fu">levels</span>(df[[fill_var]]) <span class="sc">%in%</span> <span class="fu">names</span>(vals_named)))</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">fill =</span> .data[[fill_var]]),</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> vals_named, <span class="at">name =</span> <span class="st">"IEJ"</span>, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="cn">NULL</span>, <span class="at">subtitle =</span> subt, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1) Asegurar que las variables de clase existen y son factor ----------</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">is.factor</span>(la_serena_urb<span class="sc">$</span>IEJ_qm),</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>          <span class="fu">is.factor</span>(la_serena_urb<span class="sc">$</span>IEJ_qq),</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>          <span class="fu">is.factor</span>(la_serena_urb<span class="sc">$</span>IEJ_qj),</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>          <span class="fu">is.factor</span>(la_serena_urb<span class="sc">$</span>IEJ_qf))</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 2) Paletas nombradas por método (incluye “Sin información”) ----------</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Base secuencial (ajústala si usas otra)</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>pal_base <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'#f0f9e8'</span>,<span class="st">'#bae4bc'</span>,<span class="st">'#7bccc4'</span>,<span class="st">'#43a2ca'</span>,<span class="st">'#0868ac'</span>)</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>niv_m  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qm), <span class="st">"Sin información"</span>)</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>niv_q  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qq), <span class="st">"Sin información"</span>)</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>niv_j  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qj), <span class="st">"Sin información"</span>)</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>niv_f  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">levels</span>(la_serena_urb<span class="sc">$</span>IEJ_qf), <span class="st">"Sin información"</span>)</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>vals_m  <span class="ot">&lt;-</span> <span class="fu">mk_named_pal</span>(niv_m, pal_base);  vals_m  <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_m,  <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>vals_qq <span class="ot">&lt;-</span> <span class="fu">mk_named_pal</span>(niv_q, pal_base);  vals_qq <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_qq, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>vals_qj <span class="ot">&lt;-</span> <span class="fu">mk_named_pal</span>(niv_j, pal_base);  vals_qj <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_qj, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>vals_qf <span class="ot">&lt;-</span> <span class="fu">mk_named_pal</span>(niv_f, pal_base);  vals_qf <span class="ot">&lt;-</span> <span class="fu">c</span>(vals_qf, <span class="st">"Sin información"</span> <span class="ot">=</span> <span class="st">"#d9d9d9"</span>)</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 3) Construir cada mapa de forma segura --------------------------------</span></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">make_map</span>(la_serena_urb, <span class="st">"IEJ_qm"</span>, vals_m,  <span class="st">"Manual (fixed)"</span>)</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">make_map</span>(la_serena_urb, <span class="st">"IEJ_qq"</span>, vals_qq, <span class="st">"Cuantiles"</span>)</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">make_map</span>(la_serena_urb, <span class="st">"IEJ_qj"</span>, vals_qj, <span class="st">"Jenks (Natural)"</span>)</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>m4 <span class="ot">&lt;-</span> <span class="fu">make_map</span>(la_serena_urb, <span class="st">"IEJ_qf"</span>, vals_qf, <span class="st">"Fisher-Jenks"</span>)</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 4) Componer 2×2 con patchwork ----------------------------------------</span></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("patchwork") # si hace falta</span></span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>comparativa_maps <span class="ot">&lt;-</span> (m1 <span class="sc">+</span> m2) <span class="sc">/</span> (m3 <span class="sc">+</span> m4) <span class="sc">+</span></span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"IEJ — Comparativa de quiebres"</span>,</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Visualización lado a lado para contrastar patrones espaciales"</span>,</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="fu">paste</span>(</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Los rangos de clase difieren por método."</span>,</span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Fuente: indicadores derivados del Censo 2017; uso didáctico."</span></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">&amp;</span></span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"grey40"</span>))</span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a>comparativa_maps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
