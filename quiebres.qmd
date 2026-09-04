@@ -25,24 +25,135 @@ El mismo dato puede “contar historias distintas” según el esquema de clasif
 ## Justificación
 
 - **Riesgo de sesgo visual**: un quiebre inapropiado puede exagerar o esconder cambios, afectando decisiones (priorización de recursos, focalización territorial).
-- **Percepción humana del color**: paletas mal elegidas (e.g., arcoíris) introducen artefactos perceptuales; una paleta **secuencial uniforme** comunica magnitudes de forma estable y comprensible.
+- **Percepción humana del color**: paletas mal elegidas (p. ej., arcoíris) introducen artefactos perceptuales; una paleta **secuencial uniforme** comunica magnitudes de forma estable y comprensible.
 - **Transparencia**: exponer el criterio de quiebre y el tratamiento de `NA` es parte de la **ética de la comunicación** en políticas públicas.
 
 
-## Tipos de quiebre (reseña breve)
+## ¿Qué es un quiebre de clase?
 
-- **Manual (fixed)**: Tú defines los cortes (con conocimiento experto, umbrales normativos, metas). Máximo control, pero exige **justificación**.
-- **Cuantiles (quantile)**: Cada clase contiene ~la misma cantidad de unidades espaciales. Resalta **ranks/ordenamientos**, pero los límites dependen de la distribución muestral.
-- **Jenks (jenks)**: También llamado *Natural Breaks*. Minimiza varianza intra-clase y maximiza varianza inter-clase; tiende a generar clases “naturales” según la distribución. Sensible a outliers y al número de clases.
-- **Fisher (fisher)**: Variante/optimización del criterio Jenks para particionar con mínima varianza intra-clase. Suele dar cortes similares a Jenks, con búsqueda óptima global.
+Una variable cuantitativa puede representarse con una escala continua o agruparse en
+intervalos. Los **quiebres** son los valores que delimitan esos intervalos. Por
+ejemplo, los cortes 5, 8 y 12 separan la variable en cuatro clases. Cada unidad
+espacial recibe el color de la clase en la que cae su valor.
+
+Clasificar siempre implica una simplificación: dentro de una misma clase, valores
+distintos se muestran con el mismo color; a ambos lados de un corte, valores muy
+parecidos pueden recibir colores diferentes. Por eso, antes de elegir un método es
+necesario definir:
+
+1. **El propósito del mapa:** comparar posiciones relativas, comunicar umbrales o
+   explorar agrupamientos en la distribución.
+2. **El número de clases:** pocas clases facilitan la lectura, pero resumen más; muchas
+   conservan detalle, pero hacen más difícil distinguir colores y explicar la leyenda.
+   Como punto de partida suelen funcionar entre cuatro y siete clases.
+3. **El universo de comparación:** si se compararán territorios o años, conviene usar
+   los mismos cortes en todos los mapas. Recalcularlos para cada subconjunto puede
+   producir colores iguales que representan valores distintos.
+4. **La forma de la distribución:** asimetría, valores extremos, vacíos y valores
+   repetidos pueden modificar considerablemente los resultados.
+
+## Métodos de clasificación
+
+### Quiebres manuales (`fixed`)
+
+Los cortes se definen **antes de observar o clasificar el mapa**, a partir de criterios
+externos: umbrales normativos, metas institucionales, categorías disciplinares o una
+escala común acordada. El algoritmo no busca grupos en los datos; aplica exactamente
+los límites especificados por quien analiza.
+
+**Cuándo utilizarlo.** Es la mejor opción cuando las categorías tienen significado
+sustantivo —por ejemplo, cumplimiento de una norma— o cuando se requiere comparar
+varios lugares o periodos con una escala idéntica.
+
+**Consideraciones.** Cada corte debe justificarse y documentarse. Es necesario
+comprobar que el mínimo y el máximo queden cubiertos, que no se generen clases vacías
+y que los umbrales sigan siendo pertinentes para el contexto. Si los cortes se eligen
+solo después de mirar el patrón espacial, existe el riesgo de construir una narrativa
+a conveniencia. En este capítulo, 5, 8, 12 y 15 son cortes **exclusivamente
+didácticos**, no umbrales normativos.
+
+### Cuantiles (`quantile`)
+
+Primero se ordenan los valores y luego se ubican los cortes para que cada clase
+contenga aproximadamente la misma cantidad de unidades espaciales. Con cinco clases,
+cada una intenta reunir cerca del 20 % de las observaciones. Las clases suelen tener
+anchos numéricos diferentes: un intervalo puede abarcar décimas y otro varios puntos.
+
+**Cuándo utilizarlo.** Es apropiado para comunicar **posición relativa** —los grupos
+con valores más bajos o más altos dentro del universo estudiado— y para asegurar que
+todos los colores tengan presencia en el mapa.
+
+**Consideraciones.** No debe interpretarse como una división en magnitudes
+equivalentes. Puede separar valores casi iguales solo para equilibrar cantidades y,
+cuando hay muchos empates, puede producir menos clases de las solicitadas. Además,
+los cortes cambian al cambiar la muestra; por ello no es recomendable recalcularlos
+por separado si se desea comparar años o territorios.
+
+### Quiebres naturales de Jenks (`jenks`)
+
+Jenks busca cortes que agrupen valores semejantes. En términos simples, intenta
+reducir la variación **dentro** de cada clase y aumentar la separación **entre**
+clases. Por ello, los cortes suelen ubicarse en saltos o zonas poco densas de la
+distribución, en vez de repartir las observaciones por igual.
+
+**Cuándo utilizarlo.** Resulta útil en mapas exploratorios de una sola distribución,
+especialmente cuando esta es asimétrica, presenta grupos reconocibles o tiene rangos
+de concentración distintos.
+
+**Consideraciones.** El resultado depende de los datos y del número de clases. Los
+valores extremos pueden atraer un corte y dejar clases con pocas observaciones. Como
+los límites cambian con la muestra, dos mapas calculados por separado no son
+directamente comparables aunque utilicen la misma paleta. También se debe informar el
+número de clases elegido.
+
+### Fisher (`fisher` o Fisher--Jenks)
+
+Fisher utiliza programación dinámica para encontrar la partición que minimiza de
+forma global la variación dentro de las clases para el número solicitado. Comparte el
+objetivo general de los quiebres naturales, pero busca sistemáticamente la solución
+óptima bajo ese criterio; por eso suele producir límites iguales o muy próximos a
+Jenks, aunque no necesariamente idénticos.
+
+**Cuándo utilizarlo.** Es conveniente cuando se desea una clasificación natural
+reproducible y una solución óptima para la distribución analizada. Es especialmente
+útil para contrastar el resultado de Jenks o cuando pequeñas diferencias en los
+cortes importan.
+
+**Consideraciones.** “Óptimo” se refiere solo a minimizar la variación interna; no
+significa que la clasificación sea automáticamente la más adecuada para comunicar o
+tomar decisiones. Sigue siendo dependiente de la muestra, del número de clases y de
+los valores extremos. Tampoco resuelve por sí solo la comparabilidad temporal o
+territorial.
+
+| Método | Pregunta que responde | Conviene cuando... | Precaución principal |
+|---|---|---|---|
+| Manual | ¿Qué unidades cruzan umbrales con significado externo? | Hay normas, metas o se necesita una escala común | Justificar los cortes y revisar clases vacías |
+| Cuantiles | ¿Qué unidades ocupan posiciones relativas similares? | Interesa el orden y una cantidad parecida de casos por clase | Puede separar valores casi iguales y cambia con la muestra |
+| Jenks | ¿Dónde aparecen agrupamientos o saltos en estos datos? | Se explora una distribución irregular en un mapa | Es sensible a extremos, al número de clases y a la muestra |
+| Fisher | ¿Cuál es la partición de mínima variación interna? | Se busca una solución natural óptima y reproducible | La optimalidad estadística no garantiza pertinencia sustantiva |
 
 ---
 
 
 
-## Parte práctica (R): mapas con quiebres
+## Parte práctica (R): de la distribución al mapa
 
-A continuación se construirá mapas con la variable de el indicador de Escolaridad del Jefe de Hogar (EIJ) con diferentes tipos de quiebres para evidenciar las diferencias que existen de forma práctica. Adicionalmente consideraremos lo siguiente:
+Aplicaremos los cuatro métodos al **Indicador de Escolaridad del Jefe de Hogar
+(`IEJ`)** de las manzanas urbanas de la comuna de La Serena. Antes de construir cada
+mapa se mostrará un histograma: las barras describen la distribución observada y las
+líneas verticales indican los quiebres internos. Esta lectura previa permite entender
+qué valores agrupa cada método antes de examinar su patrón espacial.
+
+::: {.callout-important title="Alcance de los datos"}
+La base de indicadores socioeconómicos utilizada en esta práctica fue elaborada a
+partir del **Censo 2017** y se incluye **solo con fines didácticos y a modo de
+ejemplo**. Los resultados no deben interpretarse como un diagnóstico vigente ni los
+cortes empleados como umbrales oficiales. Para análisis aplicados se debe revisar la
+definición de cada indicador, validar la fuente y utilizar la información oficial más
+actualizada disponible.
+:::
+
+Además, durante el ejercicio:
 
 
 - Controlamos `NA` como “Sin información” (color gris), y damos opción de ocultarlo de la leyenda.
@@ -50,7 +161,7 @@ A continuación se construirá mapas con la variable de el indicador de Escolari
 
 
 ### Preparación
-#### Librerias
+#### Librerías
 
 ```{r}
 
@@ -63,7 +174,7 @@ library(classInt)
 library(forcats)
 ```
 
-#### Funciones de Ayuda
+#### Funciones de ayuda
 
 ```{r}
 # Utilidades (helpers) ----------------------------------------------------
@@ -83,9 +194,71 @@ labels_from_breaks <- function(brks) {
 # Calcula cortes robustos con classInt (evita n > únicos y duplicados)
 robust_breaks <- function(x, n, style = "quantile") {
   x_ok <- x[is.finite(x)]
-  n_eff <- min(n, max(1, length(unique(x_ok)) - 1))
+  if (length(x_ok) == 0) {
+    stop("La variable no contiene valores finitos.")
+  }
+  if (length(unique(x_ok)) < 2) {
+    stop("Se necesitan al menos dos valores distintos para calcular quiebres.")
+  }
+
+  n_eff <- min(n, length(unique(x_ok)) - 1)
   ci <- classIntervals(x_ok, n = n_eff, style = style)
   sort(unique(ci$brks))
+}
+
+# Grafica la distribución y superpone los quiebres internos
+plot_break_distribution <- function(x, brks, metodo, bins = 30) {
+  datos <- data.frame(IEJ = x[is.finite(x)])
+  cortes <- brks[-c(1, length(brks))]
+  cortes_df <- data.frame(
+    corte = cortes,
+    etiqueta = format(round(cortes, 2), trim = TRUE, nsmall = 1)
+  )
+
+  ggplot(datos, aes(x = IEJ)) +
+    geom_histogram(
+      bins = bins,
+      fill = "#43a2ca",
+      colour = "white",
+      linewidth = 0.25
+    ) +
+    geom_vline(
+      data = cortes_df,
+      aes(xintercept = corte),
+      colour = "#b2182b",
+      linewidth = 0.85,
+      linetype = "22"
+    ) +
+    geom_label(
+      data = cortes_df,
+      aes(x = corte, y = Inf, label = etiqueta),
+      inherit.aes = FALSE,
+      angle = 90,
+      hjust = 1,
+      vjust = 1.2,
+      size = 3.2,
+      linewidth = 0,
+      label.padding = grid::unit(0.12, "lines"),
+      colour = "#7f0000",
+      fill = "white"
+    ) +
+    scale_x_continuous(expand = expansion(mult = c(0.01, 0.04))) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +
+    labs(
+      title = paste("Distribución del IEJ —", metodo),
+      subtitle = "Las líneas verticales muestran los quiebres internos",
+      x = "Valor del IEJ",
+      y = "Número de manzanas",
+      caption = "Fuente: indicadores socioeconómicos derivados del Censo 2017; uso didáctico."
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(
+      plot.title = element_text(face = "bold", colour = "#17324d"),
+      plot.subtitle = element_text(colour = "grey35"),
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_blank(),
+      plot.caption = element_text(colour = "grey40", hjust = 0)
+    )
 }
 ```
 
@@ -102,10 +275,16 @@ reg <-  "R04"
 # Lectura de insumo espacial
 path_file <- paste0(path_resultados, reg, "_ind_socioeconomicos.shp")
 ind_soc <- st_read(path_file, quiet = TRUE)
+
+# Texto común para documentar la fuente en las salidas gráficas
+nota_fuente <- paste(
+  "Fuente: indicadores socioeconómicos derivados del Censo 2017;",
+  "uso didáctico."
+)
 ```
 
 
-#### Área de Estudio
+#### Área de estudio
 
 ```{r}
 
@@ -117,7 +296,7 @@ la_serena_urb <- ind_soc %>%
 ```
 
 
-#### Paleta de Colores
+#### Paleta de colores
 
 ```{r}
 # Paleta de Colores (secuencial) ------------------------------------------
@@ -127,7 +306,7 @@ pal_iej <- c('#f0f9e8','#bae4bc','#7bccc4','#43a2ca','#0868ac')
 ```
 
 
-### Mapa Base (Paleta Continua)
+### Mapa base (paleta continua)
 
 
 ```{r}
@@ -139,7 +318,8 @@ map_cont <- ggplot() +
                        na.value = "grey90") +
   labs(title = "Escolaridad del Jefe de Hogar (IEJ)",
        subtitle = "Sin quiebres — continuo",
-       x = NULL, y = NULL) +
+       x = NULL, y = NULL,
+       caption = nota_fuente) +
   theme_bw() +
   theme(panel.grid.major = element_line(colour = "gray80"),
         panel.grid.minor = element_blank())
@@ -148,26 +328,58 @@ map_cont
 ```
 
 
-### Quiebres manuales (fixed)
+### Quiebres manuales (`fixed`)
 
-- Útiles cuando hay umbrales normativos o cortes con sentido sustantivo (p. ej., metas, percentiles de política).
-- Documenta la justificación de cada punto de corte.
+Para el ejemplo se proponen los valores 5, 8, 12 y 15. El mínimo y el máximo
+observados se agregan automáticamente para cubrir todo el rango. El histograma
+permite comprobar que estos cortes producen clases de distinto ancho y con cantidades
+desiguales de manzanas. Esto no es un error: en una clasificación manual prima el
+significado de los umbrales, no el equilibrio estadístico.
 
 ```{r}
-# Exploración rápida
-hist(la_serena_urb$IEJ)
-range(la_serena_urb$IEJ, na.rm = TRUE)
+#| label: fig-dist-manual
+#| fig-cap: "Distribución del IEJ y quiebres manuales."
+#| fig-width: 9
+#| fig-height: 5.2
 
-# Definición manual (ejemplo)
+# Definición manual para fines didácticos; no corresponde a umbrales oficiales
 min_iej <- min(la_serena_urb$IEJ, na.rm = TRUE)
 max_iej <- max(la_serena_urb$IEJ, na.rm = TRUE)
-brks <- sort(unique(c(min_iej, 5, 8, 12, 15, max_iej)))
-labs_q <- labels_from_breaks(brks)
+cortes_manuales <- c(5, 8, 12, 15)
+
+# Conserva solo los cortes que caen dentro del rango observado
+brks_manual <- sort(unique(c(
+  min_iej,
+  cortes_manuales[cortes_manuales > min_iej & cortes_manuales < max_iej],
+  max_iej
+)))
+
+graf_dist_manual <- plot_break_distribution(
+  la_serena_urb$IEJ,
+  brks_manual,
+  "quiebres manuales"
+)
+
+graf_dist_manual
+```
+
+Las líneas se encuentran en valores definidos por quien analiza. Antes de reutilizar
+este código, reemplaza `cortes_manuales` por límites respaldados por una norma, una
+hipótesis o un criterio sustantivo explícito.
+
+```{r}
+# Etiquetas y variable de clases
+labs_m <- labels_from_breaks(brks_manual)
 
 # Variable de clases + NA explícito
 la_serena_urb <- la_serena_urb %>%
   mutate(
-    IEJ_qm = cut(IEJ, breaks = brks, include.lowest = TRUE, labels = labs_q),
+    IEJ_qm = cut(
+      IEJ,
+      breaks = brks_manual,
+      include.lowest = TRUE,
+      labels = labs_m
+    ),
     IEJ_qm = forcats::fct_na_value_to_level(IEJ_qm, level = "Sin información")
   )
 
@@ -183,7 +395,8 @@ map_q_manual <- ggplot() +
   scale_fill_manual(values = vals_m, name = "IEJ",
                     drop = FALSE) +
   labs(title = "Indicador de Escolaridad del Jefe de Hogar (IEJ)",
-       subtitle = "Quiebres manuales") +
+       subtitle = "Quiebres manuales",
+       caption = nota_fuente) +
   theme_bw() +
   theme(panel.grid.major = element_line(colour = "gray80"),
         panel.grid.minor = element_blank())
@@ -194,26 +407,57 @@ map_q_manual
 
 
 
-### Quiebres por cuantiles (quantile)
+### Quiebres por cuantiles (`quantile`)
 
-- Cada clase agrupa ~el mismo número de elemenmtos.
-- Destaca rangos relativos (quién está en el top/bottom) y es estable frente a valores extremos, pero los límites son muestra-dependientes.
-
-
+Con cinco clases, el método intenta ubicar cuatro líneas de modo que cada intervalo
+contenga cerca de una quinta parte de las manzanas con información. En el histograma
+es normal observar líneas más juntas en las zonas de alta concentración y más
+separadas en las colas. Lo que se iguala es la **cantidad de observaciones**, no la
+distancia numérica entre cortes.
 
 ```{r}
+#| label: fig-dist-quantile
+#| fig-cap: "Distribución del IEJ y quiebres por cuantiles."
+#| fig-width: 9
+#| fig-height: 5.2
+
 n <- 5  # número de clases
 
 # Generación de Quiebres
-brks <- robust_breaks(la_serena_urb$IEJ, n = n, style = "quantile")
+brks_quantile <- robust_breaks(
+  la_serena_urb$IEJ,
+  n = n,
+  style = "quantile"
+)
+
+graf_dist_quantile <- plot_break_distribution(
+  la_serena_urb$IEJ,
+  brks_quantile,
+  "cuantiles"
+)
+
+graf_dist_quantile
+```
+
+La mayor concentración de líneas señala el tramo donde pequeños cambios de IEJ
+pueden hacer que una manzana cambie de color. El mapa siguiente debe leerse como una
+comparación de posiciones relativas dentro de La Serena urbana, no como una escala de
+intervalos equivalentes.
+
+```{r}
 
 # Etiquetas legibles para la leyenda (incluye el límite inferior cerrado en el primer tramo)
-labs_q <- labels_from_breaks(brks)
+labs_q <- labels_from_breaks(brks_quantile)
 
 # crear variable con clasificación con quiebres 
 la_serena_urb <- la_serena_urb %>%
   mutate(
-    IEJ_qq = cut(IEJ, breaks = brks, include.lowest = TRUE, labels = labs_q),
+    IEJ_qq = cut(
+      IEJ,
+      breaks = brks_quantile,
+      include.lowest = TRUE,
+      labels = labs_q
+    ),
     IEJ_qq = forcats::fct_na_value_to_level(IEJ_qq, level = "Sin información")
   )
 
@@ -231,7 +475,8 @@ map_q_quantile <- ggplot() +
   scale_fill_manual(values = vals_qq, name = "IEJ",
                     drop = FALSE) +
   labs(title = "Indicador de Escolaridad del Jefe de Hogar (IEJ)",
-       subtitle = "Quiebres por cuantiles") +
+       subtitle = "Quiebres por cuantiles",
+       caption = nota_fuente) +
   theme_bw() +
   theme(panel.grid.major = element_line(colour = "gray80"),
         panel.grid.minor = element_blank())
@@ -241,25 +486,56 @@ map_q_quantile
 
 
 
-### Quiebres de Jenks (jenks / Natural Breaks)
+### Quiebres de Jenks (`jenks` o *Natural Breaks*)
 
-- Busca minimizar la varianza intra-clase y maximizar la varianza inter-clase; “acomoda” cortes donde los datos cambian más.
-- Puede ser sensible a outliers y a la elección de n.
+Ahora los cortes se adaptan a los agrupamientos de la distribución. Las líneas
+tienden a aparecer donde hay cambios de densidad o separaciones entre valores. A
+diferencia de los cuantiles, no se espera que cada clase tenga el mismo número de
+manzanas.
 
 ```{r}
+#| label: fig-dist-jenks
+#| fig-cap: "Distribución del IEJ y quiebres naturales de Jenks."
+#| fig-width: 9
+#| fig-height: 5.2
+
 n <- 5
 
 # Generación de Quiebres
-brks <- robust_breaks(la_serena_urb$IEJ, n = n, style = "jenks")
+brks_jenks <- robust_breaks(
+  la_serena_urb$IEJ,
+  n = n,
+  style = "jenks"
+)
+
+graf_dist_jenks <- plot_break_distribution(
+  la_serena_urb$IEJ,
+  brks_jenks,
+  "Jenks (quiebres naturales)"
+)
+
+graf_dist_jenks
+```
+
+Si una línea deja muy pocas barras a un lado, conviene revisar si está aislando
+valores extremos. Esa clase puede ser estadísticamente coherente, pero quizá resulte
+poco útil para el propósito comunicacional del mapa.
+
+```{r}
 
 # Etiquetas legibles para la leyenda (incluye el límite inferior cerrado en el primer tramo)
-labs_q <- labels_from_breaks(brks)
+labs_j <- labels_from_breaks(brks_jenks)
 
 # crear variable con clasificación con quiebres
 la_serena_urb <- la_serena_urb %>%
   mutate(
-    IEJ_qj = cut(IEJ, breaks = brks, include.lowest = TRUE, labels = labs_q),
-    IEJ_qj = fct_explicit_na(IEJ_qj, na_level = "Sin información")
+    IEJ_qj = cut(
+      IEJ,
+      breaks = brks_jenks,
+      include.lowest = TRUE,
+      labels = labs_j
+    ),
+    IEJ_qj = forcats::fct_na_value_to_level(IEJ_qj, level = "Sin información")
   )
 
 #Construir vector de colores nombrado (añadimos color para "Sin información")
@@ -276,7 +552,8 @@ map_q_jenks <- ggplot() +
                     drop = FALSE ) +
   labs(title = "Indicador de Escolaridad del Jefe de Hogar (IEJ)",
        subtitle = "Quiebres de Jenks",
-       x = NULL, y = NULL) +
+       x = NULL, y = NULL,
+       caption = nota_fuente) +
   theme_bw()  +
   theme(panel.grid.major = element_line(colour = "gray80"),
         panel.grid.minor = element_blank())
@@ -285,25 +562,56 @@ map_q_jenks
 ```
 
 
-### Quiebres de Fisher (fisher)
+### Quiebres de Fisher (`fisher`)
 
-- Conocido como Fisher-Jenks; busca la partición óptima que minimiza la suma de varianzas dentro de clases.
-- Suele producir resultados parecidos a Jenks, con énfasis en la optimalidad global.
-
+Fisher parte de la misma idea de formar clases internamente homogéneas, pero busca la
+partición global de mínima variación interna. El histograma permite verificar cuánto
+se parece su solución a Jenks y localizar cualquier diferencia. Una similitud alta es
+esperable: ambos optimizan una noción de homogeneidad, aunque lo hacen mediante
+procedimientos distintos.
 
 ```{r}
+#| label: fig-dist-fisher
+#| fig-cap: "Distribución del IEJ y quiebres de Fisher."
+#| fig-width: 9
+#| fig-height: 5.2
+
 n <- 5
 # Generación de Quiebres
-brks <- robust_breaks(la_serena_urb$IEJ, n = n, style = "fisher")
+brks_fisher <- robust_breaks(
+  la_serena_urb$IEJ,
+  n = n,
+  style = "fisher"
+)
+
+graf_dist_fisher <- plot_break_distribution(
+  la_serena_urb$IEJ,
+  brks_fisher,
+  "Fisher--Jenks"
+)
+
+graf_dist_fisher
+```
+
+El criterio matemático ayuda a resumir la distribución, pero no reemplaza la decisión
+cartográfica. Antes de adoptar estos cortes se debe evaluar si las clases resultantes
+son interpretables y si el mapa se comparará con otros periodos o territorios.
+
+```{r}
 
 # Etiquetas legibles para la leyenda (incluye el límite inferior cerrado en el primer tramo)
-labs_q <- labels_from_breaks(brks)
+labs_f <- labels_from_breaks(brks_fisher)
 
 # crear variable con clasificación con quiebres 
 la_serena_urb <- la_serena_urb %>%
   mutate(
-    IEJ_qf = cut(IEJ, breaks = brks, include.lowest = TRUE, labels = labs_q),
-    IEJ_qf = fct_explicit_na(IEJ_qf, na_level = "Sin información")
+    IEJ_qf = cut(
+      IEJ,
+      breaks = brks_fisher,
+      include.lowest = TRUE,
+      labels = labs_f
+    ),
+    IEJ_qf = forcats::fct_na_value_to_level(IEJ_qf, level = "Sin información")
   )
 
 #Construir vector de colores nombrado (añadimos color para "Sin información")
@@ -321,7 +629,8 @@ map_q_fisher <- ggplot() +
                     drop = FALSE ) +
   labs(title = "Indicador de Escolaridad del Jefe de Hogar (IEJ)",
        subtitle = "Quiebres de Fisher",
-       x = NULL, y = NULL) +
+       x = NULL, y = NULL,
+       caption = nota_fuente) +
   theme_bw()  +
   theme(panel.grid.major = element_line(colour = "gray80"),
         panel.grid.minor = element_blank())
@@ -331,14 +640,32 @@ map_q_fisher
 
 ## Recomendaciones prácticas
 
-- Decide el “mensaje” antes del método:
-  - ¿Quieres comparar posiciones relativas? → Cuantiles.
-  - ¿Quieres resaltar agrupamientos naturales? → Jenks/Fisher.
-  - ¿Tienes umbrales normativos? → Manual (fixed).
-- Consistencia: conserva el mismo esquema entre mapas comparables (años, comunas).
-- Leyenda honesta: especifica el tipo de quiebre y muestra/explica “Sin información”.
-- Accesibilidad: usa paletas color-blind friendly ([ColorBrewer](https://colorbrewer2.org/#type=sequential&scheme=GnBu&n=5) es una buena base).
-<!-- - MAUP: recuerda que el patrón también depende de la unidad espacial (manzana, zona, comuna). Describe la unidad en el título o pie. -->
+1. **Define primero la pregunta.** Usa cortes manuales para umbrales con significado
+   externo; cuantiles para posiciones relativas; y Jenks o Fisher para explorar
+   agrupamientos propios de una distribución.
+2. **Mira la distribución antes del mapa.** Revisa el histograma, los valores extremos,
+   los empates y cuántas observaciones quedan en cada clase. Una clase casi vacía
+   merece una explicación o una revisión.
+3. **Prueba la sensibilidad.** Compara, por ejemplo, cuatro, cinco y seis clases. Si la
+   historia territorial cambia drásticamente, la conclusión es frágil y debe
+   comunicarse con cautela.
+4. **Mantén la comparabilidad.** Para comparar años, comunas o regiones, calcula una
+   escala común sobre el universo completo o utiliza cortes manuales constantes. No
+   basta con repetir los mismos colores.
+5. **Construye una leyenda honesta.** Informa el método, el número de clases, los
+   límites, la unidad del indicador y el tratamiento de `NA`. “Sin información” no
+   significa cero.
+6. **Cuida la percepción del color.** Para magnitudes ordenadas usa una paleta
+   secuencial y perceptualmente ordenada. [ColorBrewer](https://colorbrewer2.org/#type=sequential&scheme=GnBu&n=5)
+   es una buena base para seleccionar alternativas accesibles.
+7. **Recuerda que estos métodos no son espaciales.** Los cortes utilizan los valores,
+   pero no la vecindad entre unidades. Además, el patrón puede cambiar al modificar la
+   unidad geográfica —manzana, zona o comuna—, efecto relacionado con el problema de
+   la unidad espacial modificable (MAUP).
+
+En una publicación o informe, una formulación transparente sería: “El indicador se
+clasificó en cinco clases mediante cuantiles, calculados sobre todas las manzanas del
+área de estudio; las unidades sin dato se muestran en gris”.
 
 ## Comparación Visual de los Métodos de Quiebres
 
@@ -406,19 +733,14 @@ comparativa_maps <- (m1 + m2) / (m3 + m4) +
   plot_annotation(
     title = "IEJ — Comparativa de quiebres",
     subtitle = "Visualización lado a lado para contrastar patrones espaciales",
-    caption = "Nota: los rangos de clase difieren por método. Ver tabla comparativa para límites numéricos."
+    caption = paste(
+      "Los rangos de clase difieren por método.",
+      "Fuente: indicadores derivados del Censo 2017; uso didáctico."
+    )
   ) &
   theme(plot.title = element_text(face = "bold"),
         plot.caption = element_text(colour = "grey40"))
 
 comparativa_maps
 ```
-
-
-
-
-
-
-
-
 

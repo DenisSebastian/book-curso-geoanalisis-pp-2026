@@ -33,14 +33,14 @@ book:
     - part: "Tareas"
       chapters:
         - tarea_1.qmd
-    # - tarea_2.qmd
+        - tarea_2.qmd
     - references.qmd
   appendices:
     - recursos.qmd
     - control_r.qmd
     - crs.qmd
     - john_snow.qmd
-    # - quiebres.qmd
+    - quiebres.qmd
 
 bibliography: references.bib
 

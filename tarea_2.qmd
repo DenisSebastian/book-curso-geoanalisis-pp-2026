@@ -52,9 +52,9 @@ Señalar fuente utilizada para calcular los indicadores territoriales. Describie
 
 Ejemplo: 
 
-**Censo de Población y Vivienda **: El Censo de Población y Vivienda se realiza cada diez años y ofrece un conteo exhaustivo de la población y sus características demográficas, económicas y de vivienda. Es una fuente crítica de datos para la planificación y desarrollo de políticas a nivel nacional y local. [Link Censo](http://www.censo2017.cl/).
+**Censo de Población y Vivienda **: El Censo de Población y Vivienda se realiza cada diez años y ofrece un conteo exhaustivo de la población y sus características demográficas, económicas y de vivienda. Es una fuente crítica de datos para la planificación y desarrollo de políticas a nivel nacional y local. Ruta del Censo: `data/censo-2024/censo_2024_nacional.gpkg`
 
-![](images/censo_2017.png){fig-align="center" width="100"}
+![](images/CENSO-2024.jpg){fig-align="center" width="200"}
 
 
 ### Cálculo de Indicador (1 pts.)
