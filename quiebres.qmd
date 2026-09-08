@@ -1,6 +1,6 @@
 ---
 title: "Mapas y Quiebres"
-subtitle: "Quiebres y Paletas de colores en Mapas"
+subtitle: "Quiebres y paletas de colores en mapas"
 ---
 
 ## Introducción
@@ -138,19 +138,25 @@ territorial.
 
 ## Parte práctica (R): de la distribución al mapa
 
-Aplicaremos los cuatro métodos al **Indicador de Escolaridad del Jefe de Hogar
-(`IEJ`)** de las manzanas urbanas de la comuna de La Serena. Antes de construir cada
-mapa se mostrará un histograma: las barras describen la distribución observada y las
-líneas verticales indican los quiebres internos. Esta lectura previa permite entender
-qué valores agrupa cada método antes de examinar su patrón espacial.
+Aplicaremos los cuatro métodos al **Índice de Escolaridad Adulta (`IEA`)** de las
+unidades censales urbanas de la localidad **LA SERENA - COQUIMBO**, que abarca
+sectores de las comunas de La Serena y Coquimbo. Antes de construir cada mapa se
+mostrará un histograma: las barras describen la distribución observada y las líneas
+verticales indican los quiebres internos. Esta lectura previa permite entender qué
+valores agrupa cada método antes de examinar su patrón espacial.
 
 ::: {.callout-important title="Alcance de los datos"}
-La base de indicadores socioeconómicos utilizada en esta práctica fue elaborada a
-partir del **Censo 2017** y se incluye **solo con fines didácticos y a modo de
-ejemplo**. Los resultados no deben interpretarse como un diagnóstico vigente ni los
-cortes empleados como umbrales oficiales. Para análisis aplicados se debe revisar la
-definición de cada indicador, validar la fuente y utilizar la información oficial más
-actualizada disponible.
+La práctica utiliza variables agregadas del **Censo de Población y Vivienda 2024**
+del Instituto Nacional de Estadísticas (INE) de Chile. A partir de ellas se construyó,
+con fines didácticos, una base de indicadores socioeconómicos para las unidades
+censales urbanas de la localidad LA SERENA - COQUIMBO. El archivo utilizado es un
+producto derivado y **no corresponde a un indicador oficial publicado por el INE**.
+
+El `IEA` es un *proxy* que representa el promedio de años de escolaridad de la
+población de 18 años o más en cada unidad con población. Describe condiciones
+agregadas observadas por el Censo 2024; no permite inferir la escolaridad de personas
+u hogares individuales. La construcción del indicador y sus demás limitaciones se
+documentan en el [capítulo de indicadores territoriales](indicadores_territoriales.qmd#sec-indsoc).
 :::
 
 Además, durante el ejercicio:
@@ -169,9 +175,9 @@ Además, durante el ejercicio:
 library(sf)
 library(dplyr)
 library(ggplot2)
-library(mapview)
 library(classInt)
 library(forcats)
+library(patchwork)
 ```
 
 #### Funciones de ayuda
@@ -194,28 +200,21 @@ labels_from_breaks <- function(brks) {
 # Calcula cortes robustos con classInt (evita n > únicos y duplicados)
 robust_breaks <- function(x, n, style = "quantile") {
   x_ok <- x[is.finite(x)]
-  if (length(x_ok) == 0) {
-    stop("La variable no contiene valores finitos.")
-  }
-  if (length(unique(x_ok)) < 2) {
-    stop("Se necesitan al menos dos valores distintos para calcular quiebres.")
-  }
-
-  n_eff <- min(n, length(unique(x_ok)) - 1)
+  n_eff <- min(n, max(1, length(unique(x_ok)) - 1))
   ci <- classIntervals(x_ok, n = n_eff, style = style)
   sort(unique(ci$brks))
 }
 
 # Grafica la distribución y superpone los quiebres internos
-plot_break_distribution <- function(x, brks, metodo, bins = 30) {
-  datos <- data.frame(IEJ = x[is.finite(x)])
+plot_break_distribution <- function(x, brks, metodo, fuente, bins = 30) {
+  datos <- data.frame(IEA = x[is.finite(x)])
   cortes <- brks[-c(1, length(brks))]
   cortes_df <- data.frame(
     corte = cortes,
     etiqueta = format(round(cortes, 2), trim = TRUE, nsmall = 1)
   )
 
-  ggplot(datos, aes(x = IEJ)) +
+  ggplot(datos, aes(x = IEA)) +
     geom_histogram(
       bins = bins,
       fill = "#43a2ca",
@@ -245,11 +244,11 @@ plot_break_distribution <- function(x, brks, metodo, bins = 30) {
     scale_x_continuous(expand = expansion(mult = c(0.01, 0.04))) +
     scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +
     labs(
-      title = paste("Distribución del IEJ —", metodo),
+      title = paste("Distribución del IEA —", metodo),
       subtitle = "Las líneas verticales muestran los quiebres internos",
-      x = "Valor del IEJ",
-      y = "Número de manzanas",
-      caption = "Fuente: indicadores socioeconómicos derivados del Censo 2017; uso didáctico."
+      x = "Valor del IEA",
+      y = "Número de unidades censales",
+      caption = fuente
     ) +
     theme_minimal(base_size = 12) +
     theme(
@@ -260,38 +259,36 @@ plot_break_distribution <- function(x, brks, metodo, bins = 30) {
       plot.caption = element_text(colour = "grey40", hjust = 0)
     )
 }
+
+
+nota_fuente <- "Fuente: Censo 2024, INE Chile; elaboración propia."
 ```
 
 
 #### Datos
 
-```{r}
-# ruta de resultados
-path_resultados <- "data/socioeconomicos/resultados/"
+El archivo RDS fue generado en el [capítulo de indicadores
+territoriales](indicadores_territoriales.qmd#sec-indsoc). Contiene las geometrías
+urbanas procesadas, los atributos censales agregados y los indicadores derivados.
+La primera ruta corresponde a la estructura de carpetas propuesta para los ejercicios;
+la segunda se utiliza únicamente durante la publicación del libro.
 
-# selección de región
-reg <-  "R04"
+```{r eval=FALSE}
 
-# Lectura de insumo espacial
-path_file <- paste0(path_resultados, reg, "_ind_socioeconomicos.shp")
-ind_soc <- st_read(path_file, quiet = TRUE)
+la_serena_urb <- readRDS("results/R04_Coquimbo_LaSerena_urbano_ind_socioeconomicos_2024.rds")
 
-# Texto común para documentar la fuente en las salidas gráficas
-nota_fuente <- paste(
-  "Fuente: indicadores socioeconómicos derivados del Censo 2017;",
-  "uso didáctico."
-)
 ```
 
+```{r eval=TRUE, echo=FALSE}
 
-#### Área de estudio
+la_serena_urb <- readRDS("../sesiones/results/R04_Coquimbo_LaSerena_urbano_ind_socioeconomicos_2024.rds")
 
-```{r}
+stopifnot(
+  inherits(la_serena_urb, "sf"),
+  "IEA" %in% names(la_serena_urb),
+  is.numeric(la_serena_urb$IEA)
+)
 
-# Selección de Área de Estudio --------------------------------------------
-la_serena_urb <- ind_soc %>% 
-  mutate(IEJ = ifelse(PERSONAS == 0, NA, IEJ)) %>% 
-  filter(COD_COM == 4101 & MANZ_EN == "URBANO")
 
 ```
 
@@ -301,7 +298,12 @@ la_serena_urb <- ind_soc %>%
 ```{r}
 # Paleta de Colores (secuencial) ------------------------------------------
 # Referencia: https://colorbrewer2.org/#type=sequential&scheme=GnBu&n=5
-pal_iej <- c('#f0f9e8','#bae4bc','#7bccc4','#43a2ca','#0868ac')
+pal_IEA <- c('#f0f9e8','#bae4bc','#7bccc4','#43a2ca','#0868ac')
+
+# n_breaks = 20
+# pal<- colorRampPalette(
+#   c('#f0f9e8','#bae4bc','#7bccc4','#43a2ca','#0868ac'))( n_breaks )
+
 
 ```
 
@@ -312,11 +314,11 @@ pal_iej <- c('#f0f9e8','#bae4bc','#7bccc4','#43a2ca','#0868ac')
 ```{r}
 # Mapa con Colores Continuo -----------------------------------------------
 map_cont <- ggplot() +
-  geom_sf(data = la_serena_urb, aes(fill = IEJ),
+  geom_sf(data = la_serena_urb, aes(fill = IEA),
           color = NA, alpha = 0.9, linewidth = 0.1) +
-  scale_fill_gradientn(colors = pal_iej, name = "IEJ",
+  scale_fill_gradientn(colors = pal_IEA, name = "IEA",
                        na.value = "grey90") +
-  labs(title = "Escolaridad del Jefe de Hogar (IEJ)",
+  labs(title = "Índice de Escolaridad Adulta (IEA)",
        subtitle = "Sin quiebres — continuo",
        x = NULL, y = NULL,
        caption = nota_fuente) +
@@ -333,31 +335,26 @@ map_cont
 Para el ejemplo se proponen los valores 5, 8, 12 y 15. El mínimo y el máximo
 observados se agregan automáticamente para cubrir todo el rango. El histograma
 permite comprobar que estos cortes producen clases de distinto ancho y con cantidades
-desiguales de manzanas. Esto no es un error: en una clasificación manual prima el
-significado de los umbrales, no el equilibrio estadístico.
+desiguales de unidades censales. Esto no es un error: en una clasificación manual
+prima el significado de los umbrales, no el equilibrio estadístico.
 
 ```{r}
 #| label: fig-dist-manual
-#| fig-cap: "Distribución del IEJ y quiebres manuales."
+#| fig-cap: "Distribución del IEA y quiebres manuales."
 #| fig-width: 9
 #| fig-height: 5.2
 
 # Definición manual para fines didácticos; no corresponde a umbrales oficiales
-min_iej <- min(la_serena_urb$IEJ, na.rm = TRUE)
-max_iej <- max(la_serena_urb$IEJ, na.rm = TRUE)
-cortes_manuales <- c(5, 8, 12, 15)
+min_IEA <- min(la_serena_urb$IEA, na.rm = TRUE)
+max_IEA <- max(la_serena_urb$IEA, na.rm = TRUE)
+brks_manual <- c(min_IEA, 5, 8, 12, 15, max_IEA)
 
-# Conserva solo los cortes que caen dentro del rango observado
-brks_manual <- sort(unique(c(
-  min_iej,
-  cortes_manuales[cortes_manuales > min_iej & cortes_manuales < max_iej],
-  max_iej
-)))
 
 graf_dist_manual <- plot_break_distribution(
-  la_serena_urb$IEJ,
+  la_serena_urb$IEA,
   brks_manual,
-  "quiebres manuales"
+  "quiebres manuales",
+  nota_fuente
 )
 
 graf_dist_manual
@@ -374,27 +371,27 @@ labs_m <- labels_from_breaks(brks_manual)
 # Variable de clases + NA explícito
 la_serena_urb <- la_serena_urb %>%
   mutate(
-    IEJ_qm = cut(
-      IEJ,
+    IEA_qm = cut(
+      IEA,
       breaks = brks_manual,
       include.lowest = TRUE,
       labels = labs_m
     ),
-    IEJ_qm = forcats::fct_na_value_to_level(IEJ_qm, level = "Sin información")
+    IEA_qm = forcats::fct_na_value_to_level(IEA_qm, level = "Sin información")
   )
 
 # Paleta nombrada (añade gris para NA)
-niveles_sin_na <- setdiff(levels(la_serena_urb$IEJ_qm), "Sin información")
-pal_m <- ensure_palette_length(pal_iej, length(niveles_sin_na))
+niveles_sin_na <- setdiff(levels(la_serena_urb$IEA_qm), "Sin información")
+pal_m <- ensure_palette_length(pal_IEA, length(niveles_sin_na))
 vals_m <- setNames(pal_m, niveles_sin_na)
 vals_m <- c(vals_m, "Sin información" = "#d9d9d9")
 
 map_q_manual <- ggplot() +
-  geom_sf(data = la_serena_urb, aes(fill = IEJ_qm),
+  geom_sf(data = la_serena_urb, aes(fill = IEA_qm),
           color = NA, alpha = 0.9, linewidth = 0.1) +
-  scale_fill_manual(values = vals_m, name = "IEJ",
+  scale_fill_manual(values = vals_m, name = "IEA",
                     drop = FALSE) +
-  labs(title = "Indicador de Escolaridad del Jefe de Hogar (IEJ)",
+  labs(title = "Índice de Escolaridad Adulta (IEA)",
        subtitle = "Quiebres manuales",
        caption = nota_fuente) +
   theme_bw() +
@@ -410,14 +407,14 @@ map_q_manual
 ### Quiebres por cuantiles (`quantile`)
 
 Con cinco clases, el método intenta ubicar cuatro líneas de modo que cada intervalo
-contenga cerca de una quinta parte de las manzanas con información. En el histograma
-es normal observar líneas más juntas en las zonas de alta concentración y más
-separadas en las colas. Lo que se iguala es la **cantidad de observaciones**, no la
-distancia numérica entre cortes.
+contenga cerca de una quinta parte de las unidades censales con información. En el
+histograma es normal observar líneas más juntas en las zonas de alta concentración y
+más separadas en las colas. Lo que se iguala es la **cantidad de observaciones**, no
+la distancia numérica entre cortes.
 
 ```{r}
 #| label: fig-dist-quantile
-#| fig-cap: "Distribución del IEJ y quiebres por cuantiles."
+#| fig-cap: "Distribución del IEA y quiebres por cuantiles."
 #| fig-width: 9
 #| fig-height: 5.2
 
@@ -425,24 +422,25 @@ n <- 5  # número de clases
 
 # Generación de Quiebres
 brks_quantile <- robust_breaks(
-  la_serena_urb$IEJ,
+  la_serena_urb$IEA,
   n = n,
   style = "quantile"
 )
 
 graf_dist_quantile <- plot_break_distribution(
-  la_serena_urb$IEJ,
+  la_serena_urb$IEA,
   brks_quantile,
-  "cuantiles"
+  "cuantiles",
+  nota_fuente
 )
 
 graf_dist_quantile
 ```
 
-La mayor concentración de líneas señala el tramo donde pequeños cambios de IEJ
-pueden hacer que una manzana cambie de color. El mapa siguiente debe leerse como una
-comparación de posiciones relativas dentro de La Serena urbana, no como una escala de
-intervalos equivalentes.
+La mayor concentración de líneas señala el tramo donde pequeños cambios de IEA
+pueden hacer que una unidad censal cambie de color. El mapa siguiente debe leerse
+como una comparación de posiciones relativas dentro de la localidad LA SERENA -
+COQUIMBO, no como una escala de intervalos equivalentes.
 
 ```{r}
 
@@ -452,29 +450,29 @@ labs_q <- labels_from_breaks(brks_quantile)
 # crear variable con clasificación con quiebres 
 la_serena_urb <- la_serena_urb %>%
   mutate(
-    IEJ_qq = cut(
-      IEJ,
+    IEA_qq = cut(
+      IEA,
       breaks = brks_quantile,
       include.lowest = TRUE,
       labels = labs_q
     ),
-    IEJ_qq = forcats::fct_na_value_to_level(IEJ_qq, level = "Sin información")
+    IEA_qq = forcats::fct_na_value_to_level(IEA_qq, level = "Sin información")
   )
 
 #Construir vector de colores nombrado (añadimos color para "Sin información")
-niveles_sin_na <- setdiff(levels(la_serena_urb$IEJ_qq), "Sin información")
-pal_q <- ensure_palette_length(pal_iej, length(niveles_sin_na))
+niveles_sin_na <- setdiff(levels(la_serena_urb$IEA_qq), "Sin información")
+pal_q <- ensure_palette_length(pal_IEA, length(niveles_sin_na))
 vals_qq <- setNames(pal_q, niveles_sin_na)
 vals_qq <- c(vals_qq, "Sin información" = "#d9d9d9")
 
 
 # Mapa 
 map_q_quantile <- ggplot() +
-  geom_sf(data = la_serena_urb, aes(fill = IEJ_qq),
+  geom_sf(data = la_serena_urb, aes(fill = IEA_qq),
           color = NA, alpha = 0.9, linewidth = 0.1) +
-  scale_fill_manual(values = vals_qq, name = "IEJ",
+  scale_fill_manual(values = vals_qq, name = "IEA",
                     drop = FALSE) +
-  labs(title = "Indicador de Escolaridad del Jefe de Hogar (IEJ)",
+  labs(title = "Índice de Escolaridad Adulta (IEA)",
        subtitle = "Quiebres por cuantiles",
        caption = nota_fuente) +
   theme_bw() +
@@ -491,11 +489,11 @@ map_q_quantile
 Ahora los cortes se adaptan a los agrupamientos de la distribución. Las líneas
 tienden a aparecer donde hay cambios de densidad o separaciones entre valores. A
 diferencia de los cuantiles, no se espera que cada clase tenga el mismo número de
-manzanas.
+unidades censales.
 
 ```{r}
 #| label: fig-dist-jenks
-#| fig-cap: "Distribución del IEJ y quiebres naturales de Jenks."
+#| fig-cap: "Distribución del IEA y quiebres naturales de Jenks."
 #| fig-width: 9
 #| fig-height: 5.2
 
@@ -503,15 +501,16 @@ n <- 5
 
 # Generación de Quiebres
 brks_jenks <- robust_breaks(
-  la_serena_urb$IEJ,
+  la_serena_urb$IEA,
   n = n,
   style = "jenks"
 )
 
 graf_dist_jenks <- plot_break_distribution(
-  la_serena_urb$IEJ,
+  la_serena_urb$IEA,
   brks_jenks,
-  "Jenks (quiebres naturales)"
+  "Jenks (quiebres naturales)",
+  nota_fuente
 )
 
 graf_dist_jenks
@@ -529,28 +528,28 @@ labs_j <- labels_from_breaks(brks_jenks)
 # crear variable con clasificación con quiebres
 la_serena_urb <- la_serena_urb %>%
   mutate(
-    IEJ_qj = cut(
-      IEJ,
+    IEA_qj = cut(
+      IEA,
       breaks = brks_jenks,
       include.lowest = TRUE,
       labels = labs_j
     ),
-    IEJ_qj = forcats::fct_na_value_to_level(IEJ_qj, level = "Sin información")
+    IEA_qj = forcats::fct_na_value_to_level(IEA_qj, level = "Sin información")
   )
 
 #Construir vector de colores nombrado (añadimos color para "Sin información")
-niveles_sin_na <- setdiff(levels(la_serena_urb$IEJ_qj), "Sin información")
-pal_j <- ensure_palette_length(pal_iej, length(niveles_sin_na))
+niveles_sin_na <- setdiff(levels(la_serena_urb$IEA_qj), "Sin información")
+pal_j <- ensure_palette_length(pal_IEA, length(niveles_sin_na))
 vals_qj <- setNames(pal_j, niveles_sin_na)
 vals_qj <- c(vals_qj, "Sin información" = "#d9d9d9")
 
 # Mapa 
 map_q_jenks <- ggplot() +
-  geom_sf(data = la_serena_urb, aes(fill = IEJ_qj),
+  geom_sf(data = la_serena_urb, aes(fill = IEA_qj),
           color = NA, alpha = 0.9, linewidth = 0.1) +
-  scale_fill_manual(values = vals_qj, name = "IEJ",
+  scale_fill_manual(values = vals_qj, name = "IEA",
                     drop = FALSE ) +
-  labs(title = "Indicador de Escolaridad del Jefe de Hogar (IEJ)",
+  labs(title = "Índice de Escolaridad Adulta (IEA)",
        subtitle = "Quiebres de Jenks",
        x = NULL, y = NULL,
        caption = nota_fuente) +
@@ -572,22 +571,23 @@ procedimientos distintos.
 
 ```{r}
 #| label: fig-dist-fisher
-#| fig-cap: "Distribución del IEJ y quiebres de Fisher."
+#| fig-cap: "Distribución del IEA y quiebres de Fisher."
 #| fig-width: 9
 #| fig-height: 5.2
 
 n <- 5
 # Generación de Quiebres
 brks_fisher <- robust_breaks(
-  la_serena_urb$IEJ,
+  la_serena_urb$IEA,
   n = n,
   style = "fisher"
 )
 
 graf_dist_fisher <- plot_break_distribution(
-  la_serena_urb$IEJ,
+  la_serena_urb$IEA,
   brks_fisher,
-  "Fisher--Jenks"
+  "Fisher--Jenks",
+  nota_fuente
 )
 
 graf_dist_fisher
@@ -605,29 +605,29 @@ labs_f <- labels_from_breaks(brks_fisher)
 # crear variable con clasificación con quiebres 
 la_serena_urb <- la_serena_urb %>%
   mutate(
-    IEJ_qf = cut(
-      IEJ,
+    IEA_qf = cut(
+      IEA,
       breaks = brks_fisher,
       include.lowest = TRUE,
       labels = labs_f
     ),
-    IEJ_qf = forcats::fct_na_value_to_level(IEJ_qf, level = "Sin información")
+    IEA_qf = forcats::fct_na_value_to_level(IEA_qf, level = "Sin información")
   )
 
 #Construir vector de colores nombrado (añadimos color para "Sin información")
-niveles_sin_na <- setdiff(levels(la_serena_urb$IEJ_qf), "Sin información")
-pal_f <- ensure_palette_length(pal_iej, length(niveles_sin_na))
+niveles_sin_na <- setdiff(levels(la_serena_urb$IEA_qf), "Sin información")
+pal_f <- ensure_palette_length(pal_IEA, length(niveles_sin_na))
 vals_qf <- setNames(pal_f, niveles_sin_na)
 vals_qf <- c(vals_qf, "Sin información" = "#d9d9d9")
 
 
 # Mapa 
 map_q_fisher <- ggplot() +
-  geom_sf(data = la_serena_urb, aes(fill = IEJ_qf),
+  geom_sf(data = la_serena_urb, aes(fill = IEA_qf),
           color = NA, alpha = 0.9, linewidth = 0.1) +
-  scale_fill_manual(values = vals_qf, name = "IEJ",
+  scale_fill_manual(values = vals_qf, name = "IEA",
                     drop = FALSE ) +
-  labs(title = "Indicador de Escolaridad del Jefe de Hogar (IEJ)",
+  labs(title = "Índice de Escolaridad Adulta (IEA)",
        subtitle = "Quiebres de Fisher",
        x = NULL, y = NULL,
        caption = nota_fuente) +
@@ -664,18 +664,17 @@ map_q_fisher
    la unidad espacial modificable (MAUP).
 
 En una publicación o informe, una formulación transparente sería: “El indicador se
-clasificó en cinco clases mediante cuantiles, calculados sobre todas las manzanas del
-área de estudio; las unidades sin dato se muestran en gris”.
+clasificó en cinco clases mediante cuantiles, calculados sobre todas las unidades
+censales del área de estudio; las unidades sin dato se muestran en gris”.
 
-## Comparación Visual de los Métodos de Quiebres
+## Comparación visual de los métodos de quiebres
 
 ```{r}
-# --- Helpers de seguridad -------------------------------------------------
-ensure_palette_length <- function(pal, K) {
-  if (length(pal) == K) return(pal)
-  grDevices::colorRampPalette(pal)(K)
-}
+#| label: fig-comparacion-quiebres
+#| fig-width: 9
+#| fig-height: 7
 
+# --- Helpers de seguridad -------------------------------------------------
 mk_named_pal <- function(levels_vec, base_pal) {
   base_pal <- ensure_palette_length(base_pal, length(levels_vec))
   setNames(base_pal, levels_vec)
@@ -689,7 +688,7 @@ make_map <- function(df, fill_var, vals_named, subt) {
   ggplot() +
     geom_sf(data = df, aes(fill = .data[[fill_var]]),
             color = NA, alpha = 0.9, linewidth = 0.1) +
-    scale_fill_manual(values = vals_named, name = "IEJ", drop = FALSE) +
+    scale_fill_manual(values = vals_named, name = "IEA", drop = FALSE) +
     labs(title = NULL, subtitle = subt, x = NULL, y = NULL) +
     theme_bw() +
     theme(panel.grid.major = element_blank(),
@@ -700,19 +699,19 @@ make_map <- function(df, fill_var, vals_named, subt) {
 }
 
 # --- 1) Asegurar que las variables de clase existen y son factor ----------
-stopifnot(is.factor(la_serena_urb$IEJ_qm),
-          is.factor(la_serena_urb$IEJ_qq),
-          is.factor(la_serena_urb$IEJ_qj),
-          is.factor(la_serena_urb$IEJ_qf))
+stopifnot(is.factor(la_serena_urb$IEA_qm),
+          is.factor(la_serena_urb$IEA_qq),
+          is.factor(la_serena_urb$IEA_qj),
+          is.factor(la_serena_urb$IEA_qf))
 
 # --- 2) Paletas nombradas por método (incluye “Sin información”) ----------
 # Base secuencial (ajústala si usas otra)
 pal_base <- c('#f0f9e8','#bae4bc','#7bccc4','#43a2ca','#0868ac')
 
-niv_m  <- setdiff(levels(la_serena_urb$IEJ_qm), "Sin información")
-niv_q  <- setdiff(levels(la_serena_urb$IEJ_qq), "Sin información")
-niv_j  <- setdiff(levels(la_serena_urb$IEJ_qj), "Sin información")
-niv_f  <- setdiff(levels(la_serena_urb$IEJ_qf), "Sin información")
+niv_m  <- setdiff(levels(la_serena_urb$IEA_qm), "Sin información")
+niv_q  <- setdiff(levels(la_serena_urb$IEA_qq), "Sin información")
+niv_j  <- setdiff(levels(la_serena_urb$IEA_qj), "Sin información")
+niv_f  <- setdiff(levels(la_serena_urb$IEA_qf), "Sin información")
 
 vals_m  <- mk_named_pal(niv_m, pal_base);  vals_m  <- c(vals_m,  "Sin información" = "#d9d9d9")
 vals_qq <- mk_named_pal(niv_q, pal_base);  vals_qq <- c(vals_qq, "Sin información" = "#d9d9d9")
@@ -720,27 +719,24 @@ vals_qj <- mk_named_pal(niv_j, pal_base);  vals_qj <- c(vals_qj, "Sin informaci�
 vals_qf <- mk_named_pal(niv_f, pal_base);  vals_qf <- c(vals_qf, "Sin información" = "#d9d9d9")
 
 # --- 3) Construir cada mapa de forma segura --------------------------------
-m1 <- make_map(la_serena_urb, "IEJ_qm", vals_m,  "Manual (fixed)")
-m2 <- make_map(la_serena_urb, "IEJ_qq", vals_qq, "Cuantiles")
-m3 <- make_map(la_serena_urb, "IEJ_qj", vals_qj, "Jenks (Natural)")
-m4 <- make_map(la_serena_urb, "IEJ_qf", vals_qf, "Fisher-Jenks")
+m1 <- make_map(la_serena_urb, "IEA_qm", vals_m,  "Manual (fixed)")
+m2 <- make_map(la_serena_urb, "IEA_qq", vals_qq, "Cuantiles")
+m3 <- make_map(la_serena_urb, "IEA_qj", vals_qj, "Jenks (Natural)")
+m4 <- make_map(la_serena_urb, "IEA_qf", vals_qf, "Fisher-Jenks")
 
 # --- 4) Componer 2×2 con patchwork ----------------------------------------
-# install.packages("patchwork") # si hace falta
-library(patchwork)
-
 comparativa_maps <- (m1 + m2) / (m3 + m4) +
   plot_annotation(
-    title = "IEJ — Comparativa de quiebres",
+    title = "IEA — comparación de métodos de clasificación",
     subtitle = "Visualización lado a lado para contrastar patrones espaciales",
     caption = paste(
       "Los rangos de clase difieren por método.",
-      "Fuente: indicadores derivados del Censo 2017; uso didáctico."
+      nota_fuente,
+      sep = "\n"
     )
   ) &
   theme(plot.title = element_text(face = "bold"),
-        plot.caption = element_text(colour = "grey40"))
+        plot.caption = element_text(colour = "grey40", hjust = 0, size = 8.5))
 
 comparativa_maps
 ```
-
